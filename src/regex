@@ -1,0 +1,20 @@
+oprp = [+|-]
+oprm = [/|*]
+oprln = [not]
+oprlr_eq = [=|!=]
+oprlr_eq = [<|>]
+oprlr_lgt_e = [<=|>=]
+comma = [,]
+o_bracket = [\[]
+c_bracket = [\]]
+
+type_str = ".*"$
+type_int = ^[\+|\-]?[0-9]+$
+type_float = {type_int}[\.]{1}[0-9]*\$
+id = ^[A-Z|a-z]+(\w)*
+
+
+
+#TODO
+Comandos, loops, chamadas de função
+
