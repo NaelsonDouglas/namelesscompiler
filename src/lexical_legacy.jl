@@ -54,7 +54,8 @@ function token(lexem,line::Int, col::Int)
 			tkn["categ_nom"] = "TYPE_FLOAT"
 		end
 	elseif lexem[1] == '"' && lexem[length(lexem)] == '"' #if it starts and ends with \"
-		tkn["categ_nom"] = "CT_STRING"
+		tkn["categ_nom"] = "CT_STRING"		
+		tkn["categ_num"] = tkns_ids["CT_STRING"]
 	elseif lexem[1] == '\'' && lexem[length(lexem)] == '\'' #if it starts and ends with \"
 		tkn["categ_nom"] = "TYPE_CHAR"
 	else #From this point we are sure the token is not a number and doesnt start with a number
