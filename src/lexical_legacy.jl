@@ -1,7 +1,6 @@
 using DataStructures
 using JSON
 
-
 f = open("code.nl")
 
 t = open("tokens.json")
@@ -125,8 +124,6 @@ function token(lexem,line::Int, col::Int)
 
 		end
 
-
-
 		try
 			tkn["categ_num"] = tkns_ids[tkn["categ_nom"]] #tkn is a dict maped from the tokens.json file
 		catch
@@ -134,7 +131,6 @@ function token(lexem,line::Int, col::Int)
 		end
 	end
 		return tkn
-
 end
 
 function producer()
@@ -227,14 +223,8 @@ function producer()
 			if (l == length(lines) && cki == length(chunks))
 				#eoftkn = Dict("lexem"=>"\\EOF","line"=>L, "col"=>col+1, "categ_nom" => "EOF","categ_num" => " ")
 				enqueue!(lineq,token("EOF",l,col+=1))				
-			end
-
-
-
-			
+			end		
 		end	
-
-
 		#The pop! command for Queue is not working...lol
 		lineq_vector = collect(lineq)
 		for i in lineq_vector
@@ -259,6 +249,5 @@ function nextToken()
 		#Info("End of file reached")
 		return false
 
-	end
-	
+	end	
 end
