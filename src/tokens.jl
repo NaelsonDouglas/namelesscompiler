@@ -49,4 +49,5 @@ FN_CALL=47
 CT_STRING=48
 OPR_CONCAT=49
 OPR_UN_NEG=50
+OPRLR_GT=51
 #https://github.com/JuliaLang/julia/blob/d386e40c17d43b79fc89d3e579fc04547241787c/base/Enums.jl#L31-L51

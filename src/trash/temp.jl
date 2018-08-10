@@ -1,28 +1,3 @@
-
-function checkisint(lexem::String)
-	try
-		parse(Int,lexem)
-		if (contains(==,lexem,'.'))
-			return false
-		end
-			return true
-	catch
-		return false
-	end
-end;
-
-function checkisfloat(lexem::String)
-	try
-		parse(Float64,lexem)
-		return true
-	catch
-		return false
-	end
-end;
-
-checkisnumber(lexem::String) = checkisfloat(lexem)
-
-
 function matchlexem(item::String)
 
 	if (item == "EOF")
@@ -31,11 +6,11 @@ function matchlexem(item::String)
 
 	#Checks if the lexem has invalid characters	
 	invalidpart = 
-	filter(item) do x
-			!contains(==,vcat(valid_chars),x)
+	filter(lexem) do x
+			!contains(==,vcat(digits_only,chars),x)
 	end	
 
-	if (length(invalidpart) > 0)		
+	if (legnth(invalidpart > 0))
 		return Int(LEX_ERR)
 	end
 
@@ -62,12 +37,7 @@ function matchlexem(item::String)
 
 	#From this point we are sure the token is not a number neither is a string
 	return	@match item begin
-				"for"=>Int(BLK_FOR)
-				"while"=>Int(BLK_WHILE)
 				"~" => Int(OPR_UN_NEG)
-				"-" => Int(OPR_SUB)
-				"*" => Int(OPR_DM)
-				"/" => Int(OPR_DM)
 				"[" => Int(O_BRCKT)
 				"]" => Int(C_BRCKT)
 				"(" => Int(O_PRTSIS)
@@ -78,12 +48,10 @@ function matchlexem(item::String)
 				"{" => Int(O_C_BRCKT)
 				"}" => Int(C_C_BRCKT)
 				"=" => Int(OPR_ATR)
-				"==" => Int(OPRLR_EQ)
-				">" => Int(OPRLR_GT)
-				"<" => Int(OPRLR_LG)
+				">" => Int(OPRLR_LGT)
+				"<" => Int(OPRLR_LGT)
 				">=" => Int(OPRLR_LGT_EQ)
 				"<=" => Int(OPRLR_LGT_EQ)
-				":" => Int(VEC_IN)
 				"int" => Int(IDT_INT)
 				"float" => Int(IDT_FLOAT)
 				"char" => Int(IDT_CHAR)
