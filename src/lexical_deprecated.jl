@@ -4,7 +4,8 @@ using Match
 include("tokens.jl")
 include("matcher.jl")
 
-f = open("code.nl")
+input = "code.nl"
+f = open(input)
 
 chars_only = vcat(collect('A':'Z'),collect('a':'z'),'"')
 digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
@@ -44,95 +45,99 @@ function producer()
 	stringmode = false
 
 
-	lines = readlines(f)
+	
 
 	@async begin
-	 for l=1:length(lines)
-		comment_mode = false
-		chunks = split(lines[l]," ")
-		lineq = Queue(Dict)
-		lexembuff = ""
-		col = 0
-		chunk = -999
-		for cki = 1:length(chunks) #chunk in chunks
-			chunk = chunks[cki]
-			
-			if(length(chunk) > 0)
-				if (chunk[1] == '#')
-					break
-				end
-				i=1
-				#for i=1:length(chunk)
-				while(i<=length(chunk))
-				if (chunk[i] == '"')					
-					stringmode = !stringmode
-				end
-
-					if contains(==,chars_numbers,chunk[i])
-						lexembuff = string(lexembuff,chunk[i])
-					else
-
-						if length(lexembuff) > 0
-							enqueue!(lineq,token(lexembuff,l,col+=1))
-							lexembuff = ""
-						end
-
-						if (contains(==,terminals,chunk[i]))
-							enqueue!(lineq,token(string(chunk[i]),l,col+=1))
-						elseif chunk[i] == '>'
-								if chunk[i+1] == '='
-									enqueue!(lineq,token(">=",l,col+=1))
-									i+=1
-								else
-									enqueue!(lineq,token(">",l,col+=1))								
-								end
-						
-						elseif chunk[i] == '<'
-								if chunk[i+1] == '='
-									enqueue!(lineq,token("<=",l,col+=1))
-									i+=1
-								else
-									enqueue!(lineq,token("<",l,col+=1))								
-								end
-
-						elseif chunk[i] == '='
-								if chunk[i+1] == '='
-									enqueue!(lineq,token("==",l,col+=1))
-									i+=1
-								else
-									enqueue!(lineq,token("=",l,col+=1))								
-								end
-
-
-
-						elseif chunk[i] == ':'
-								if chunk[i+1] == ':'
-									enqueue!(lineq,token("::",l,col+=1))
-									i+=1
-								end
-						end
-
+		open(input) do file
+			l = 0
+		 for ln in eachline(file)  #=1:length(lines)=#
+		 	l+=1
+			comment_mode = false
+			chunks = split(ln," ")
+			lineq = Queue(Dict)
+			lexembuff = ""
+			col = 0
+			chunk = -999
+			for cki = 1:length(chunks) #chunk in chunks
+				chunk = chunks[cki]
+				
+				if(length(chunk) > 0)
+					if (chunk[1] == '#')
+						break
 					end
-					i+=1
-				end
-			end
-			if (length(lexembuff) > 0 && !stringmode)
-							enqueue!(lineq,token(lexembuff,l,col+=1))
-							lexembuff = ""
-			elseif stringmode
-				lexembuff = string(lexembuff," ")
-			end
+					i=1
+					#for i=1:length(chunk)
+					while(i<=length(chunk))
+					if (chunk[i] == '"')					
+						stringmode = !stringmode
+					end
 
-			if (l == length(lines) && cki == length(chunks))
-				#eoftkn = Dict("lexem"=>"\\EOF","line"=>L, "col"=>col+1, "categ_nom" => "EOF","categ_num" => " ")
-				enqueue!(lineq,token("EOF",l,col+=1))				
-			end		
-		end	
-		#The pop! command for Queue is not working...lol
-		lineq_vector = collect(lineq)
-		for i in lineq_vector
-			put!(ch,i)
-		end	
+						if contains(==,chars_numbers,chunk[i])
+							lexembuff = string(lexembuff,chunk[i])
+						else
+
+							if length(lexembuff) > 0
+								enqueue!(lineq,token(lexembuff,l,col+=1))
+								lexembuff = ""
+							end
+
+							if (contains(==,terminals,chunk[i]))
+								enqueue!(lineq,token(string(chunk[i]),l,col+=1))
+							elseif chunk[i] == '>'
+									if chunk[i+1] == '='
+										enqueue!(lineq,token(">=",l,col+=1))
+										i+=1
+									else
+										enqueue!(lineq,token(">",l,col+=1))								
+									end
+							
+							elseif chunk[i] == '<'
+									if chunk[i+1] == '='
+										enqueue!(lineq,token("<=",l,col+=1))
+										i+=1
+									else
+										enqueue!(lineq,token("<",l,col+=1))								
+									end
+
+							elseif chunk[i] == '='
+									if chunk[i+1] == '='
+										enqueue!(lineq,token("==",l,col+=1))
+										i+=1
+									else
+										enqueue!(lineq,token("=",l,col+=1))								
+									end
+
+
+
+							elseif chunk[i] == ':'
+									if chunk[i+1] == ':'
+										enqueue!(lineq,token("::",l,col+=1))
+										i+=1
+									end
+							end
+
+						end
+						i+=1
+					end
+				end
+				if (length(lexembuff) > 0 && !stringmode)
+								enqueue!(lineq,token(lexembuff,l,col+=1))
+								lexembuff = ""
+				elseif stringmode
+					lexembuff = string(lexembuff," ")
+				end
+
+				if (l == countlines(input) && cki == length(chunks))
+					#eoftkn = Dict("lexem"=>"\\EOF","line"=>L, "col"=>col+1, "categ_nom" => "EOF","categ_num" => " ")
+					enqueue!(lineq,token("EOF",l,col+=1))				
+				end		
+			end	
+			#The pop! command for Queue is not working...lol
+			lineq_vector = collect(lineq)
+			for i in lineq_vector
+				put!(ch,i)
+			end	
+		end
 	end
 
 	close(ch)
