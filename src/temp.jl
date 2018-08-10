@@ -1,28 +1,3 @@
-
-function checkisint(lexem::String)
-	try
-		parse(Int,lexem)
-		if (contains(==,lexem,'.'))
-			return false
-		end
-			return true
-	catch
-		return false
-	end
-end;
-
-function checkisfloat(lexem::String)
-	try
-		parse(Float64,lexem)
-		return true
-	catch
-		return false
-	end
-end;
-
-checkisnumber(lexem::String) = checkisfloat(lexem)
-
-
 function matchlexem(item::String)
 
 	if (item == "EOF")
@@ -31,11 +6,11 @@ function matchlexem(item::String)
 
 	#Checks if the lexem has invalid characters	
 	invalidpart = 
-	filter(item) do x
-			!contains(==,vcat(valid_chars),x)
+	filter(lexem) do x
+			!contains(==,vcat(digits_only,chars),x)
 	end	
 
-	if (length(invalidpart) > 0)		
+	if (legnth(invalidpart > 0))
 		return Int(LEX_ERR)
 	end
 

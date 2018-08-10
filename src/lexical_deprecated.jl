@@ -1,50 +1,25 @@
 using DataStructures
 using JSON
+using Match
 include("tokens.jl")
-
-chars = vcat(collect('A':'Z'),collect('a':'z'),'"')
-digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
-numbers =  vcat(digits_only,['+','-','.'])
-charssnumbers = vcat(chars,numbers)
-terminals = ['[', ']','{','}','(',')',';',',','-','*',"/"]
+include("matcher.jl")
 
 f = open("code.nl")
+
+chars_only = vcat(collect('A':'Z'),collect('a':'z'),'"')
+digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
+numbers =  vcat(digits_only,['+','-','.'])
+
+chars_numbers = vcat(chars_only,numbers)
+terminals = ['[', ']','{','}','(',')',';',',','-','*','/',' ']
+valid_chars = vcat(chars_numbers,terminals)
+
 
 t = open("tks.json")
 tkns_nms = JSON.parse(t)
 tkns_nms = SortedDict(zip(map(parse,keys(tkns_nms))  ,  values(tkns_nms)))
 
-
-
-chars = vcat(collect('A':'Z'),collect('a':'z'),'"')
-digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
-numbers =  vcat(digits_only,['+','-','.'])
-charssnumbers = vcat(chars,numbers)
-terminals = ['[', ']','{','}','(',')',';',',','-','*',"/"]
-
-function checkisint(lexem::String)
-	try
-		parse(Int,lexem)
-		if (contains(==,lexem,'.'))
-			return false
-		end
-			return true
-	catch
-		return false
-	end
-end;
-
-function checkisfloat(lexem::String)
-	try
-		parse(Float64,lexem)
-		return true
-	catch
-		return false
-	end
-end;
-
-checkisnumber(lexem::String) = checkisfloat(lexem)
-
+#Given a lexem, 
 function token(lexem,line::Int, col::Int)
 	tkn = Dict("lexem"=>string(lexem),"line"=>line, "col"=>col, "categ_nom" => " ","categ_num" => " ")
 	matchedcateg =  matchlexem(lexem)
@@ -55,15 +30,7 @@ function token(lexem,line::Int, col::Int)
 	else
        	tkn["categ_num"] = Int(ID)	       		
        	tkn["categ_nom"] = tkns_nms[Int(ID)]
-    end
-    #=
-	try
-		tkn["categ_num"] = tkns_ids[tkn["categ_nom"]] #tkn is a dict maped from the tokens.json file
-	catch
-		tkn["categ_num"] = -9999999 #Uncategorized token ---> The goal is to make this line never be executed. 
-	end
-	=#
-
+    end  
 	return tkn
 end
 
@@ -101,7 +68,7 @@ function producer()
 					stringmode = !stringmode
 				end
 
-					if contains(==,charssnumbers,chunk[i])
+					if contains(==,chars_numbers,chunk[i])
 						lexembuff = string(lexembuff,chunk[i])
 					else
 
@@ -170,8 +137,7 @@ function producer()
 
 	close(ch)
 end	
-	return ch
-	
+	return ch	
 end
 
 ch = producer()
@@ -182,8 +148,13 @@ function nextToken()
 		println("[",token["line"],", ",token["col"],"] (",token["categ_num"],", ",token["categ_nom"],") {",token["lexem"],"}")
 		return token;
 	catch
-		#Info("End of file reached")
+		info("End of file reached")
 		return false
 
 	end	
+end
+
+for i=1:16
+	nextToken();
+	sleep(0.05)
 end

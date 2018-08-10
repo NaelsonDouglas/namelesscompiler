@@ -1,6 +1,6 @@
 int main(int argc, string argv)
 {
-  print(" Hello World")
+  print("Hello World")
 }
 
 
