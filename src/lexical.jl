@@ -1,11 +1,21 @@
-using DataStructures
-using JSON
-using Match
+input = "input/shell_sort.nl"
+
+
+
+try
+	using DataStructures
+	using JSON
+	using Match
+catch
+	Pkg.add("DataStructures")
+	Pkg.add("JSON")
+	Pkg.add("Match")
+end
 
 include("tokens.jl")
 include("matcher.jl")
 
-input = "input/shell_sort.nl"
+
 f = open(input)
 
 chars_only = vcat(collect('A':'Z'),collect('a':'z'),'"')
