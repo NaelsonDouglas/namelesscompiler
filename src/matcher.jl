@@ -1,3 +1,10 @@
+chars_only = vcat(collect('A':'Z'),collect('a':'z'),'"')
+digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
+numbers =  vcat(digits_only,['+','-','.'])
+
+chars_numbers = vcat(chars_only,numbers)
+separators = ['[', ']','{','}','(',')',';',',','-','*','/',' ','<','>','=',' ']
+valid_chars = vcat(chars_numbers,separators,':')
 
 function checkisint(lexem::String)
 	try
@@ -55,6 +62,8 @@ function matchlexem(item::String)
 	if item[1] == '"' && item[length(item)] == '"' #if it starts and ends with "
 		return Int(CT_STRING)
 	end
+
+
 		
 	if item[1] == '\'' && item[length(item)] == '\'' #if it starts and ends with \)
 		return Int(CT_CHAR)
@@ -95,8 +104,6 @@ function matchlexem(item::String)
 				"EOF" => Int(EOF)
 				 _ => false
 			end
-
-
 end
 
 

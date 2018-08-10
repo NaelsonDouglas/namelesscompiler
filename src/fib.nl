@@ -23,10 +23,12 @@ void fibonacci(int n)
     
     int i = 2
     while(i<n){
-          sequence::i = sequence::(i-1) + sequence::(i-2)
+          prev = i-1
+          anteprev = i-2
+          sequence::i = sequence::(prev) + sequence::(anteprev)
           print(",")
           print(sequence::i)
-      i=i+1
+      i = i + 1
     }
   }
  }

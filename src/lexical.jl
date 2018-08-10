@@ -1,4 +1,4 @@
-input = "input/shell_sort.nl"
+input = "input/fib.nl"
 
 
 
@@ -18,13 +18,7 @@ include("matcher.jl")
 
 f = open(input)
 
-chars_only = vcat(collect('A':'Z'),collect('a':'z'),'"')
-digits_only = ['0', '1','2','3','4','5','6','7','8','9'] 
-numbers =  vcat(digits_only,['+','-','.'])
 
-chars_numbers = vcat(chars_only,numbers)
-terminals = ['[', ']','{','}','(',')',';',',','-','*','/',' ','<','>','=']
-valid_chars = vcat(chars_numbers,terminals,':')
 
 
 t = open("tks.json")
@@ -65,7 +59,7 @@ function producer()
 			chunk = -999
 			for cki = 1:length(chunks) #chunk in chunks
 				chunk = chunks[cki]
-				
+			
 				if(length(chunk) > 0)
 					if (chunk[1] == '#')
 						break
