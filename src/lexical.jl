@@ -23,8 +23,8 @@ digits_only = ['0', '1','2','3','4','5','6','7','8','9']
 numbers =  vcat(digits_only,['+','-','.'])
 
 chars_numbers = vcat(chars_only,numbers)
-terminals = ['[', ']','{','}','(',')',';',',','-','*','/',' ','<','>','=',':']
-valid_chars = vcat(chars_numbers,terminals)
+terminals = ['[', ']','{','}','(',')',';',',','-','*','/',' ','<','>','=']
+valid_chars = vcat(chars_numbers,terminals,':')
 
 
 t = open("tks.json")
@@ -111,9 +111,6 @@ function producer()
 									else
 										enqueue!(lineq,token("=",l,col+=1))								
 									end
-
-
-
 							elseif chunk[i] == ':'
 									if chunk[i+1] == ':'
 										enqueue!(lineq,token("::",l,col+=1))
@@ -168,9 +165,10 @@ function loop_all()
 	i = true
 	while (i!=false)
 		i=nextToken();
-		sleep(0.05)
+		#sleep(0.05)
 	end
 end
 
 info("Para ler todos os tokens automaticamente use loop_all()")
 info("Para ler token a token use nextToken();")
+loop_all()
