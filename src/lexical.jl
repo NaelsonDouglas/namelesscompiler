@@ -1,4 +1,4 @@
-input = "input/fib.nl"
+input = "input/hello_world.nl"
 
 
 
@@ -10,6 +10,9 @@ catch
 	Pkg.add("DataStructures")
 	Pkg.add("JSON")
 	Pkg.add("Match")
+	using DataStructures
+	using JSON
+	using Match
 end
 
 include("tokens.jl")
@@ -126,7 +129,7 @@ function producer()
 
 				if (l == countlines(input) && cki == length(chunks))
 					#eoftkn = Dict("lexem"=>"\\EOF","line"=>L, "col"=>col+1, "categ_nom" => "EOF","categ_num" => " ")
-					enqueue!(lineq,token("EOF",l,col+=1))				
+					enqueue!(lineq,token("\\eof",l,col+=1))				
 				end		
 			end	
 			#The pop! command for Queue is not working...lol

@@ -32,7 +32,7 @@ checkisnumber(lexem::String) = checkisfloat(lexem)
 
 function matchlexem(item::String)
 
-	if (item == "EOF")
+	if (item == "\\eof")
 		return Int(EOF)
 	end
 

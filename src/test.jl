@@ -29,6 +29,7 @@ function loop_all()
 				println(readline(f))				
 				sleep(0.1)
 			end
+			print("        ")
 			printtoken(t)
 		catch
 		end
@@ -37,6 +38,5 @@ function loop_all()
 end
 
 
-info("Para ler todos os tokens automaticamente use loop_all()")
-info("Para ler token a token use nextToken();")
+
 loop_all()
