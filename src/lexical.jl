@@ -27,6 +27,7 @@ tkns_nms = SortedDict(zip(map(parse,keys(tkns_nms))  ,  values(tkns_nms)))
 
 #Given a lexem, 
 function token(lexem,line::Int, col::Int)
+	#TODO MUDAR INDEXAÇÃOO (USAR REGISTRO)
 	tkn = Dict("lexem"=>string(lexem),"line"=>line, "col"=>col, "categ_nom" => " ","categ_num" => " ")
 	matchedcateg =  matchlexem(lexem)
 
@@ -59,7 +60,7 @@ function producer()
 			chunk = -999
 			for cki = 1:length(chunks) #chunk in chunks
 				chunk = chunks[cki]
-			
+
 				if(length(chunk) > 0)
 					if (chunk[1] == '#')
 						break
@@ -79,8 +80,8 @@ function producer()
 								enqueue!(lineq,token(lexembuff,l,col+=1))
 								lexembuff = ""
 							end
-
-							if (contains(==,terminals,chunk[i]))
+#TODO FAZER UMA FUNÇÃO PARA ELSE-IF
+							if (contains(==,separators,chunk[i]))
 								enqueue!(lineq,token(string(chunk[i]),l,col+=1))
 							elseif chunk[i] == '>'
 									if chunk[i+1] == '='
@@ -143,10 +144,18 @@ end
 
 ch = producer()
 
+
+
+#	@printf("%.3f",x)
+
+
 function nextToken()
 	try
 		token = take!(ch)
-		println("[",token["line"],", ",token["col"],"] (",token["categ_num"],", ",token["categ_nom"],") {",token["lexem"],"}")
+		#todo colocar o print no programa de teste e tirar do nextotken
+		
+
+		#println("[",line,", ",col,"] (",categ_num,", ",categ_nom,") {",lexem,"}")
 		return token;
 	catch
 		info("End of file reached")
@@ -155,14 +164,9 @@ function nextToken()
 	end	
 end
 
-function loop_all()
-	i = true
-	while (i!=false)
-		i=nextToken();
-		#sleep(0.05)
-	end
-end
 
-info("Para ler todos os tokens automaticamente use loop_all()")
-info("Para ler token a token use nextToken();")
-loop_all()
+
+
+
+
+

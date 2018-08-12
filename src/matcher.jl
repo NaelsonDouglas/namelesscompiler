@@ -64,7 +64,7 @@ function matchlexem(item::String)
 	end
 
 
-		
+	#TODO ISSO AQUI TÁ PERMITINDO CHAR DE TAMANHO >1	
 	if item[1] == '\'' && item[length(item)] == '\'' #if it starts and ends with \)
 		return Int(CT_CHAR)
 	end 
