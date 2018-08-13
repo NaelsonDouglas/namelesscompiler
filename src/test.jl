@@ -1,11 +1,11 @@
 include("lexical.jl")
 
 function printtoken(token)
-		line  = token["line"]
-		col = token["col"]
-		categ_num = token["categ_num"]
-		categ_nom = token["categ_nom"]
-		lexem = token["lexem"]
+		line  = token.line
+		col = token.column
+		categ_num = token.categ_num
+		categ_nom = token.categ_nom
+		lexem = token.lexem
 		
 		
 		@printf("[%04d,%04d]",line,col)
@@ -22,9 +22,8 @@ function loop_all()
 	while (t!=false)
 		t=nextToken();
 		try			
-			if t["line"] > line
-				line+=1
-				#print("(line=$line t=",t["line"],")")
+			if t.line > line
+				line+=1				
 				println()
 				println(readline(f))				
 				sleep(0.1)

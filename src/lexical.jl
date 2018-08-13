@@ -21,7 +21,13 @@ include("matcher.jl")
 
 f = open(input)
 
-
+mutable struct Token 
+	lexem::String
+	line::Int64
+	column::Int64
+	categ_nom::String
+	categ_num::Int64
+end
 
 
 t = open("tks.json")
@@ -31,15 +37,16 @@ tkns_nms = SortedDict(zip(map(parse,keys(tkns_nms))  ,  values(tkns_nms)))
 #Given a lexem, 
 function token(lexem,line::Int, col::Int)
 	#TODO MUDAR INDEXAÇÃOO (USAR REGISTRO)
-	tkn = Dict("lexem"=>string(lexem),"line"=>line, "col"=>col, "categ_nom" => " ","categ_num" => " ")
+	tkn = Token(string(lexem),line,col,"",0)
+	#tkn = Dict("lexem"=>string(lexem),"line"=>line, "col"=>col, "categ_nom" => " ","categ_num" => " ")
 	matchedcateg =  matchlexem(lexem)
 
 	if (matchedcateg != false)
-		tkn["categ_num"] = matchedcateg		
-		tkn["categ_nom"] = tkns_nms[matchedcateg]
+		tkn.categ_num = matchedcateg
+		tkn.categ_nom = tkns_nms[matchedcateg]
 	else
-       	tkn["categ_num"] = Int(ID)	       		
-       	tkn["categ_nom"] = tkns_nms[Int(ID)]
+       	tkn.categ_num = Int(ID)	       		
+       	tkn.categ_nom = tkns_nms[Int(ID)]
     end  
 	return tkn
 end
@@ -57,7 +64,7 @@ function producer()
 		 	l+=1
 			comment_mode = false
 			chunks = split(ln," ")
-			lineq = Queue(Dict)
+			lineq = Queue(Token)
 			lexembuff = ""
 			col = 0
 			chunk = -999
