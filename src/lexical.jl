@@ -25,7 +25,7 @@ mutable struct Token
 	lexem::String
 	line::Int64
 	column::Int64
-	categ_nom::String
+	categ_nom::String #TODO Provavelmente é melhor tirar esse field. Não faz sentido ficar arrastando uma String para cima e para baixo em cada token. Já tem um dicionário com os nomes e que podemos pegar direto
 	categ_num::Int64
 end
 
