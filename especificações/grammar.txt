@@ -27,7 +27,9 @@ OPR_DM -> '/'|*
 OPRLR_EQ_DIF -> ==|!=
 CHAR -> 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'|'o'|'p'|'q'|'r'|'s'|'t'|'u'|'v'|'x'|'y'|'w'|'z'|' '
 ALPHA -> '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'
-ALPHANUM -> ALPHA NUM|NUM ALPHA|NUM ALPHA ALPHANUM|ALPHA NUM ALPHANUM
+
+
+ALPHANUM -> CHAR ALPHA|ALPHA CHAR|ALPHA CHAR ALPHANUM|CHAR ALPHA ALPHANUM
 #'TODO: indecisão
 OPRLR_LGT -> '<'|'<='
 OPRLR_GT -> '>'|'>='
@@ -47,12 +49,13 @@ OPR_NOT -> 'NOT'
 
 OPRLR -> OPRLR_EQ_DIF | OPRLR_LGT | OPRLR_LGT_EQ | ORPLR_AND_OR
 
-
 CT_STRING -> '"'ALPHANUM'"'
 CT_INT -> OPR_PM NUM | NUM
-CT_FLOAT -> {CT_INT}.[0-9]*$
-CTN -> {CT_INT}|{CT_FLOAT}
-ID -> [:ALPHA:]+[:ALNUM:]*
+CT_FLOAT -> CT_INT'.' NUM
+CTN -> CT_INT|CT_FLOAT
+
+#TODO Indecidibilidade.
+ID -> ALPHA NUM | ALPHA | ALPHA ID
 
 LOOP_WHILE -> 'while' '(' EXPR_BOOL ')' '{' CMD '}'
 
@@ -61,8 +64,6 @@ LOOP_FOR -> 'for' '(' INT_DCLR COMMA EXPR_BOOL COMMA CMD ')' '{' CMD '}'
 CTB -> NUM | 'true' | 'false'
 
 EXPR_BOOL ->  EXPR_ARIT OPR_LOGIC EXPR_ARIT | CTB
-
-
 
 TERM -> CTN|ID
 
