@@ -1,4 +1,4 @@
-input = "input/hello_world.nl"
+input = "code.nl"
 
 
 
@@ -151,6 +151,8 @@ function producer()
 end	
 	return ch	
 end
+
+token(tkn::String) = token(string(tkn),0,0)
 
 ch = producer()
 
