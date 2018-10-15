@@ -101,6 +101,12 @@ function matchlexem(item::String)
 				"string" => Int(IDT_STRING)
 				"print" => Int(FN_PRINT)
 				"main" => Int(FN_MAIN)
+				"AND" => Int(OPRLR_AND)
+				"OR" => Int(OPRLR_OR)
+				"NOT" => Int(OPRL_NOT)
+				"true" => Int(CTB)
+				"false" => Int(CTB)
+				"#" => Int(CMNT_LN)
 				"::" => Int(VEC_IN)  #From this point we are sure the token is not an operator or a reserved symbol
 				"EOF" => Int(EOF)
 				 _ => false

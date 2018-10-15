@@ -54,6 +54,11 @@
 "52":"RETURN",
 "53":"OPRLR_GEQ",
 "54":"OPRLR_LGEQ",
-"55":"OPR_CONCAT"
+"55":"OPR_CONCAT",
+"56":"OPRLR_AND",
+"57":"OPRLR_OR",
+"58":"OPRL_NOT",
+"59":"CTB",
+"60":"CMNT_LN"
 }
 
