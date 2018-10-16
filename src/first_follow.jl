@@ -40,17 +40,23 @@ calcfst_heart(F[1]) returns the first off ABC
 "
 function calcfst_heart(_production::Vector)
 	my_first = []
-	for p in _production
-		@show p
+	for p in _production		
 		curr_fst = calcfst_head([p])
 		push!(my_first,curr_fst)
 		my_first = unique(collect(my_first))
 
-		if !contains(==,curr_fst,EPISILON)
-			break
-		end
+		
 	end
-	return my_first
+
+	if (contains(==,my_first,EPISILON) && (length(my_first)>1))
+			filter!(my_first) do x
+				x!=EPISILON
+			end
+	end
+
+	
+	return collect(my_first)
+
 end
 
 
@@ -59,9 +65,16 @@ function calc_first(productions::Vector)
 	my_first = []
 	for p in productions
 		current_first = calcfst_heart(p)
-		my_first = unique(vcat(my_first,current_first))
+		@show p
+		@show current_first
+
+		my_first = vcat(my_first,current_first[1])
+
+		my_first = unique(collect(my_first))
 	end
-	return my_first
+
+	length(my_first)==1? collect(my_first[1]) : collect(my_first)	
+	collect(my_first)
 end
 
 

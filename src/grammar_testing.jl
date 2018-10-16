@@ -1,10 +1,13 @@
-E  = [[:T,:E,:ER]]
+productions =
+[
 
-ER = [[1,:T,:ER],[EPISILON]]
+E  = [[:T,:E,:ER]],
+ER = [[1,:T,:ER],[EPISILON]],
 
-T  = [[:F,:T]]
+T  = [[:F,:T]],
+TR = [[2,:F,:TR],[EPISILON]],
 
-TR = [[2,:F,:TR],[EPISILON]]
-F  = [[3],[ID]]
+F  = [[3],[ID]],
+TEMP = [[TR,TR]]
 
-TEMP = [[EPISILON]]
+]
