@@ -1,4 +1,4 @@
-grammar_file = "grammar_testing.jl"
+grammar_file = "grammar.jl"
 include(grammar_file)
 
 
@@ -9,7 +9,7 @@ isSymbol(x) = typeof(x)==Symbol? true : false
 F = [[ABC]]
 calcfst_head(F) will return the first of A
 "
-function calcfst_head(subproduction::Vector)	
+function calcfst_head(subproduction::Union{Vector,Int})	
 	my_first = []
 
 
@@ -28,6 +28,7 @@ function calcfst_head(subproduction::Vector)
 	end	
 
 	if length(my_first) == 0
+
 		return calcfst_head(eval(subproduction[1]))
 	end
 	return my_first
@@ -38,9 +39,16 @@ end
 F = [[ABC].[XYZ]]
 calcfst_heart(F[1]) returns the first off ABC
 "
-function calcfst_heart(_production::Vector)
+function calcfst_heart(production::Union{Vector,Symbol})
 	my_first = []
+	
+	_production = production
+	if typeof(_production) == Symbol
+		_production = eval(_production)
+	end	
+
 	for p in _production		
+
 		curr_fst = calcfst_head([p])
 		push!(my_first,curr_fst)
 		my_first = unique(collect(my_first))
@@ -65,9 +73,7 @@ function calc_first(productions::Vector)
 	my_first = []
 	for p in productions
 		current_first = calcfst_heart(p)
-		@show p
-		@show current_first
-
+		
 		my_first = vcat(my_first,current_first[1])
 
 		my_first = unique(collect(my_first))

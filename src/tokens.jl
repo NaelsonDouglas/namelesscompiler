@@ -61,4 +61,6 @@ OPRL_NOT=58
 CTB=59
 CMNT_LN=60
 EPISILON=61
+
+OPRLR_DIF=62
 #https://github.com/JuliaLang/julia/blob/d386e40c17d43b79fc89d3e579fc04547241787c/base/Enums.jl#L31-L51

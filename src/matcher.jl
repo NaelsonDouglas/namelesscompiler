@@ -36,6 +36,10 @@ function matchlexem(item::String)
 		return Int(EOF)
 	end
 
+	if (item == "!=")
+		return Int(OPRLR_DIF)
+	end
+
 	#Checks if the lexem has invalid characters	
 	invalidpart = 
 	filter(item) do x
@@ -70,6 +74,7 @@ function matchlexem(item::String)
 	end 
 
 	#From this point we are sure the token is not a number neither is a string
+	@show item
 	return	@match item begin
 				"for"=>Int(BLK_FOR)
 				"while"=>Int(BLK_WHILE)
@@ -95,6 +100,7 @@ function matchlexem(item::String)
 				"<" => Int(OPRLR_LG)
 				">=" => Int(OPRLR_GEQ)
 				"<=" => Int(OPRLR_LGEQ)				
+				"!=" => Int(OPRLR_DIF)
 				"int" => Int(IDT_INT)
 				"float" => Int(IDT_FLOAT)
 				"char" => Int(IDT_CHAR)
