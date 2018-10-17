@@ -177,12 +177,3 @@ function nextToken()
 
 	end	
 end
-
-
-
-
-
-
-map(calc_first,productions)
-
-#dict_firsts = SortedDict(zip(collect(instances(Prods)),firsts))
