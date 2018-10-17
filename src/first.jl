@@ -1,8 +1,8 @@
 Base.isinteger(v::Symbol) = false
 
 amnt_productions = length(collect(map(Int,instances(Prods)))) #The amount of productions ---> The length of the Prods Enum
-firsts = fill([],amnt_productions)
-
+firsts = Vector{Vector}(amnt_productions)
+fill!(firsts,Vector())
 function calc_first(g=grammar)
 	
 	for prod_i in g #Individual productionsi in the grammar
@@ -14,10 +14,17 @@ function calc_first(g=grammar)
 			#@show sent
 			#@show prod_id						
 			for cell in sent
-				@show cell
+				if typeof(cell) == Int
+					firsts[prod_id]  = vcat(firsts[prod_id],cell)
+					break
+				elseif typeof(cell) == Symbol
+					expanded = eval(cell)
+					
+				end
 			end			
+			
 		end	
-		println()	
+		
 
 
 	end	

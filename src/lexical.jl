@@ -185,7 +185,7 @@ end
 
 calc_first()
 
-for i in firsts[1]
-#       @show i
- #      println()
+
+for i in firsts
+	@show i
 end
