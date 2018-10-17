@@ -73,15 +73,60 @@ function calcfst_heart(production::Union{Vector,Symbol,Int})
 
 end
 
+
+Base.isinteger(v::Symbol) = false
+
+function getfst_sentence(sentence::Union{Int,Symbol})
+	if isinteger(sentence)
+		return sentence
+	else
+		return eval(sentence)
+	end
+
+
+end
+
 function calc_first(productions::Vector)
 	my_first = []
+	#a sentene in each proudction S -> AB | CD
+	#AB and CD are productions,A,B,C,D are sentences
 	for p in productions
-		current_first = calcfst_heart(p)		
-		my_first = vcat(my_first,plainvector(current_first))
-		my_first = unique(collect(my_first))
+		
+		println("---------------------")
+		@show productions
+
+
+		#This loop  test to prevent the usage of bad written grammars
+		for pi in p
+			try
+				if (typeof(pi) != Symbol && typeof(pi)!= Int)
+					@show p[1]
+					@show pi 
+					error("Irregular grammar definition")
+					exit(0)
+				end
+			catch
+				println("---------------------")
+				@show productions
+				@show p
+				@show pi
+				println("---------------------")
+				error("pi should be of the type Symbol or Int, but I got an ",typeof(pi))
+			end
+
+		end
+
+		@show p
+		for sent_i=1:length(p)
+			
+			@show p[sent_i]
+			println()
+		end
+
+
 	end
 	
-	my_first = plainvector(my_first)
+	
 
 
 
