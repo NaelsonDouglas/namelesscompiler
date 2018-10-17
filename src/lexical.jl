@@ -17,7 +17,7 @@ end
 
 include("tokens.jl")
 include("matcher.jl")
-include("first_follow.jl")
+include("first.jl")
 
 
 f = open(input)
@@ -182,4 +182,5 @@ end
 
 
 
+x=map(calc_first,productions)
 

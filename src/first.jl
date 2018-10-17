@@ -1,8 +1,12 @@
+
 grammar_file = "grammar.jl"
+
+
 include(grammar_file)
+include("auxiliar_funcs.jl")
 
+#isSymbol(x) = typeof(x)==Symbol? true : false
 
-isSymbol(x) = typeof(x)==Symbol? true : false
 
 
 "Gets the first on the head of the production
@@ -16,14 +20,14 @@ function calcfst_head(subproduction::Union{Vector,Int})
 	try
 		if isinteger(subproduction[1])  #IF the subproduction is a terminal
 			push!(my_first,subproduction[1])
-			return my_first
+			return plainvector(my_first)
 		end
 	end
 
 	try		
 		if length(subproduction)==0 #If its an episilon subproduction
 			push!(my_first,EPISILON)
-			return my_first
+			return plainvector(my_first)
 		end
 	end	
 
@@ -31,7 +35,7 @@ function calcfst_head(subproduction::Union{Vector,Int})
 
 		return calcfst_head(eval(subproduction[1]))
 	end
-	return my_first
+	return plainvector(my_first)
 end
 
 
@@ -39,8 +43,10 @@ end
 F = [[ABC].[XYZ]]
 calcfst_heart(F[1]) returns the first off ABC
 "
-function calcfst_heart(production::Union{Vector,Symbol})
+function calcfst_heart(production::Union{Vector,Symbol,Int})
 	my_first = []
+
+	
 	
 	_production = production
 	if typeof(_production) == Symbol
@@ -49,7 +55,7 @@ function calcfst_heart(production::Union{Vector,Symbol})
 
 	for p in _production		
 
-		curr_fst = calcfst_head([p])
+		curr_fst = plainvector(calcfst_heart([p]))
 		push!(my_first,curr_fst)
 		my_first = unique(collect(my_first))
 
@@ -63,30 +69,24 @@ function calcfst_heart(production::Union{Vector,Symbol})
 	end
 
 	
-	return collect(my_first)
+	return collect(plainvector(my_first))
 
 end
-
-
 
 function calc_first(productions::Vector)
 	my_first = []
 	for p in productions
-		current_first = calcfst_heart(p)
-		
-		my_first = vcat(my_first,current_first[1])
-
+		current_first = calcfst_heart(p)		
+		my_first = vcat(my_first,plainvector(current_first))
 		my_first = unique(collect(my_first))
 	end
+	
+	my_first = plainvector(my_first)
 
-	length(my_first)==1? collect(my_first[1]) : collect(my_first)	
-	collect(my_first)
+
+
+	return my_first
 end
-
-
-
-
-
 
 
 

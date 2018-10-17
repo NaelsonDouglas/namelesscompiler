@@ -39,6 +39,9 @@ function matchlexem(item::String)
 	if (item == "!=")
 		return Int(OPRLR_DIF)
 	end
+	if (item == ">")
+		return Int(OPRLR_GT)
+	end
 
 	#Checks if the lexem has invalid characters	
 	invalidpart = 
