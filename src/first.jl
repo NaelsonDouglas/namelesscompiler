@@ -55,7 +55,7 @@ function calcfst_heart(production::Union{Vector,Symbol,Int})
 
 	for p in _production		
 
-		curr_fst = plainvector(calcfst_heart([p]))
+		curr_fst = plainvector(calcfst_head([p]))
 		push!(my_first,curr_fst)
 		my_first = unique(collect(my_first))
 

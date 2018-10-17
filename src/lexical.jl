@@ -18,6 +18,7 @@ end
 include("tokens.jl")
 include("matcher.jl")
 include("first.jl")
+include("productions.jl")
 
 
 f = open(input)
@@ -182,5 +183,6 @@ end
 
 
 
-x=map(calc_first,productions)
+firsts=map(calc_first,productions)
 
+dict_firsts = SortedDict(zip(collect(instances(Prods)),firsts))

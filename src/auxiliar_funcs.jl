@@ -5,7 +5,7 @@ plainvector(v)'
 The boolean unq specifies if the output will be filtered to return a vector of unique values
 "
 function plainvector(_v,unq=true)
-
+	
 	v = copy(_v)
 	for i=1:length(v)
 		if typeof(v[i])!=Int
