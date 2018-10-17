@@ -1,36 +1,24 @@
-
-grammar_file = "grammar.jl"
-
-
+Base.isinteger(v::Symbol) = false
 
 amnt_productions = length(collect(map(Int,instances(Prods)))) #The amount of productions ---> The length of the Prods Enum
 firsts = fill([],amnt_productions)
 
-
-include(grammar_file)
-include("auxiliar_funcs.jl")
-
-#isSymbol(x) = typeof(x)==Symbol? true : false
-
-
-Base.isinteger(v::Symbol) = false
-
-
-function calc_first(productions::Vector)
+function calc_first(g=grammar)
 	
-	my_first = []
-	
-	return my_first
+	for prod_i in g #Individual productionsi in the grammar
+		prods_body   = get_productions(prod_i)
+		prod_id      = get_productionid(prod_i)		
+		
+		for sent in prods_body # Right-sides
+			#@show prods_body
+			#@show sent
+			#@show prod_id						
+			for cell in sent
+				@show cell
+			end			
+		end	
+		println()	
+
+
+	end	
 end
-
-
-
-
-
-
-
-
-
-
-
-

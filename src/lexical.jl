@@ -16,9 +16,14 @@ catch
 end
 
 include("tokens.jl")
+include("productions.jl")
+include("grammar.jl")
+
+include("auxiliar_funcs.jl")
+
 include("matcher.jl")
 include("first.jl")
-include("productions.jl")
+
 
 
 f = open(input)
@@ -176,4 +181,11 @@ function nextToken()
 		return false
 
 	end	
+end
+
+calc_first()
+
+for i in firsts[1]
+#       @show i
+ #      println()
 end
