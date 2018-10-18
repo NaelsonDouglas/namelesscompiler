@@ -186,6 +186,9 @@ end
 calc_first()
 map!(unique,firsts)
 
+m = collect(instances(Prods))
 for i=1:length(firsts)
-	println(" "*string(i)*"--",firsts[i])
+	println(m[i])
+	println(string(i)*"--",firsts[i],)
+	println()
 end

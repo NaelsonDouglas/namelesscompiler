@@ -29,25 +29,31 @@ function calc_first(g=grammar)
 					
 					
 					son_id = get_productionid(expanded)
-					println("Fater ->",prod_id," son-->",son_id)
+					
 
 					if length(firsts[son_id])>0
 
 						firsts[prod_id]  = vcat(firsts[prod_id],firsts[son_id])
-						break
-						#firsts[prod_id]  = vcat(firsts[prod_id],cell)						
+						break						
 					else
 						dependents[son_id] = vcat(dependents[prod_id],prod_id)
 						dependents[son_id] = unique(dependents[son_id])
-						#firsts[prod_id]  = vcat(firsts[prod_id],cell)
+						firsts[prod_id]  = vcat(firsts[prod_id],cell)
 					end				
 				end
 			end			
 
 		end	
+
+
+		
 	end	
+	#=
 	println()	
+	m = collect(instances(Prods))
+
 	for i=1:length(dependents)
-		println(i,"----",dependents[i])
+		println(m[i],"----",i,"----",dependents[i])
 	end
+	=#
 end
