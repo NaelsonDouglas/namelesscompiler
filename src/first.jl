@@ -57,3 +57,27 @@ function calc_first(g=grammar)
 	end
 	=#
 end
+
+"It's an auxiliar and ugly function. Nothing special to see here."
+function reverse_first()
+	names = collect(instances(Prods))
+	for i=1:length(firsts)
+		
+		n = string(names[i])
+		l = length(n)
+		plus = 15-l
+		
+		l2 = length(string(i))
+		plus2 = 4-l2
+		print(i)
+		for j=1:plus2
+			print("-")
+		end
+
+		print(string(names[i]))
+		for j=1:plus
+			print("-")
+		end
+		println(firsts[i])
+	end
+end
