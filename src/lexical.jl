@@ -21,6 +21,7 @@ include("auxiliar_funcs.jl")
 
 include("matcher.jl")
 include("first.jl")
+include("follow.jl")
 
 
 
@@ -183,11 +184,14 @@ function nextToken()
 end
 
 calc_first()
+calc_follow()
 map!(unique,firsts)
 
+#=
 m = collect(instances(Prods))
 for i=1:length(firsts)
 	println(m[i])
 	println(string(i)*"--",firsts[i],)
 	println()
 end
+=#
