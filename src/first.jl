@@ -5,6 +5,10 @@ firsts = Vector{Vector}(amnt_productions)
 fill!(firsts,Vector())
 function calc_first(g=grammar)
 	
+	dependents = Vector{Vector}(amnt_productions)	
+	fill!(dependents,Vector())
+
+	
 	for prod_i in g #Individual productionsi in the grammar
 		prods_body   = get_productions(prod_i)
 		prod_id      = get_productionid(prod_i)		
@@ -14,18 +18,36 @@ function calc_first(g=grammar)
 			#@show sent
 			#@show prod_id						
 			for cell in sent
+				
 				if typeof(cell) == Int
-					firsts[prod_id]  = vcat(firsts[prod_id],cell)
-					break
+					firsts[prod_id]  = vcat(firsts[prod_id],cell)			
+					if cell!=EPISILON
+						break
+					end
 				elseif typeof(cell) == Symbol
 					expanded = eval(cell)
 					
+					
+					son_id = get_productionid(expanded)
+					println("Fater ->",prod_id," son-->",son_id)
+
+					if length(firsts[son_id])>0
+
+						firsts[prod_id]  = vcat(firsts[prod_id],firsts[son_id])
+						break
+						#firsts[prod_id]  = vcat(firsts[prod_id],cell)						
+					else
+						dependents[son_id] = vcat(dependents[prod_id],prod_id)
+						dependents[son_id] = unique(dependents[son_id])
+						#firsts[prod_id]  = vcat(firsts[prod_id],cell)
+					end				
 				end
 			end			
-			
+
 		end	
-		
-
-
 	end	
+	println()	
+	for i=1:length(dependents)
+		println(i,"----",dependents[i])
+	end
 end

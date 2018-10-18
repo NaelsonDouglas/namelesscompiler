@@ -184,8 +184,8 @@ function nextToken()
 end
 
 calc_first()
+map!(unique,firsts)
 
-
-for i in firsts
-	@show i
+for i=1:length(firsts)
+	println(" "*string(i)*"--",firsts[i])
 end
