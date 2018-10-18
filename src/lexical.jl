@@ -1,7 +1,5 @@
 input = "code.nl"
 
-
-
 try
 	using DataStructures
 	using JSON
@@ -143,7 +141,7 @@ function producer()
 
 				if (l == countlines(input) && cki == length(chunks))
 					#eoftkn = Dict("lexem"=>"\\EOF","line"=>L, "col"=>col+1, "categ_nom" => "EOF","categ_num" => " ")
-					enqueue!(lineq,token("\\eof",l,col+=1))				
+					#enqueue!(lineq,token("\\eof",l,col+=1))				
 				end		
 			end	
 			#The pop! command for Queue is not working...lol
@@ -178,7 +176,8 @@ function nextToken()
 		return token;
 	catch
 		info("End of file reached")
-		return false
+		return Token("\eof",0,0,"EOF",EOF)
+		#return false
 
 	end	
 end

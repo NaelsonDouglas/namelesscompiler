@@ -32,9 +32,7 @@ checkisnumber(lexem::String) = checkisfloat(lexem)
 
 function matchlexem(item::String)
 
-	if (item == "\\eof")
-		return Int(EOF)
-	end
+	
 
 	if (item == "!=")
 		return Int(OPRLR_DIF)
@@ -77,7 +75,7 @@ function matchlexem(item::String)
 	end 
 
 	#From this point we are sure the token is not a number neither is a string
-	@show item
+	
 	return	@match item begin
 				"for"=>Int(BLK_FOR)
 				"while"=>Int(BLK_WHILE)
@@ -116,7 +114,7 @@ function matchlexem(item::String)
 				"true" => Int(CTB)
 				"false" => Int(CTB)
 				"#" => Int(CMNT_LN)
-				"::" => Int(VEC_IN)  #From this point we are sure the token is not an operator or a reserved symbol
+				"::" => Int(VEC_IN)				
 				"EOF" => Int(EOF)
 				 _ => false
 			end
