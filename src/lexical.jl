@@ -22,6 +22,7 @@ include("auxiliar_funcs.jl")
 include("matcher.jl")
 include("first.jl")
 include("follow.jl")
+include("semanthic.jl")
 
 
 
