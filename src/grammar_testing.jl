@@ -36,7 +36,7 @@ OPRLR = [[[:OPRLR_LGT],[OPRLR_GT],[OPRLR_EQ]],Int(OPRLR_)],
 FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
 """
 
-    S = [[[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]], Int(S_)],
+    S = [ [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]], Int(S_)],
     TYPE = [[[IDT_INT], [IDT_CHAR], [IDT_FLOAT], [IDT_STRING]], Int(TYPE_)],
     PARAM = [[[O_BRCKT, C_BRCKT], [O_BRCKT, :P1, C_BRCKT]], Int(PARAM_)],
     P1 = [[[:TYPE, :IDVEC], [:TYPE, :IDVEC, COMMA, :P1]], , Int(P1_)],
@@ -65,7 +65,7 @@ FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
     EXB2 = [[[:IDVEC], [C_BRCKT, :EXPR_BOOL, C_BRCKT] ,[CT_INT]], Int(EXB2_)]
 
 
-    EXPR_STR =[[EXS2,EXS1], Int(EXPR_STR_)]
+    EXPR_STR =[[[EXS2,EXS1]], Int(EXPR_STR_)]
     EXS1 = [[[OPR_PS,EXS2, EXS1], [EPS]], Int(EXS1_)]
     EXS2 = [[[IDVEC], [CT_STR]], Int(EXS2_)]
 
