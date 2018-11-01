@@ -191,33 +191,59 @@ calc_follow()
 
 # por exemplo recebe A -> BACD, o argumento da função seria BA, essa função
 # acha o FIRST de BACD.
-function first(rule)
-    c_rule_fs = []
+#
+# S -> ABC
+# A -> xDC | a | b | eps
+# B -> b | eps
+# C -> c
+# D -> d | i | j
 
-    if rule[1] isa Int64
-        push(c_rule_fs, rule[1])
-    else
+function first_calc_one_rule(rule)
+    c_rule_fs = []
+    has_eps = false
+
+    if rule isa Int64 && rule != EPS
+        push!(c_rule_fs, rule)
+        return unique(c_rule_fs)
+    end
+
+    for r1 in rule
         has_eps = false
-        for r in rule
-            
+        @show eval(r1)[1]
+        for r2 in eval(r1)[1]
+            @show r2[1]
+            if r2[1] != EPS
+                append!(c_rule_fs, first(r2[1]))
+            else
+                has_eps = true
+            end
+        end
+        if !has_eps
+            break
         end
     end
 
-    return c_rule_fs
+    if has_eps
+        push!(c_rule_fs, EPS)
+    end
+
+    return unique(c_rule_fs)
 end
 
 rules_count = 0
 terminals_count_aux = []
 for it_g in grammar
-    rules_count += length(it_g[1][1])
     for term in it_g[1][1]
         if term isa Int64
-            push(terminals_count_aux, term)
+            push!(terminals_count_aux, term)
         end
     end
 end
 
-predict_table = Array{Any, 2}(rules_count, length(set(terminals_count_aux)))
+first_calc_one_rule(eval(:TYPE)[1])
+
+#=
+predict_table = Array{Any, 2}(length(grammar), length(unique(terminals_count_aux)))
 
 for r in grammar
     has_eps = false
@@ -227,6 +253,8 @@ for r in grammar
     end
 
 end
+=#
+
 
 #include("sinthatic.jl")
 #sinthatic()
