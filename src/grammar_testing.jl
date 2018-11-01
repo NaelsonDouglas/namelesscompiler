@@ -62,11 +62,10 @@ FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
     EXPR_BOOL = [[[EXB1] ,[:EXB1, OPRLR_OR, :EXPR_BOOL]], Int(EXPR_BOOL_)],
     EXB1 = [[[:EXB1, :EXB11]], Int(EXB1_)],
     EXB11 = [[[OPRLR_AND, :EXB2, :EXB11], [EPS]], Int(EXB11_)],
-    EXB2 = [[[:IDVEC], [C_BRCKT, :EXPR_BOOL, C_BRCKT] ,[CT_INT]], Int(EXB2_)]
+    EXB2 = [[[:IDVEC], [C_BRCKT, :EXPR_BOOL, C_BRCKT] ,[CT_INT]], Int(EXB2_)],
 
 
-    EXPR_STR =[[[EXS2,EXS1]], Int(EXPR_STR_)]
-    EXS1 = [[[OPR_PS,EXS2, EXS1], [EPS]], Int(EXS1_)]
-    EXS2 = [[[IDVEC], [CT_STR]], Int(EXS2_)]
-
+    EXPR_STR =[[[EXS2,EXS1]], Int(EXPR_STR_)],
+    EXS1 = [[[OPR_PS,EXS2, EXS1], [EPS]], Int(EXS1_)],
+    EXS2 = [[[IDVEC], [CT_STR]], Int(EXS2_)],
 ]
