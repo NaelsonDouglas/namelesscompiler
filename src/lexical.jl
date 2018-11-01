@@ -15,7 +15,7 @@ end
 
 include("tokens.jl")
 include("productions.jl")
-include("grammar.jl")
+include("grammar_testing.jl")
 
 include("auxiliar_funcs.jl")
 
@@ -187,13 +187,49 @@ end
 
 calc_first()
 calc_follow()
-map!(unique,firsts)
+#map!(unique,firsts)
 
+# por exemplo recebe A -> BACD, o argumento da função seria BA, essa função
+# acha o FIRST de BACD.
+function first(rule)
+    c_rule_fs = []
 
+    if rule[1] isa Int64
+        push(c_rule_fs, rule[1])
+    else
+        has_eps = false
+        for r in rule
+            
+        end
+    end
 
+    return c_rule_fs
+end
 
-include("sinthatic.jl")
-sinthatic()
+rules_count = 0
+terminals_count_aux = []
+for it_g in grammar
+    rules_count += length(it_g[1][1])
+    for term in it_g[1][1]
+        if term isa Int64
+            push(terminals_count_aux, term)
+        end
+    end
+end
+
+predict_table = Array{Any, 2}(rules_count, length(set(terminals_count_aux)))
+
+for r in grammar
+    has_eps = false
+
+    if has_eps
+        
+    end
+
+end
+
+#include("sinthatic.jl")
+#sinthatic()
 #=
 m = collect(instances(Prods))
 for i=1:length(firsts)

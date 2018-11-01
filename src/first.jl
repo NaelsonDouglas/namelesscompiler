@@ -21,7 +21,7 @@ function calc_first(g=grammar)
 				
 				if typeof(cell) == Int
 					firsts[prod_id]  = vcat(firsts[prod_id],cell)			
-					if cell!=EPISILON
+					if cell!=EPS
 						break
 					end
 				elseif typeof(cell) == Symbol
