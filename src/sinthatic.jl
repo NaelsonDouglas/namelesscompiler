@@ -51,34 +51,58 @@ function sinthatic()
 	count = 1
 	
 	
-	q = Queue(Any)
-	enqueue!(q,:S)
+	st = Stack(Any)
+	push!(st,S[1])
+	topid = S[2]
+
+	tkn = nextToken()
 
 	for ln in eachline(f)
 
 		@printf("%.4d    ",count)
 		println(ln)
 
-		tkn = ""
+		
 		while (tkn!="eol")
 
 			
-			tkn = nextToken()
+			
 			if tkn == "eol"
 				break
-			end			
-			println(tkn)
-
-			queue_top = front(q)
-			subprod = getsubprod(queue_top,tkn.categ_num)
-
-			if typeof(queue_top[1][subprod]) == Int #If it's a token
-
 			end
+			
 
+			stack_top = top(st)		
 
+			subprod_i = getsubprod(topid,tkn.categ_num)
 
+			@show tkn
+			@show stack_top
+			@show subprod_i
+			@show topid
+			@show tkn.categ_num
+			println()
 
+			prd = stack_top[subprod_i]
+			
+			if typeof(prd[1]) == Symbol
+				topid = eval(prd[1][2])
+				pop!(st)
+				
+
+				for i = length(prd[1]):-1:1
+					push!(st,prd[i])
+				end
+				@show st
+			elseif typeof(prd[1]) == Symbol
+				tkn = nextToken()
+			end
+			
+			
+			
+
+			
+			
 
 		end		
 
