@@ -22,7 +22,7 @@ include("auxiliar_funcs.jl")
 include("matcher.jl")
 include("first.jl")
 include("follow.jl")
-include("semanthic.jl")
+include("sinthatic.jl")
 
 
 
@@ -151,6 +151,7 @@ function producer()
 			for i in lineq_vector
 				put!(ch,i)
 			end	
+			put!(ch,"eol")
 		end
 	end
 
@@ -196,3 +197,6 @@ for i=1:length(firsts)
 	println()
 end
 =#
+
+
+sinthatic()
