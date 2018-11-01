@@ -1,35 +1,73 @@
 grammar =
 [
-ATRIB = [[[ID,OPR_ATR,CTN]],Int(ATRIB_)],
-CT_NUM = [[[CTN],[CT_FLOAT]],Int(CT_NUM_)],
-OPR_ARIT = [[[OPR_DM],[OPR_SUM],[OPR_SUB]],Int(OPR_ARIT_)],
-OPR_SUMSUB = [[[OPR_SUM],[OPR_SUB]],Int(OPR_SUMSUB_)],
-OPRLR_EQ_DIF = [[[OPRLR_EQ],[OPRLR_DIF]],Int(OPRLR_EQ_DIF_)],
-OPRLR_LGTR = [[[OPR_ATR],[EPISILON]],Int(OPRLR_LGTR_)],
-OPRLR_GTR = [[[OPR_ATR],[EPISILON]],Int(OPRLR_GTR_)],
-OPRL_ANDOR = [[[OPRLR_OR],[OPRLR_AND]],Int(OPRL_ANDOR_)],
-BOOLEAN = [[[CTB],[CTN]],Int(BOOLEAN_)],
+S = [ [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]], Int(S_)],
 
-INT_DCLR = [[[IDT_INT,:OPR_ATR,CT_INT]],Int(INT_DCLR_)],
-EXPR_ARIT = [[[CTN,:OPR_ARIT,CTN]],Int(EXPR_ARIT_)],
-OPR_LOGIC = [[[:OPR_ARIT]],Int(OPR_LOGIC_)], #Todo: escrever os operadores lógicos
-EXPR_BOOL = [[[:EXPR_ARIT,:OPR_LOGIC,:EXPR_ARIT,CTB]],Int(EXPR_BOOL_)],
-LOOP_WHILE = [[[BLK_WHILE, O_BRCKT, :EXPR_BOOL, C_BRCKT, O_C_BRCKT, C_C_BRCKT]],Int(LOOP_WHILE_)],
-LOOP_FOR = [[[BLK_FOR, O_C_BRCKT, :INT_DCLR, COMMA, :EXPR_BOOL, COMMA, C_C_BRCKT, O_C_BRCKT, C_C_BRCKT]],Int(LOOP_FOR_)],
-LOOP = [[[:LOOP_FOR],[:LOOP_WHILE]],Int(LOOP_)],
-#TODO: Adcionar uma forma de CMD desencadear vários comandos ao invés de um único
-CMD = [[[:LOOP], [:ATRIB] , [:EXPR_ARIT] , [:EXPR_BOOL]],Int(CMD_)],
-DATA_TYPE = [[[IDT_FLOAT], [IDT_BOOL], [IDT_CHAR], [IDT_STRING], [VOID], [:CMD]],Int(DATA_TYPE_)],
-PARAMS_R = [[[COMMA,:DATA_TYPE,:ID,:PARAMS_R],[EPISILON]],Int(PARAMS_R_)],
-PARAMS = [[[:DATA_TYPE,ID,:PARAMS_R],[EPISILON]],Int(PARAMS_)],
-MAIN = [[[:DATA_TYPE,FN_MAIN,:O_BRCKT,:PARAMS,:C_BRCKT,:O_C_BRCKT, :CMD,:C_C_BRCKT]],Int(MAIN_)],
-FN_DCLR = [[[:DATA_TYPE,ID,O_BRCKT,PARAMS,C_BRCKT,O_C_BRCKT,:CMD,C_C_BRCKT]],Int(FN_DCLR_)],
-S = [[[:MAIN],[:FN_DCLR,:MAIN]],Int(S_)],
-TERM_NUM = [[[:CT_NUM],[ID]],Int(TERM_NUM_)],
-EXP_ARIT = [[[:CT_NUM,:OPR_ARIT,:CT_NUM],[OPR_SUB,:CT_NUM,:OPR_ARIT,:CT_NUM],[O_BRCKT,:EXPR_ARIT,C_BRCKT]],Int(EXP_ARIT_)],
-EXPR_ALG = [[[:EXPR_ARIT],[:TERM_NUM, :OPR_ARIT, :EXPR_ALG]],Int(EXPR_ALG_)],
-OPRLR_LGT = [[[OPRLR_LG,:OPRLR_LGTR]],Int(OPRLR_LGT_)],
-OPRLR_G = [[[OPRLR_GT,:OPRLR_GTR]],Int(OPRLR_G_)],
-OPRLR = [[[:OPRLR_LGT],[OPRLR_GT],[OPRLR_EQ]],Int(OPRLR_)],
-FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
+    TYPE = [ [[IDT_INT],
+              [IDT_CHAR],
+              [IDT_FLOAT],
+              [IDT_STRING]], Int(TYPE_)],
+
+    PARAM = [ [[O_BRCKT, C_BRCKT],
+               [O_BRCKT, :P1, C_BRCKT]], Int(PARAM_)],
+    P1 = [ [[:TYPE, :IDVEC],
+            [:TYPE, :IDVEC, COMMA, :P1]], Int(P1_)],
+
+
+    #=
+    EXPR_STR -> EXPR_STR + EXPR_STR | CT_STR | IDVEC
+    =#
+    EXS2 = [[[:IDVEC],
+             [CT_STR]], Int(EXS2_)],
+    EXS1 = [[[OPR_PM,:EXS2, :EXS1],
+             [EPS]], Int(EXS1_)],
+    EXPR_STR =[[[:EXS2, :EXS1]], Int(EXPR_STR_)],
+
+
+
+    IDVEC = [[[ID],
+              [ID, VEC_IN, :EXPR_I_F]], Int(IDVEC_)],
+    ATTR = [[[:TYPE, :IDVEC, EQ, :EXPR_I_F],
+             [:TYPE, :IDVEC, EQ, EXPR_STR]], Int(ATTR_)],
+
+
+    EXPR_ALL = [[[:EXPR_I_F], [:EXPR_STR], [:EXPR_BOOL]], Int(EXPR_ALL_)],
+
+    EXPR_I_F =[[[:EX1],
+                [:EX1, OPR_PM ,:EXPR_I_F]], Int(EXPR_I_F_)],
+    EX1 = [[[:EX2,:EX11]], Int(EX1_)],
+    EX11 = [[[OPR_DM,:EX2, :EX11],
+             [EPS]], Int(EX11_)],
+    EX2 = [[[:IDVEC],
+            [CT_FLOAT],
+            [CT_INT],
+            [O_BRCKT, :EX2, C_BRCKT]], Int(EX2_)],
+
+
+    EXPR_BOOL = [[[:EXB1],
+                  [:EXB1, OPRLR_OR, :EXPR_BOOL]], Int(EXPR_BOOL_)],
+    EXB1 = [[[:EXB1, :EXB11]], Int(EXB1_)],
+    EXB11 = [[[OPRLR_AND, :EXB2, :EXB11],
+              [EPS]], Int(EXB11_)],
+    EXB2 = [[[:IDVEC],
+             [C_BRCKT, :EXPR_BOOL, C_BRCKT] ,
+             [CT_INT]], Int(EXB2_)],
+
+    ALL_INTER = [[[:RIF, :ALL_INTER],
+                  [ATTR , :ALL_INTER],
+                  [:RWHILE, :ALL_INTER],
+                  [:RFOR, :ALL_INTER],
+                  [:RCONT, :ALL_INTER]],Int(ALL_INTER_)],
+
+    RIF = [[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
+             O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]], Int(RIF_)],
+    RIF1 = [[[BLK_ELSE, :RIF1],
+             [BLK_ELSE, O_C_BRCKT, :ALL_INTER, C_C_BRCKT], [EPS]],
+            Int(RIF1_)],
+
+    RWHILE = [[[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]], Int(RWHILE_)],
+
+    RFOR = [[[BLK_FOR, O_BRCKT, ATTR, COMMA,:EXPR_I_F, COMMA, :EXPR_I_F,
+              C_BRCKT, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]], Int(RFOR_)],
+
+    RCONT = [[[CONTINUE], [BREAK], [RETURN], [RETURN, EXPR_ALL]], Int(RCONT_)],
 ]
