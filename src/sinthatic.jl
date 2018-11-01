@@ -1,3 +1,4 @@
+
 table = fill(Any[],length(Productions),length(Tokens))
 
 for prd=1:length(Productions)
@@ -48,7 +49,11 @@ function sinthatic()
 
 	f = open(input,"r")
 	count = 1
-	curr_prod = Int(S_)
+	
+	
+	q = Queue(Any)
+	enqueue!(q,:S)
+
 	for ln in eachline(f)
 
 		@printf("%.4d    ",count)
@@ -56,19 +61,27 @@ function sinthatic()
 
 		tkn = ""
 		while (tkn!="eol")
-			tkn=nextToken()
+
+			
+			tkn = nextToken()
 			if tkn == "eol"
 				break
 			end			
 			println(tkn)
-			if contains(==,firsts[curr_prod],tkn.categ_num)
-				println(grammar[curr_prod][1])
-				println()
+
+			queue_top = front(q)
+			subprod = getsubprod(queue_top,tkn.categ_num)
+
+			if typeof(queue_top[1][subprod]) == Int #If it's a token
+
 			end
-		
 
 
-		end
+
+
+
+		end		
+
 		println()
 		count+=1
 	end
