@@ -14,27 +14,23 @@ catch
 end
 
 include("tokens.jl")
-include("productions.jl")
-include("grammar_testing.jl")
+#include("productions.jl")
+#include("grammar.jl")
 
 include("auxiliar_funcs.jl")
 
 include("matcher.jl")
-include("first.jl")
-include("follow.jl")
-
+#include("first.jl")
+#include("follow.jl")
+include("data_structures.jl")
 
 
 
 f = open(input)
 
-mutable struct Token 
-	lexem::String
-	line::Int64
-	column::Int64
-	categ_nom::String #TODO Provavelmente é melhor tirar esse field. Não faz sentido ficar arrastando uma String para cima e para baixo em cada token. Já tem um dicionário com os nomes e que podemos pegar direto
-	categ_num::Int64
-end
+
+
+
 
 
 t = open("tks.json")
@@ -49,12 +45,13 @@ function token(lexem,line::Int, col::Int)
 	matchedcateg =  matchlexem(lexem)
 
 	if (matchedcateg != false)
-		tkn.categ_num = matchedcateg
+		tkn.categ_num = matchedcateg		
 		tkn.categ_nom = tkns_nms[matchedcateg]
 	else
        	tkn.categ_num = Int(ID)	       		
        	tkn.categ_nom = tkns_nms[Int(ID)]
     end  
+    tkn.firsts = tkn.categ_num
 	return tkn
 end
 
@@ -170,21 +167,50 @@ ch = producer()
 
 
 function nextToken()
+	tkn = -1
+	lex = -1
+	col = -1
+	nom = -1
+	num = -1
 	try
-		token = take!(ch)
-		#todo colocar o print no programa de teste e tirar do nextotken
-		
+		tkn = take!(ch)
+		#todo colocar o print no programa de teste e tirar do nextotken		
 
 		#println("[",line,", ",col,"] (",categ_num,", ",categ_nom,") {",lexem,"}")
-		return token;
+
+		
 	catch
 		info("End of file reached")
-		return Token("\eof",0,0,"EOF",EOF)
-		#return false
-
+		tkn = Token("\eof",0,0,"EOF",EOF)
 	end	
+	if typeof(tkn) == Token
+		lex = tkn.lexem
+		col = tkn.column
+		nom = tkn.categ_nom
+		num = tkn.categ_num
+		println("\(\"$lex\",$col,$nom,$num\)")
+	else
+		info("---eol---")
+	end
+	return tkn;
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Isso aqui tudo é usando a notação de vetor, não vai mais funcionar
+#=
 calc_first()
 calc_follow()
 #map!(unique,firsts)
@@ -267,4 +293,4 @@ for i=1:length(firsts)
 end
 =#
 
-
+=#

@@ -1,5 +1,12 @@
+
+function addProduction(prd::Production,grammar_=grammar)
+	push!(grammar_, prd)
+end
+
+
 grammar =
 [
+
 ATRIB = [[[ID,OPR_ATR,CTN]],Int(ATRIB_)],
 CT_NUM = [[[CTN],[CT_FLOAT]],Int(CT_NUM_)],
 OPR_ARIT = [[[OPR_DM],[OPR_SUM],[OPR_SUB]],Int(OPR_ARIT_)],
@@ -22,7 +29,7 @@ CMD = [[[:LOOP], [:ATRIB] , [:EXPR_ARIT] , [:EXPR_BOOL]],Int(CMD_)],
 DATA_TYPE = [[[IDT_FLOAT],[IDT_INT], [IDT_BOOL], [IDT_CHAR], [IDT_STRING], [VOID], [:CMD]],Int(DATA_TYPE_)],
 PARAMS_R = [[[COMMA,:DATA_TYPE,ID,:PARAMS_R],[EPISILON]],Int(PARAMS_R_)],
 PARAMS = [[[:DATA_TYPE,ID,:PARAMS_R],[EPISILON]],Int(PARAMS_)],
-MAIN = [[[:DATA_TYPE,FN_MAIN,O_BRCKT,:PARAMS,C_BRCKT,O_C_BRCKT, :CMD,C_C_BRCKT]],Int(MAIN_)],
+MAIN = [[[FN_MAIN,O_BRCKT,:PARAMS,C_BRCKT,O_C_BRCKT, :CMD,C_C_BRCKT]],Int(MAIN_)],
 FN_DCLR = [[[:DATA_TYPE,ID,O_BRCKT,PARAMS,C_BRCKT,O_C_BRCKT,:CMD,C_C_BRCKT]],Int(FN_DCLR_)],
 S = [[[:MAIN],[:FN_DCLR,:MAIN]],Int(S_)],
 TERM_NUM = [[[:CT_NUM],[ID]],Int(TERM_NUM_)],
