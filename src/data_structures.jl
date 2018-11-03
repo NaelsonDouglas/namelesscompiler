@@ -30,10 +30,16 @@ mutable struct Production
 	enum::Int
 	firsts
 	follows	
+	lexem::String
 end
 
+ 
 function Production(subprods_,enum_)
-	prd = Production(subprods_,enum_,[],[])
+	prd = Production(subprods_,enum_,[],[],"")
+end
+
+function Production(subprods_)
+	Production(subprods_,-1)
 end
 
 Element = Union{Token,Production}

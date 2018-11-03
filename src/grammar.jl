@@ -1,9 +1,56 @@
 
-function addProduction(prd::Production,grammar_=grammar)
-	prd
-	push!(grammar_, prd)
+include("tokens.jl")
+grammar_map = Dict{Symbol,Int}()
+grammar = []
+
+function addProduction(id::Symbol,body_::Production)
+	body = body_
+	if !haskey(grammar_map,id)
+		body.enum =length(grammar)
+		push!(grammar, body)
+		grammar_map[id] = length(grammar)	
+	else
+		error("Productions already exists")
+	end
+end
+function addProduction(id::Symbol,body_)
+	addProduction(id,Production(body_))
 end
 
+
+
+function getProd(s::Union{Symbol,Int}) 
+	 try
+	 	return grammar[grammar_map[s]]
+	 catch
+	 	if isinteger(s)
+	 	 	return grammar[s]
+	 	else
+	 	 	error("Wrong type input for getProd")
+	 	 end
+	 end
+end
+getproduction(s) = getProd(s)
+
+info("Adcionando 3 produções aleatórias ATRIB CT_NUM E C")
+
+addProduction(:ATRIB,[[ID],[OPR_ATR],[CTN]])
+addProduction(:CT_NUM,[[CTN],[CT_FLOAT]])
+addProduction(:CU,[[:CT_NUM, CT_FLOAT, CTN]])
+
+println("------------------3 produções foram adcionadas-------------------------")
+info("Acessando uma produção usando o Número dela")
+x=getProd(3)
+println(x)
+println("-----------------------------------------------")
+
+info("Acessando essas produções usando o ID delas")
+x=getProd(:ATRIB)
+print(x)
+
+
+
+#=
 
 grammar =
 [
@@ -41,3 +88,4 @@ OPRLR_G = [[[OPRLR_GT,:OPRLR_GTR]],Int(OPRLR_G_)],
 OPRLR = [[[:OPRLR_LGT],[OPRLR_GT],[OPRLR_EQ]],Int(OPRLR_)],
 FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
 ]
+=#
