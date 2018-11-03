@@ -1,5 +1,12 @@
+
+function addProduction(prd::Production,grammar_=grammar)
+	push!(grammar_, prd)
+end
+
+
 grammar =
 [
+
 ATRIB = [[[ID,OPR_ATR,CTN]],Int(ATRIB_)],
 CT_NUM = [[[CTN],[CT_FLOAT]],Int(CT_NUM_)],
 OPR_ARIT = [[[OPR_DM],[OPR_SUM],[OPR_SUB]],Int(OPR_ARIT_)],
