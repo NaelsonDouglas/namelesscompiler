@@ -2,4 +2,7 @@
 
 @enum Prods S_=1 TYPE_ PARAM_ P1_ IDVEC_ ALL_INTER_ RIF_ RIF1_ ATTR_ RWHILE_ RFOR_ RCONT_ EXPR_ALL_ EXPR_I_F_ EX1_ EX11_ EX2_ EXPR_BOOL_ EXB1_ EXB11_ EXB2_ EXPR_STR_ EXS1_ EXS2_
 
-Productions = instances(Prods)
+function Production(subprods_)
+	prd = Production(subprods_)
+end
+
