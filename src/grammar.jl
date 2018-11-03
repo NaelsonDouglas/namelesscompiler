@@ -1,5 +1,6 @@
 
 function addProduction(prd::Production,grammar_=grammar)
+	prd
 	push!(grammar_, prd)
 end
 
