@@ -14,22 +14,18 @@ function addProduction(id::Symbol, body_::Production)
 			grammar_map[id] = length(grammar)
 		#else
 		#	error(string("The element ",id," is already defined"))
-		#end	
+		#end
 	else
 		error("Production already exists")
 	end
 end
 
 function addProduction(id::Symbol,body_)
-	addProduction(id,Production(body_))
+    addProduction(id,Production(body_))
 end
 function addProd(id::Symbol,body_)
-	
-		addProduction(id,Production(body_))
-
+    addProduction(id,Production(body_))
 end
-
-
 
 function getProd(s::Union{Symbol,Int})
 	 try
@@ -48,7 +44,7 @@ end
 
    removed left recursion:
 =#
-addProduction(:S, [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+addProd(:S, [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 
 #=
    normal:
@@ -100,6 +96,21 @@ addProduction(:EX2, [[:IDVEC],
 
 #=
    normal:
+     EXPR_BOOL -> EXPR_BOOL 'or' EXPR_BOOL
+               -> EXPR_BOOL 'and' EXPR_BOOL
+               -> 'not' EXPR_BOOL
+               -> '(' EXPR_BOOL ')'
+               -> EXPR_NUM 'rel' EXPR_NUM
+               -> 'true'
+               -> 'false'
+   precedência:
+     EXPR_BOOL -> EXPR_BOOL 'or' EXPR_BOOL
+               -> EXPR_BOOL 'and' EXPR_BOOL
+               -> 'not' EXPR_BOOL
+               -> '(' EXPR_BOOL ')'
+               -> EXPR_NUM 'rel' EXPR_NUM
+               -> 'true'
+               -> 'false'
 
    removed left recursion:
 =#
