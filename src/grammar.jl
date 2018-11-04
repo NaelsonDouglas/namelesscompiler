@@ -18,6 +18,9 @@ end
 function addProduction(id::Symbol,body_)
 	addProduction(id,Production(body_))
 end
+function addProd(id::Symbol,body_)
+	addProduction(id,Production(body_))
+end
 
 
 
