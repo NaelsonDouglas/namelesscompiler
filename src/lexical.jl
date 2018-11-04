@@ -23,7 +23,8 @@ include("matcher.jl")
 #include("first.jl")
 #include("follow.jl")
 include("data_structures.jl")
-
+include("grammar.jl")
+include("first.jl")
 
 
 f = open(input)

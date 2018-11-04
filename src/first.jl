@@ -1,53 +1,38 @@
+
+
+dependencies = Dict{Symbol,Symbol}()
+
+function calc_first(prd::Production)
+	subprods = prd.subprods
+	father_idx = prd.enum
+
+	@show prd
+	for subprods_idx=1:length(subprods)
+
+		if typeof(subprods[subprods_idx][1]) == Symbol
+			#println("Começa com Produção")	
+
+			son_idx = getProd_idx(subprods[subprods_idx][1])
+
+			son_firsts =calc_first(grammar[son_idx])
+			for i in son_firsts
+				grammar[father_idx].firsts = vcat(grammar[father_idx].firsts,i)
+			end
+		else			
+			#println("Começa com Token")
+			
+			grammar[father_idx].firsts = vcat(grammar[father_idx].firsts,Int(subprods[subprods_idx][1]))
+
+		end
+
+	end
+	grammar[father_idx].firsts = unique(grammar[father_idx].firsts)
+	return grammar[father_idx].firsts
+
+
+end
 #=
-
-S -> AdBC
-A -> aBC | c | d | eps
-B -> e | f
-
+for p in grammar
+	calc_first(p)
+end
 =#
-
-include("tokens.jl")
-include("data_structures.jl")
-
-function ll1first(rule::Array{Element, 1})
-    cRuleFirst = []
-    has_eps = false
-    for r in rule
-        if r isa Token && r.categ_num != EPS
-            append!(cRuleFirst, r)
-            break
-        else
-            # verifica se a produção atual deriva vazio
-            has_eps = false
-            for rEPS in r.subprods
-                if rEps isa Token && rEPS.categ_num == EPS
-                    has_eps = true
-                end
-            end
-
-            append!(cRuleFirst, ll1first(r))
-            if !has_eps
-                break
-            end
-        end
-    end
-
-    if has_eps
-        push!(cRuleFirst, EPS)
-    end
-
-    unique(cRuleFirst)
-end
-
-function ll1first(rule::Production)
-    cRuleFirst = []
-    for r in rule
-        append!(cRuleFirst, ll1first(r))
-    end
-
-    unique(cRuleFist)
-end
-
-function ll1first(term::Token)
-    [term]
-end
