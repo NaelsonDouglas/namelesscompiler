@@ -14,6 +14,8 @@ function Token(lexem_::String,	line_::Int64,column_::Int64,categ_nom_::String,ca
 end
 
 
+
+
 #This is not working
 #Todo, research the reason for that
 function Base.show(tkn::Token) 
@@ -46,6 +48,15 @@ Element = Union{Token,Production}
 
 
 
+
+#Lembrar que Element é a união de Token e Production. A definição destes tipos estão em data_structures.jl
+
+	
+
 function getfirst(e::Element)
 	return e.firsts
+end
+
+function getfollows(e::Element)
+	return e.follows
 end

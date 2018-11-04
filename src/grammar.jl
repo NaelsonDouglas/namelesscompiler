@@ -1,12 +1,14 @@
 
 include("tokens.jl")
+include("data_structures.jl")
 grammar_map = Dict{Symbol,Int}()
 grammar = []
 
 function addProduction(id::Symbol,body_::Production)
 	body = body_
 	if !haskey(grammar_map,id)
-		body.enum =length(grammar)
+		body.enum =length(grammar)+1
+		body.lexem = string(id)
 		push!(grammar, body)
 		grammar_map[id] = length(grammar)	
 	else
@@ -30,9 +32,14 @@ function getProd(s::Union{Symbol,Int})
 	 	 end
 	 end
 end
-getproduction(s) = getProd(s)
 
-info("Adcionando 3 produções aleatórias ATRIB CT_NUM E C")
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ==================== ISSO AQUI TUDO PODE SER APAGADO, É SÓ O EXEMPLO PRA EXPLICAR
+info("Adcionando 3 produções aleatórias ATRIB CT_NUM E CU")
 
 addProduction(:ATRIB,[[ID],[OPR_ATR],[CTN]])
 addProduction(:CT_NUM,[[CTN],[CT_FLOAT]])
@@ -40,14 +47,89 @@ addProduction(:CU,[[:CT_NUM, CT_FLOAT, CTN]])
 
 println("------------------3 produções foram adcionadas-------------------------")
 info("Acessando uma produção usando o Número dela")
-x=getProd(3)
+x=getProd(1)
 println(x)
 println("-----------------------------------------------")
 
-info("Acessando essas produções usando o ID delas")
+info("Acessando essa mesma produção usando o ID dela")
 x=getProd(:ATRIB)
-print(x)
+println(x)
 
+#Resetando o banco de produções
+grammar_map = Dict{Symbol,Int}()
+grammar = []
+
+
+
+#=
+	O PRÓXIMO PASSO é substituir as produções do formato confuso com vetor
+	grammar = [ 
+				ATRIB = [[[ID,OPR_ATR,CTN]],Int(ATRIB_)],
+				CT_NUM = [[[CTN],[CT_FLOAT]],Int(CT_NUM_)]
+				....]
+
+	para o novo formato que usa a struct Production
+	addProduction(:ATRIB,[[ID,OPR_ATR,CTN]])
+	addProduction(:CT_NUM,[[CTN],[CT_FLOAT]])
+	...
+	
+	---> Olhar o exemplo acima, dentro deste blocão de comentários
+
+	--->USAR A GRAMÁTICA BOA! ESSA AQUI TÁ RUIM!!
+=#
+
+
+
+
+#=
+	
+
+	
+	Usando addProduction não há a necessidade de atrelar manualmente o enumerador como é feito com ",Int(ATRIB_)" no modelo antigo
+	
+	A própria função faz esse mapeamento dentro do vetor grammar[] que associa números <---> Produçao
+	A associação inversa Produção <----> Número é feita na própria produção no campo Production.enum
+	Também é feita a associação Nome <----> Produçao no dicionário grammar_map
+
+	Você pode acessar a produção com o Nome ou o número diretamente com a função getProd(S), onde s é um símbolo (nome) ou núermo da produçao
+
+	ex: getProd(1) ----> retorna a produção com enum 1
+		getProd(:FN_MAIN) ----> retorna a produção FN_MAIN
+
+	------------------------------------------------------------------------
+	A produção tem os seguintes campos.
+	subprods é um vetor com o lado direito da produção 
+	S -> ABC|CDE|xYZ
+	subprods é [[A,B,C],[C,D,E].[x,Y,Z]]
+	
+
+	mutable struct Production
+		subprods
+		enum::Int
+		firsts
+		follows	
+		lexem::String
+	end
+
+	Mains detalhes em data_structures.jl
+	------------------------------------------------------------------------
+
+=#
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+
+
+
+
+
+
+
+
+
+# ISSO TUDO ABAIXO VAI SER DESCARTADO 
 
 
 #=
