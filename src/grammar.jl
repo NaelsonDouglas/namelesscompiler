@@ -7,19 +7,26 @@ grammar = []
 function addProduction(id::Symbol, body_::Production)
 	body = body_
 	if !haskey(grammar_map,id)
-		body.enum =length(grammar)+1
-		body.lexem = string(id)
-		push!(grammar, body)
-		grammar_map[id] = length(grammar)
+		if !isdefined(id)
+			body.enum =length(grammar)+1
+			body.lexem = string(id)
+			push!(grammar, body)
+			grammar_map[id] = length(grammar)
+		else
+			error(string("The element ",id," is already defined"))
+		end	
 	else
-		error("Productions already exists")
+		error("Production already exists")
 	end
 end
+
 function addProduction(id::Symbol,body_)
 	addProduction(id,Production(body_))
 end
 function addProd(id::Symbol,body_)
-	addProduction(id,Production(body_))
+	
+		addProduction(id,Production(body_))
+
 end
 
 
