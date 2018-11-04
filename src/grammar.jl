@@ -1,9 +1,138 @@
 
-function addProduction(prd::Production,grammar_=grammar)
-	prd
-	push!(grammar_, prd)
+include("tokens.jl")
+include("data_structures.jl")
+grammar_map = Dict{Symbol,Int}()
+grammar = []
+
+function addProduction(id::Symbol,body_::Production)
+	body = body_
+	if !haskey(grammar_map,id)
+		body.enum =length(grammar)+1
+		body.lexem = string(id)
+		push!(grammar, body)
+		grammar_map[id] = length(grammar)	
+	else
+		error("Productions already exists")
+	end
+end
+function addProduction(id::Symbol,body_)
+	addProduction(id,Production(body_))
 end
 
+
+
+function getProd(s::Union{Symbol,Int}) 
+	 try
+	 	return grammar[grammar_map[s]]
+	 catch
+	 	if isinteger(s)
+	 	 	return grammar[s]
+	 	else
+	 	 	error("Wrong type input for getProd")
+	 	 end
+	 end
+end
+
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ==================== ISSO AQUI TUDO PODE SER APAGADO, É SÓ O EXEMPLO PRA EXPLICAR
+info("Adcionando 3 produções aleatórias ATRIB CT_NUM E CU")
+
+addProduction(:ATRIB,[[ID],[OPR_ATR],[CTN]])
+addProduction(:CT_NUM,[[CTN],[CT_FLOAT]])
+addProduction(:CU,[[:CT_NUM, CT_FLOAT, CTN]])
+
+println("------------------3 produções foram adcionadas-------------------------")
+info("Acessando uma produção usando o Número dela")
+x=getProd(1)
+println(x)
+println("-----------------------------------------------")
+
+info("Acessando essa mesma produção usando o ID dela")
+x=getProd(:ATRIB)
+println(x)
+
+#Resetando o banco de produções
+grammar_map = Dict{Symbol,Int}()
+grammar = []
+
+
+
+#=
+	O PRÓXIMO PASSO é substituir as produções do formato confuso com vetor
+	grammar = [ 
+				ATRIB = [[[ID,OPR_ATR,CTN]],Int(ATRIB_)],
+				CT_NUM = [[[CTN],[CT_FLOAT]],Int(CT_NUM_)]
+				....]
+
+	para o novo formato que usa a struct Production
+	addProduction(:ATRIB,[[ID,OPR_ATR,CTN]])
+	addProduction(:CT_NUM,[[CTN],[CT_FLOAT]])
+	...
+	
+	---> Olhar o exemplo acima, dentro deste blocão de comentários
+
+	--->USAR A GRAMÁTICA BOA! ESSA AQUI TÁ RUIM!!
+=#
+
+
+
+
+#=
+	
+
+	
+	Usando addProduction não há a necessidade de atrelar manualmente o enumerador como é feito com ",Int(ATRIB_)" no modelo antigo
+	
+	A própria função faz esse mapeamento dentro do vetor grammar[] que associa números <---> Produçao
+	A associação inversa Produção <----> Número é feita na própria produção no campo Production.enum
+	Também é feita a associação Nome <----> Produçao no dicionário grammar_map
+
+	Você pode acessar a produção com o Nome ou o número diretamente com a função getProd(S), onde s é um símbolo (nome) ou núermo da produçao
+
+	ex: getProd(1) ----> retorna a produção com enum 1
+		getProd(:FN_MAIN) ----> retorna a produção FN_MAIN
+
+	------------------------------------------------------------------------
+	A produção tem os seguintes campos.
+	subprods é um vetor com o lado direito da produção 
+	S -> ABC|CDE|xYZ
+	subprods é [[A,B,C],[C,D,E].[x,Y,Z]]
+	
+
+	mutable struct Production
+		subprods
+		enum::Int
+		firsts
+		follows	
+		lexem::String
+	end
+
+	Mains detalhes em data_structures.jl
+	------------------------------------------------------------------------
+
+=#
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+# ============================================================================================
+
+
+
+
+
+
+
+
+
+# ISSO TUDO ABAIXO VAI SER DESCARTADO 
+
+
+#=
 
 grammar =
 [
@@ -41,3 +170,4 @@ OPRLR_G = [[[OPRLR_GT,:OPRLR_GTR]],Int(OPRLR_G_)],
 OPRLR = [[[:OPRLR_LGT],[OPRLR_GT],[OPRLR_EQ]],Int(OPRLR_)],
 FN_CALL = [[[ID,O_BRCKT, :PARAMS,C_BRCKT]],Int(FN_CALL_)],
 ]
+=#

@@ -14,6 +14,8 @@ function Token(lexem_::String,	line_::Int64,column_::Int64,categ_nom_::String,ca
 end
 
 
+
+
 #This is not working
 #Todo, research the reason for that
 function Base.show(tkn::Token) 
@@ -30,16 +32,31 @@ mutable struct Production
 	enum::Int
 	firsts
 	follows	
+	lexem::String
 end
 
+ 
 function Production(subprods_,enum_)
-	prd = Production(subprods_,enum_,[],[])
+	prd = Production(subprods_,enum_,[],[],"")
+end
+
+function Production(subprods_)
+	Production(subprods_,-1)
 end
 
 Element = Union{Token,Production}
 
 
 
+
+#Lembrar que Element é a união de Token e Production. A definição destes tipos estão em data_structures.jl
+
+	
+
 function getfirst(e::Element)
 	return e.firsts
+end
+
+function getfollows(e::Element)
+	return e.follows
 end
