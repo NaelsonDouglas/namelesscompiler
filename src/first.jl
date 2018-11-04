@@ -1,83 +1,53 @@
-Base.isinteger(v::Symbol) = false
+#=
 
-amnt_productions = length(collect(map(Int,instances(Prods)))) #The amount of productions ---> The length of the Prods Enum
-firsts = Vector{Vector}(amnt_productions)
-fill!(firsts,Vector())
-function calc_first(g=grammar)
-	
-	dependents = Vector{Vector}(amnt_productions)	
-	fill!(dependents,Vector())
+S -> AdBC
+A -> aBC | c | d | eps
+B -> e | f
 
-	
-	for prod_i in g #Individual productionsi in the grammar
-		prods_body   = get_productions(prod_i)
-		prod_id      = get_productionid(prod_i)		
-		
-		for sent in prods_body # Right-sides
-			#@show prods_body
-			#@show sent
-			#@show prod_id						
-			for cell in sent
-				
-				if typeof(cell) == Int
-					firsts[prod_id]  = vcat(firsts[prod_id],cell)			
-					if cell!=EPS
-						break
-					end
-				elseif typeof(cell) == Symbol
-					expanded = eval(cell)
-					
-					
-					son_id = get_productionid(expanded)
-					
+=#
 
-					if length(firsts[son_id])>0
+include("tokens.jl")
+include("data_structures.jl")
 
-						firsts[prod_id]  = vcat(firsts[prod_id],firsts[son_id])
-						break						
-					else
-						dependents[son_id] = vcat(dependents[prod_id],prod_id)
-						dependents[son_id] = unique(dependents[son_id])
-						firsts[prod_id]  = vcat(firsts[prod_id],cell)
-					end				
-				end
-			end			
+function first(rule::Array{Element, 1})
+    cRuleFirst = []
+    has_eps = false
+    for r in rule
+        if r isa Token && r != EPS
+            append!(cRuleFirst, r)
+            break
+        else
+            # verifica se a produção atual deriva vazio
+            has_eps = false
+            for rEPS in r.subprods
+                if rEps isa Token && rEPS.categ_num == EPS
+                    has_eps = true
+                end
+            end
 
-		end	
+            append!(cRuleFirst, first(r))
+            if !has_eps
+                break
+            end
+        end
+    end
 
+    if has_eps
+        push!(cRuleFirst, EPS)
+    end
 
-		
-	end	
-	#=
-	println()	
-	m = collect(instances(Prods))
-
-	for i=1:length(dependents)
-		println(m[i],"----",i,"----",dependents[i])
-	end
-	=#
+    unique(cRuleFirst)
 end
 
-"It's an auxiliar and ugly function. Nothing special to see here."
-function reverse_first()
-	names = collect(instances(Prods))
-	for i=1:length(firsts)
-		
-		n = string(names[i])
-		l = length(n)
-		plus = 15-l
-		
-		l2 = length(string(i))
-		plus2 = 4-l2
-		print(i)
-		for j=1:plus2
-			print("-")
-		end
+function first(rule::Production)
+    cRuleFirst = []
+    for r in rule
+        append!(cRuleFirst, first(r))
+    end
 
-		print(string(names[i]))
-		for j=1:plus
-			print("-")
-		end
-		println(firsts[i])
-	end
+    unique(cRuleFist)
+end
+
+function first(term::Token)
+    [term]
 end
