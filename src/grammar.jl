@@ -2,7 +2,7 @@
 include("tokens.jl")
 include("data_structures.jl")
 grammar_map = Dict{Symbol,Int}()
-grammar = []
+grammar = Production[]
 
 function addProduction(id::Symbol, body_::Production)
 	body = body_
@@ -27,6 +27,15 @@ function addProd(id::Symbol,body_)
     addProduction(id,Production(body_))
 end
 
+
+function getProd_idx(s::Union{Symbol,Int})
+	 try
+	 	return grammar[grammar_map[s]].enum
+	 catch
+	 	return false
+	 end
+end
+
 function getProd(s::Union{Symbol,Int})
 	 try
 	 	return grammar[grammar_map[s]]
@@ -44,7 +53,7 @@ end
 
    removed left recursion:
 =#
-addProd(:S, [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+addProduction(:S, [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 
 #=
    normal:
