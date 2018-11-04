@@ -28,14 +28,11 @@ include("data_structures.jl")
 
 f = open(input)
 
+#t = open("tks.json") Esse JSON não é mais necessário. O mapeamento agora é feito em tokens.jl sem uso do disco
+#tks_names = JSON.parse(t)
+#tks_names = SortedDict(zip(map(parse,keys(tks_names))  ,  values(tks_names)))
 
 
-
-
-
-t = open("tks.json")
-tkns_nms = JSON.parse(t)
-tkns_nms = SortedDict(zip(map(parse,keys(tkns_nms))  ,  values(tkns_nms)))
 
 #Given a lexem, 
 function token(lexem,line::Int, col::Int)
@@ -46,10 +43,10 @@ function token(lexem,line::Int, col::Int)
 
 	if (matchedcateg != false)
 		tkn.categ_num = matchedcateg		
-		tkn.categ_nom = tkns_nms[matchedcateg]
+		tkn.categ_nom = tks_names[matchedcateg]
 	else
        	tkn.categ_num = Int(ID)	       		
-       	tkn.categ_nom = tkns_nms[Int(ID)]
+       	tkn.categ_nom = tks_names[Int(ID)]
     end  
     tkn.firsts = tkn.categ_num
 	return tkn
@@ -180,8 +177,8 @@ function nextToken()
 
 		
 	catch
-		info("End of file reached")
-		tkn = Token("\eof",0,0,"EOF",EOF)
+		#info("End of file reached")
+		tkn = Token("\eof",0,0,"EOF",Int(EOF))
 	end	
 	if typeof(tkn) == Token
 		lex = tkn.lexem
@@ -190,7 +187,7 @@ function nextToken()
 		num = tkn.categ_num
 		println("\(\"$lex\",$col,$nom,$num\)")
 	else
-		info("---eol---")
+		info("eol")
 	end
 	return tkn;
 end
