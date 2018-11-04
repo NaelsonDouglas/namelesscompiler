@@ -77,20 +77,48 @@ addProduction(:P1, [[:TYPE, :IDVEC],
 
 #=
    normal:
+     ATTR  -> 'IDT_INT' IDVEC OPR_ATR EXPR_NUM
+           -> 'IDT_STRING' OPR_ATR EXPR_STR
+           -> 'IDT_CHAR' IDVEC OPR_ATR EXPR_NUM
+           -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
 
-   removed left recursion:
+     IDVEC -> ID
+           -> ID, VEC_IN, :EXPR_NUM
+
+   factor to remove ambiguity:
+
+     ATTR  -> 'IDT_INT' IDVEC OPR_ATR EXPR_NUM
+           -> 'IDT_STRING' OPR_ATR EXPR_STR
+           -> 'IDT_CHAR' IDVEC OPR_ATR EXPR_NUM
+           -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
+
+     IDVEC -> ID
+           -> ID, VEC_IN, :EXPR_NUM
 =#
-addProduction(:IDVEC, [[ID],
-                       [ID, VEC_IN, :EXPR_NUM]])
 addProduction(:ATTR, [[:TYPE, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [:TYPE, :IDVEC, OPR_ATR, CT_STRING]])
-
+addProduction(:IDVEC, [[ID],
+                       [ID, VEC_IN, :EXPR_NUM]])
 #=
    normal:
+     EXPR_NUM  -> EXPR_NUM + EXPR_NUM
+               -> EXPR_NUM * EXPR_NUM
+               -> '-' EXPR_NUM
+               -> '(' EXPR_NUM ')'
 
+   precedência:
+     EXPR_NUM -> K
+              -> K + EXPR_NUM
+
+     K        -> G
+              -> K * G
+
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
    removed left recursion:
+
 =#
-addProduction(:EXPR_ALL , [[:EXPR_NUM], [:EXPR_BOOL]])
 addProduction(:EXPR_NUM, [[:EX1],
                           [:EX1, OPR_PM ,:EXPR_NUM]])
 addProduction(:EX1, [[:EX2,:EX11]])
@@ -113,24 +141,48 @@ addProduction(:EX2, [[:IDVEC],
                -> 'true'
                -> 'false'
    precedência:
-     EXPR_BOOL -> EXPR_BOOL 'or' EXPR_BOOL
-               -> EXPR_BOOL 'and' EXPR_BOOL
-               -> 'not' EXPR_BOOL
-               -> '(' EXPR_BOOL ')'
+     EXPR_BOOL -> T
+               -> EXPR_BOOL 'or' T
+               -> 'not' T
+
+     T         -> F
+               -> T 'and' F
+
+     F         -> '(' EXPR_BOOL ')'
                -> EXPR_NUM 'rel' EXPR_NUM
                -> 'true'
                -> 'false'
 
    removed left recursion:
+     EXPR_BOOL  -> T EXPR_BOOLH
+                -> 'not' T EXPR_BOOLH
+
+     EXPR_BOOLH -> 'or' T EXPR_BOOLH
+                -> eps
+
+     T          -> F TH
+
+     TH         -> 'and'F TH
+                -> eps
+
+     F          -> '(' EXPR_BOOL ')'
+                -> EXPR_NUM 'rel' EXPR_NUM
+                -> 'true'
+                -> 'false'
 =#
-addProduction(:EXPR_BOOL, [[:EXB1],
-                           [:EXB1, OPRLR_OR, :EXPR_BOOL]])
-addProduction(:EXB1, [[:EXB1, :EXB11]])
-addProduction(:EXB11, [[OPRLR_AND, :EXB2, :EXB11],
-                       [EPS]])
-addProduction(:EXB2, [[:IDVEC],
-                      [C_BRCKT, :EXPR_BOOL, C_BRCKT] ,
-                      [CT_INT]])
+addProduction(:EXPR_BOOL, [[:T, :EXPR_BOOLH],
+                           [OPRL_NOT, :T, :EXPR_BOOLH]])
+addProduction(:EXPR_BOOLH, [[OPRL_OR, :T, :EXPR_BOOLH],
+                            [EPS]])
+
+addProduction(:T, [[:F, :TH]])
+addProduction(:TH, [[OPRL_AND, :F, :TH],
+                    [EPS]])
+
+addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
+                   [:EXPR_NUM, :OPRL_REL, :EXPR_NUM] ,
+                   [CT_FALSE],
+                   [CT_TRUE]])
 
 #=
    normal:
