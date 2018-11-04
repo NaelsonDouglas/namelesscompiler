@@ -9,11 +9,11 @@ B -> e | f
 include("tokens.jl")
 include("data_structures.jl")
 
-function first(rule::Array{Element, 1})
+function ll1first(rule::Array{Element, 1})
     cRuleFirst = []
     has_eps = false
     for r in rule
-        if r isa Token && r != EPS
+        if r isa Token && r.categ_num != EPS
             append!(cRuleFirst, r)
             break
         else
@@ -25,7 +25,7 @@ function first(rule::Array{Element, 1})
                 end
             end
 
-            append!(cRuleFirst, first(r))
+            append!(cRuleFirst, ll1first(r))
             if !has_eps
                 break
             end
@@ -39,15 +39,15 @@ function first(rule::Array{Element, 1})
     unique(cRuleFirst)
 end
 
-function first(rule::Production)
+function ll1first(rule::Production)
     cRuleFirst = []
     for r in rule
-        append!(cRuleFirst, first(r))
+        append!(cRuleFirst, ll1first(r))
     end
 
     unique(cRuleFist)
 end
 
-function first(term::Token)
+function ll1first(term::Token)
     [term]
 end
