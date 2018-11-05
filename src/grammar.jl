@@ -54,7 +54,7 @@ end
     S -> TYPE 'id' PARAM '{' ALL_INTER '}' S
       -> EPS
 =#
-addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
+apppddProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
                    [EPS]])
 
 #=
