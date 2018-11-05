@@ -235,11 +235,8 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-<<<<<<< HEAD
                    [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
-=======
                    [:EXPR_NUM, :OPRLR_REL, :EXPR_NUM] ,
->>>>>>> fbbf72d53409d7bb525fb2a8ecf2945cbbb79d00
                    [CT_FALSE],
                    [CT_TRUE]])
 
