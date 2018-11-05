@@ -12,6 +12,7 @@ function calc_first(prd::Production)
 		if typeof(subprods[subprods_idx][1]) == Symbol
 			#println("Começa com Produção")	
 			@show subprods[subprods_idx][1]
+
 			son_idx = getProd_idx(subprods[subprods_idx][1])
 
 			son_firsts =calc_first(grammar[son_idx])

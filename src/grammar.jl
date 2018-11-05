@@ -54,7 +54,7 @@ end
     S -> TYPE 'id' PARAM '{' ALL_INTER '}' S
       -> EPS
 =#
-apppddProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
+addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
                    [EPS]])
 
 #=
@@ -159,7 +159,7 @@ factoring:
            -> 'id'
            -> (EXPR_STR)
 =#
-addProduction(:EXPR_STR, [[:ESH, OPR_PM, :EXPR_STR]]),
+addProduction(:EXPR_STR, [[#=:ESH, =#OPR_PM, :EXPR_STR]]),
 
 
 #=
@@ -255,7 +255,7 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
                    [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
-                   [:EXPR_NUM, :OPRLR_REL, :EXPR_NUM] ,
+                   [:EXPR_NUM, OPRLR_REL, :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
 

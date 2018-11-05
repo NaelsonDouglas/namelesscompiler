@@ -60,3 +60,35 @@ end
 function getfollows(e::Element)
 	return e.follows
 end
+
+function getLexem(enum::Int)
+	grammar[enum].lexem
+end
+
+function printcontent(content)
+
+	lexems=1
+	for p in grammar
+		if content == "follow"
+		lexems = p.follows
+	elseif content == "first"
+		lexems = p.firsts
+	else
+		error("Use follow ou first")
+	end
+	
+	print(p.lexem*"   =>   [")
+	
+	for i=1:length(lexems)
+		print(tks_names[lexems[i]])		
+		if i!=length(lexems)
+			print(",")
+		end
+
+	end
+	print("]")
+	println()
+
+
+end
+end

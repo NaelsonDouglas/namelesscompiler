@@ -32,9 +32,9 @@ function calc_follow(p::Union{Production,Int})
 
 					for fst in getProd(elemsprod_idx+1).firsts
 						@show sprod[elemsprod_idx]
-						println("----")
+						#println("----")
 						grammar[father_id].follows = 
-														vcat(grammar[father_id].follows,fst)
+														unique(vcat(grammar[father_id].follows,fst))
 					end
 				else
 					nxtToken = Int(sprod[elemsprod_idx+1])
@@ -52,10 +52,10 @@ function calc_follow(p::Union{Production,Int})
 		if typeof(last(sprod)) == Symbol
 			son_id = getProd_idx(last(sprod))
 			father_id = p.enum
-			@show p
+			#@show p
 			for fl in grammar[father_id].follows
 				grammar[son_id].follows =
-											 vcat(grammar[son_id].follows,fl)
+											 unique(vcat(grammar[son_id].follows,fl))
 			end
 		end
 	end
@@ -65,6 +65,5 @@ end
 
 map(calc_follow,grammar)
 
-for p in grammar
-	println(p.lexem*"   =>   "*string(p.follows))
-end
+
+
