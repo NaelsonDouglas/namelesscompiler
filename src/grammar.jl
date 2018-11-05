@@ -235,11 +235,7 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-<<<<<<< HEAD
-                   [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
-=======
-                   [:EXPR_NUM, :OPRLR_REL, :EXPR_NUM] ,
->>>>>>> fbbf72d53409d7bb525fb2a8ecf2945cbbb79d00
+                   [:EXPR_NUM, OPRLR_REL, :EXPR_NUM] ,                 
                    [CT_FALSE],
                    [CT_TRUE]])
 
@@ -313,7 +309,7 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> eps
 =#
 addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN, :RH]])
-addProduction(:RH, [[:EXPR_STR],
+addProduction(:RH, [#=[:EXPR_STR],=#
                     [:EXPR_NUM],
                     [:EXPR_BOOL],
                     [EPS]])

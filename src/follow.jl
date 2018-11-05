@@ -1,4 +1,5 @@
 include("grammar.jl")
+include("first.jl")
 map(calc_first,grammar)
 
 function isProduction(p)
@@ -65,5 +66,5 @@ end
 map(calc_follow,grammar)
 
 for p in grammar
-	println(p.lexem*"   =>   "*p.follows)
+	println(p.lexem*"   =>   "*string(p.follows))
 end
