@@ -141,16 +141,35 @@ addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_FLOAT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_BOOL, :IDVEC, OPR_ATR, :EXPR_BOOL],
                       [IDT_CHAR, :IDVEC, OPR_ATR, :EXPR_NUM]])
-addProduction(:IDVEC, [[ID, :IDT]]),
+addProduction(:IDVEC, [[ID, :IDT]])
 addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
                      [EPS]])
+
+#=
+normal:
+   EXPR_STR -> EXPR_STR '+' EXPR_STR
+   EXPR_STR -> (EXPR_STR)
+   EXPR_STR -> 'ct_string'
+   EXPR_STR -> 'id'
+
+factoring:
+  EXPR_STR -> ESH '+' EXPR_STR
+
+  ESH      -> 'ct_string'
+           -> 'id'
+           -> (EXPR_STR)
+=#
+addProduction(:EXPR_STR, [[:ESH, OPR_PM, :EXPR_STR]]),
+
+
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
                -> EXPR_NUM * EXPR_NUM 
                -> '-' EXPR_NUM
                -> '(' EXPR_NUM ')'
-
+               -> 'ct_int'
+               -> 'ct_float'
    precedence:
      EXPR_NUM -> K
               -> K + EXPR_NUM
