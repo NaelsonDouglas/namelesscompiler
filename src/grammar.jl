@@ -248,10 +248,9 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-                   [:EXPR_NUM, :OPRL_REL, :EXPR_NUM] ,
+                   [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
-addProduction(:OPRLR_REL, [[OPRLR_LGEQ]])
 
 #=
    normal:
