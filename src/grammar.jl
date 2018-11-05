@@ -32,6 +32,7 @@ function getProd_idx(s::Union{Symbol,Int})
 	 try
 	 	return grammar[grammar_map[s]].enum
 	 catch
+    
 	 	return false
 	 end
 end
@@ -146,7 +147,7 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
-               -> EXPR_NUM * EXPR_NUM
+               -> EXPR_NUM * EXPR_NUM 
                -> '-' EXPR_NUM
                -> '(' EXPR_NUM ')'
 
@@ -175,9 +176,12 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
 =#
 addProduction(:EXPR_NUM, [[:K],
                           [:K, OPR_PM ,:EXPR_NUM]])
+
 addProduction(:K, [[:G,:KH]])
+
 addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
+
 addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
@@ -228,11 +232,12 @@ addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
                             [EPS]])
 
 addProduction(:T, [[:F, :TH]])
+
 addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-                   [:EXPR_NUM, :OPRL_REL, :EXPR_NUM] ,
+                   [:EXPR_NUM, :OPRLR_REL, :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
 addProduction(:OPRLR_REL, [[OPRLR_LGEQ]])
