@@ -52,25 +52,40 @@ end
    normal:
     S -> TYPE 'id' PARAM '{' ALL_INTER '}'
 =#
-addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S]])
 
 #=
    normal:
-     TYPE  -> 'const' TYPEH
-           ->  TYPEH
+     TYPE  -> CONST 'int'
+           -> CONST 'char'
+           -> CONST 'float'
+           -> CONST 'string'
 
-     TYPEH -> 'int'
+     CONST -> 'const'
+           -> EPS
+
+     TP    ->
+   fectoring:
+     TYPE  -> CONST
+
+     CONST -> 'const'
+           -> EPS
+
+     TP    -> 'int'
            -> 'char'
            -> 'float'
            -> 'string'
 =#
-addProduction(:TYPE, [[CONST, :TYPEH],
-                      [:TYPE]])
-addProduction(:TYPEH, [[IDT_INT],
-                       [IDT_CHAR],
-                       [IDT_FLOAT],
-                       [IDT_STRING],
-                       [IDT_BOOL]])
+addProduction(:TYPE, [[:CONST]])
+addProduction(:CONST, [[CONST],
+                       [EPS]])
+addProduction(:TP, [[IDT_INT],
+                      [IDT_CHAR],
+                      [IDT_FLOAT],
+                      [IDT_STRING],
+                      [IDT_BOOL]])
+
+
 addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
 
 #=
