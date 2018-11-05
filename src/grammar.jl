@@ -67,9 +67,8 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
      CONST -> 'const'
            -> EPS
 
-     TP    ->
    fectoring:
-     TYPE  -> CONST
+     TYPE  -> CONST TP
 
      CONST -> 'const'
            -> EPS
@@ -79,14 +78,14 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> 'float'
            -> 'string'
 =#
-addProduction(:TYPE, [[:CONST]])
+addProduction(:TYPE, [[:CONST, :TP]])
 addProduction(:CONST, [[CONST],
                        [EPS]])
 addProduction(:TP, [[IDT_INT],
-                      [IDT_CHAR],
-                      [IDT_FLOAT],
-                      [IDT_STRING],
-                      [IDT_BOOL]])
+                    [IDT_CHAR],
+                    [IDT_FLOAT],
+                    [IDT_STRING],
+                    [IDT_BOOL]])
 
 
 addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
@@ -159,13 +158,14 @@ factoring:
            -> 'id'
            -> (EXPR_STR)
 =#
-addProduction(:EXPR_STR, [[#=:ESH, =#OPR_PM, :EXPR_STR]]),
-
-
+addProduction(:EXPR_STR, [[:ESH, OPR_PM, :EXPR_STR]]),
+addProduction(:ESH, [[CT_STRING],
+                     [ID],
+                     [O_BRCKT, EXPR_STR, C_BRCKT]])
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
-               -> EXPR_NUM * EXPR_NUM 
+               -> EXPR_NUM * EXPR_NUM
                -> '-' EXPR_NUM
                -> '(' EXPR_NUM ')'
                -> 'ct_int'
@@ -192,12 +192,24 @@ addProduction(:EXPR_STR, [[#=:ESH, =#OPR_PM, :EXPR_STR]]),
      G        -> 'ct_int'
               -> 'ct_float'
               -> '(' EXPR_NUM ')'
+   ambiguity:
+     EXPR_NUM -> K KR
+     KR       -> '+' EXPR_NUM
+              -> EPS
+
+     K        -> G KH
+
+     KH       -> '*' G KH
+              -> EPS
+
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
 =#
-addProduction(:EXPR_NUM, [[:K],
-                          [:K, OPR_PM ,:EXPR_NUM]])
-
+addProduction(:EXPR_NUM, [[:K, :KR]])
+addProduction(:KR, [[OPR_PM ,:EXPR_NUM],
+                    [EPS]])
 addProduction(:K, [[:G,:KH]])
-
 addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
 addProduction(:G, [[CT_FLOAT],
