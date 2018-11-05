@@ -307,7 +307,7 @@ addProduction(:RWHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
 addProduction(:RFOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
-                        [ID, ATTR_IH]])
+                        [ID, :ATTR_IH]])
 addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
                          [EPS]])
 #=
