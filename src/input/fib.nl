@@ -1,3 +1,4 @@
+a==a
 void fibonacci(int n)
 {
   if (n<0){return}
@@ -15,8 +16,8 @@ void fibonacci(int n)
   if (n>1)
   {
     int sequence::n
-    sequence::0 = 0
-    sequence::1 = 1
+    sequence::0 =0
+    sequence::1 =1
     print(sequence::0)
     print(",")
     print(sequence::1)
@@ -26,7 +27,4 @@ void fibonacci(int n)
           sequence::i = sequence::(i - 1) + sequence::(i - 2)
           print(",")
           print(sequence::i)
-      i=i + 1
-    }
-  }
- }
+      i=i+1}}}
