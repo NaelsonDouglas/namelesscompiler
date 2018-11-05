@@ -77,15 +77,16 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> 'char'
            -> 'float'
            -> 'string'
+           -> 'bool'
 =#
 addProduction(:TYPE, [[:CONST]])
 addProduction(:CONST, [[CONST],
                        [EPS]])
 addProduction(:TP, [[IDT_INT],
-                      [IDT_CHAR],
-                      [IDT_FLOAT],
-                      [IDT_STRING],
-                      [IDT_BOOL]])
+                    [IDT_CHAR],
+                    [IDT_FLOAT],
+                    [IDT_STRING],
+                    [IDT_BOOL]])
 
 
 addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
