@@ -30,7 +30,8 @@ function calc_follow(p::Union{Production,Int})
 				if isProduction(sprod[elemsprod_idx+1])
 
 					for fst in getProd(elemsprod_idx+1).firsts
-
+						@show sprod[elemsprod_idx]
+						println("----")
 						grammar[father_id].follows = 
 														vcat(grammar[father_id].follows,fst)
 					end
