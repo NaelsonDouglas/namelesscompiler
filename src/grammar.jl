@@ -50,9 +50,10 @@ end
 
 #=
    normal:
-    S -> TYPE 'id' PARAM '{' ALL_INTER '}'
+    S -> TYPE 'id' PARAM '{' ALL_INTER '}' S
 =#
-addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S]])
+addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
+                   [EPS]])
 
 #=
    normal:
