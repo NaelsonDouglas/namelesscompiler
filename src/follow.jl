@@ -1,5 +1,3 @@
-include("grammar.jl")
-include("first.jl")
 map(calc_first,grammar)
 
 function isProduction(p)
@@ -31,7 +29,7 @@ function calc_follow(p::Union{Production,Int})
 				if isProduction(sprod[elemsprod_idx+1])
 
 					for fst in getProd(elemsprod_idx+1).firsts
-						@show sprod[elemsprod_idx]
+						#@show sprod[elemsprod_idx]
 						#println("----")
 						grammar[father_id].follows = 
 														unique(vcat(grammar[father_id].follows,fst))
