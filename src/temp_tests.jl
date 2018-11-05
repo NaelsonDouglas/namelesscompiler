@@ -1,64 +1,36 @@
-grammar = []
-grammar_map = Dict{Symbol,Int}()
+function convertToalcino(prod::Production)
+	output = ""
+
+	output = prod.lexem*"-> "
 
 
+	for i=1:length(prod.subprods)
 
-addProd(:ATRIB,[[ID,OPR_ATR,CTN]])
+		for elem in prod.subprods[i]
+			if typeof(elem) == Symbol
+				output = output*string(elem)
+			else
+				output = output*lowercase(string("'",elem,"'"))
+			end
+			output = output*" "
+		end
 
-addProd(:CT_NUM,[[CTN],[CT_FLOAT]])
+		if i != length(prod.subprods)
+			output = output*" | "
+		end
+	end
+	return output*"\n"
+end
 
-addProd(:OPR_ARIT,[[OPR_DM],[OPR_SUM],[OPR_SUB]])
 
-addProd(:OPR_SUMSUB,[[OPR_SUM],[OPR_SUB]])
-
-addProd(:OPRLR_EQ_DIF,[[OPRLR_EQ],[OPRLR_DIF]])
-
-addProd(:OPRLR_LGTR,[[OPR_ATR],[EPS]])
-
-addProd(:OPRLR_GTR,[[OPR_ATR],[EPS]])
-
-addProd(:OPRL_ANDOR,[[OPRLR_OR],[OPRLR_AND]])
-
-addProd(:BOOLEAN,[[CTB],[CTN]])
-
-addProd(:INT_DCLR,[[IDT_INT,OPR_ATR,CT_INT]])
-
-addProd(:EXPR_ARIT,[[CTN,:OPR_ARIT,CTN]])
-
-addProd(:OPR_LOGIC,[[:OPR_ARIT]])
-
-addProd(:EXPR_BOOL,[[:EXPR_ARIT,:OPR_LOGIC,:EXPR_ARIT,CTB]])
-
-addProd(:LOOP_WHILE,[[BLK_WHILE, O_BRCKT, :EXPR_BOOL, C_BRCKT, O_C_BRCKT, C_C_BRCKT]])
-
-addProd(:LOOP_FOR,[[BLK_FOR, O_C_BRCKT, :INT_DCLR, COMMA, :EXPR_BOOL, COMMA, C_C_BRCKT, O_C_BRCKT, C_C_BRCKT]])
-
-addProd(:LOOP,[[:LOOP_FOR],[:LOOP_WHILE]])
-
-addProd(:CMD,[[:LOOP], [:ATRIB] , [:EXPR_ARIT] , [:EXPR_BOOL]])
-
-addProd(:DATA_TYPE,[[IDT_FLOAT],[IDT_INT], [IDT_BOOL], [IDT_CHAR], [IDT_STRING], [VOID], [:CMD]])
-
-addProd(:PARAMS_R,[[COMMA,:DATA_TYPE,ID,:PARAMS_R],[EPS]])
-
-addProd(:PARAMS,[[:DATA_TYPE,ID,:PARAMS_R],[EPS]])
-
-addProd(:MAIN,[[FN_MAIN,O_BRCKT,:PARAMS,C_BRCKT,O_C_BRCKT, :CMD,C_C_BRCKT]])
-
-addProd(:FN_DCLR,[[:DATA_TYPE,ID,O_BRCKT,:PARAMS,C_BRCKT,O_C_BRCKT,:CMD,C_C_BRCKT]])
-
-addProd(:S,[[:MAIN],[:FN_DCLR,:MAIN]])
-
-addProd(:TERM_NUM,[[:CT_NUM],[ID]])
-
-addProd(:EXP_ARIT,[[:CT_NUM,:OPR_ARIT,:CT_NUM],[OPR_SUB,:CT_NUM,:OPR_ARIT,:CT_NUM],[O_BRCKT,:EXPR_ARIT,C_BRCKT]])
-
-addProd(:EXPR_ALG,[[:EXPR_ARIT],[:TERM_NUM, :OPR_ARIT, :EXPR_ALG]])
-
-addProd(:OPRLR_LGT,[[OPRLR_LG,:OPRLR_LGTR]])
-
-addProd(:OPRLR_G,[[OPRLR_GT,:OPRLR_GTR]])
-
-addProd(:OPRLR,[[:OPRLR_LGT],[OPRLR_GT],[OPRLR_EQ]])
-
-addProd(:FN_CALL,[[ID,O_BRCKT, :PARAMS,C_BRCKT]])
+function convertGrammar(g=grammar)
+	output = ""
+	for p in grammar
+		output = output*convertToalcino(p)
+	end
+	f = open("grammar_prof.txt","w+")
+	write(f,output)
+	flush(f)
+	close(f)
+	return output
+end
