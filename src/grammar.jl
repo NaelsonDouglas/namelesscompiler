@@ -173,9 +173,24 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
      G        -> 'ct_int'
               -> 'ct_float'
               -> '(' EXPR_NUM ')'
+  left factoring:
+     EXPR_NUM -> K EH
+
+     EH       -> '+' EXPR_NUM
+              -> EPS
+
+     K        -> G KH
+
+     KH       -> '*' G KH
+              -> EPS
+
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
 =#
-addProduction(:EXPR_NUM, [[:K],
-                          [:K, OPR_PM ,:EXPR_NUM]])
+addProduction(:EXPR_NUM, [[:K, :EH]])
+addProduction(:EH, [[OPR_PM ,:EXPR_NUM],
+                    [EPS]])
 addProduction(:K, [[:G,:KH]])
 addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
