@@ -76,6 +76,7 @@ using JSON
       OPRLR_GEQ,    # REMOVER
       OPR_CONCAT,   # REMOVER 
       =#
+      OPRLR_REL,     #Operador lógico relacional
       CT_B,         # true ou false
       CMNT_LN,      # COMENTARIO DE LINHA
       #OPRLR_DIF,    # REMOVER

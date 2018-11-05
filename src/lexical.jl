@@ -1,4 +1,4 @@
-input = "code.nl"
+input = "input/fib.nl"
 
 try
 	using DataStructures
@@ -93,8 +93,8 @@ function producer()
 								lexembuff = ""
 							end
 #TODO FAZER UMA FUNÇÃO PARA ELSE-IF
-							if (contains(==,separators,chunk[i]))
-								enqueue!(lineq,token(string(chunk[i]),l,col+=1))
+							if (contains(==,separators,chunk[i]))								
+								#enqueue!(lineq,token(string(chunk[i]),l,col+=1))
 							elseif chunk[i] == '>'
 									if chunk[i+1] == '='
 										enqueue!(lineq,token(">=",l,col+=1))
@@ -188,7 +188,7 @@ function nextToken()
 		num = tkn.categ_num
 		println("\(\"$lex\",$col,$nom,$num\)")
 	else
-		info("eol")
+		#info("eol")
 	end
 	return tkn;
 end

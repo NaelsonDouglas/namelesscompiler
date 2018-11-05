@@ -15,8 +15,8 @@ void fibonacci(int n)
   if (n>1)
   {
     int sequence::n
-    sequence::0 = 0
-    sequence::1 = 1
+    sequence::0 =0
+    sequence::1 =1
     print(sequence::0)
     print(",")
     print(sequence::1)
