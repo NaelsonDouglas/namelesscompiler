@@ -278,23 +278,39 @@ addProduction(:RIF1, [[BLK_ELS, :RIF1],
 
 #=
    normal:
-      
-   removed left recursion:
+      RWHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_INTER '}'
 =#
 addProduction(:RWHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
                          :ALL_INTER, C_C_BRCKT]])
 
 #=
-   normal:
+  normal:
+   RFOR   -> 'for' '(' ATTR_I ',' EXPR_NUM ',' EXPR_NUM ') '{' '{' ALL_INTER '}'
+   ATTR_I -> 'int' 'id' '=' :EXPR_NUM
+          -> 'id' ATTR_IH
 
-   removed left recursion:
+  ATTR_IH -> '=' EXPR_NUM
+          -> EPS
 =#
-addProduction(:RFOR, [[BLK_FOR, O_BRCKT, :ATTR, COMMA,:EXPR_NUM, COMMA,
+addProduction(:RFOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
-
+addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
+                        [ID, ATTR_IH]])
+addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
+                         [EPS]])
 #=
    normal:
+    RCONT -> 'continue'
+          -> 'break'
+          -> 'return' RH
 
-   removed left recursion:
+   RH     -> EXPR_STR
+          -> EXPR_NUM
+          -> EXPR_BOOL
+          -> eps
 =#
-addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN], [RETURN, :EXPR_ALL]])
+addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN, :RH]])
+addProduction(:RH, [[:EXPR_STR],
+                    [:EXPR_NUM],
+                    [:EXPR_BOOL],
+                    [EPS]])
