@@ -50,30 +50,53 @@ end
 
 #=
    normal:
-
-   removed left recursion:
+    S -> TYPE 'id' PARAM '{' ALL_INTER '}'
 =#
-addProduction(:S, [[:TYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 
 #=
    normal:
+     TYPE  -> 'const' TYPEH
+           ->  TYPEH
 
-   removed left recursion:
+     TYPEH -> 'int'
+           -> 'char'
+           -> 'float'
+           -> 'string'
 =#
-addProduction(:TYPE, [[IDT_INT],
-                      [IDT_CHAR],
-                      [IDT_FLOAT],
-                      [IDT_STRING]])
+addProduction(:TYPE, [[CONST, :TYPEH],
+                      [:TYPE]])
+addProduction(:TYPEH, [[IDT_INT],
+                       [IDT_CHAR],
+                       [IDT_FLOAT],
+                       [IDT_STRING],
+                       [IDT_BOOL]])
+addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
 
 #=
    normal:
+     PARAM  -> '(' ')'
+            -> '(' PR ')'
 
-   removed left recursion:
+     PR     -> TYPE IDVEC
+            -> TYPE IDVEC ',' PR
+   factoring to remove ambiguity:
+     PARAM  -> '(' PRH
+
+     PRH    -> ')'
+            -> PR ')'
+
+     PR     -> TYPE IDVEC PRL
+
+     PRL    -> ',' PR
+            -> EPS
 =#
-addProduction(:PARAM, [[O_BRCKT, C_BRCKT],
-                       [O_BRCKT, :P1, C_BRCKT]])
-addProduction(:P1, [[:TYPE, :IDVEC],
-                    [:TYPE, :IDVEC, COMMA, :P1]])
+addProduction(:PARAM, [[O_BRCKT, :PRH]])
+addProduction(:PRH, [[C_BRCKT],
+                     [:PR, C_BRCKT]])
+addProduction(:PR, [[:TYPE, :IDVEC, :PRL]])
+addProduction(:PRL, [[COMMA, :PR],
+                     [EPS]])
 
 #=
    normal:
@@ -85,20 +108,24 @@ addProduction(:P1, [[:TYPE, :IDVEC],
      IDVEC -> ID
            -> ID, VEC_IN, :EXPR_NUM
 
-   factor to remove ambiguity:
+   factoring to remove ambiguity:
 
      ATTR  -> 'IDT_INT' IDVEC OPR_ATR EXPR_NUM
            -> 'IDT_STRING' OPR_ATR EXPR_STR
            -> 'IDT_CHAR' IDVEC OPR_ATR EXPR_NUM
            -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
 
-     IDVEC -> ID
-           -> ID, VEC_IN, :EXPR_NUM
+     IDVEC -> 'id' IDT
+     IDT   -> '::' EXPR_NUM | EPS
 =#
-addProduction(:ATTR, [[:TYPE, :IDVEC, OPR_ATR, :EXPR_NUM],
-                      [:TYPE, :IDVEC, OPR_ATR, CT_STRING]])
-addProduction(:IDVEC, [[ID],
-                       [ID, VEC_IN, :EXPR_NUM]])
+addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
+                      [IDT_STRING, :IDVEC, OPR_ATR, :EXPR_STR],
+                      [IDT_FLOAT, :IDVEC, OPR_ATR, :EXPR_NUM],
+                      [IDT_BOOL, :IDVEC, OPR_ATR, :EXPR_BOOL],
+                      [IDT_CHAR, :IDVEC, OPR_ATR, :EXPR_NUM]])
+addProduction(:IDVEC, [[ID, :IDT]]),
+addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
+                     [EPS]])
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
@@ -106,7 +133,7 @@ addProduction(:IDVEC, [[ID],
                -> '-' EXPR_NUM
                -> '(' EXPR_NUM ')'
 
-   precedência:
+   precedence:
      EXPR_NUM -> K
               -> K + EXPR_NUM
 
@@ -117,18 +144,26 @@ addProduction(:IDVEC, [[ID],
               -> 'ct_float'
               -> '(' EXPR_NUM ')'
    removed left recursion:
+     EXPR_NUM -> K
+              -> K '+' EXPR_NUM
 
+     K        -> G KH
+
+     KH       -> '*' G KH
+              -> EPS
+
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
 =#
-addProduction(:EXPR_NUM, [[:EX1],
-                          [:EX1, OPR_PM ,:EXPR_NUM]])
-addProduction(:EX1, [[:EX2,:EX11]])
-addProduction(:EX11, [[OPR_DM,:EX2, :EX11],
-                      [EPS]])
-addProduction(:EX2, [[:IDVEC],
-                     [CT_FLOAT],
-                     [CT_INT],
-                     [CT_STRING],
-                     [O_BRCKT, :EX2, C_BRCKT]])
+addProduction(:EXPR_NUM, [[:K],
+                          [:K, OPR_PM ,:EXPR_NUM]])
+addProduction(:K, [[:G,:KH]])
+addProduction(:KH, [[OPR_DM,:G, :KH],
+                    [EPS]])
+addProduction(:G, [[CT_FLOAT],
+                   [CT_INT],
+                   [O_BRCKT, :EXPR_NUM, C_BRCKT]])
 
 
 #=
@@ -140,7 +175,7 @@ addProduction(:EX2, [[:IDVEC],
                -> EXPR_NUM 'rel' EXPR_NUM
                -> 'true'
                -> 'false'
-   precedência:
+   precedence:
      EXPR_BOOL -> T
                -> EXPR_BOOL 'or' T
                -> 'not' T
@@ -166,28 +201,32 @@ addProduction(:EX2, [[:IDVEC],
                 -> eps
 
      F          -> '(' EXPR_BOOL ')'
-                -> EXPR_NUM 'rel' EXPR_NUM
+                -> EXPR_NUM OPRLR_REL EXPR_NUM
                 -> 'true'
                 -> 'false'
 =#
 addProduction(:EXPR_BOOL, [[:T, :EXPR_BOOLH],
                            [OPRL_NOT, :T, :EXPR_BOOLH]])
-addProduction(:EXPR_BOOLH, [[OPRL_OR, :T, :EXPR_BOOLH],
+addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
                             [EPS]])
 
 addProduction(:T, [[:F, :TH]])
-addProduction(:TH, [[OPRL_AND, :F, :TH],
+addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
                    [:EXPR_NUM, :OPRL_REL, :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
+addProduction(:OPRLR_REL, [[OPRLR_LGEQ]])
 
 #=
    normal:
-
-   removed left recursion:
+     ALL_INTER -> RIF ALL_INTER
+               -> ATTR ALL_INTER
+               -> RWHILE ALL_INTER
+               -> RFOR ALL_INTER
+               -> RCONT ALL_INTER
 =#
 addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
                           [:ATTR , :ALL_INTER],
@@ -197,8 +236,19 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
 
 #=
    normal:
+     RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_INTER '}' RIF1
+     RIF1 -> 'else' RIF
+          -> 'else' '{' ALL_INTER '}'
+          -> EPS
 
-   removed left recursion:
+   factoring:
+     RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_INTER '}' RIF1
+
+     RIF1 -> 'else' RIF2
+          -> EPS
+
+     RIF2 -> RIF
+          -> '{' ALL_INTER '}'
 =#
 addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
                      O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]])
@@ -208,7 +258,7 @@ addProduction(:RIF1, [[BLK_ELS, :RIF1],
 
 #=
    normal:
-
+      
    removed left recursion:
 =#
 addProduction(:RWHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
