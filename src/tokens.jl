@@ -1,20 +1,20 @@
 using DataStructures
 using JSON
 
-
+#TODO: Apagar as linhas para remover após consertar o matching
 @enum(Tokens,
       CT_VALUE=1, # ??
       CT_INT,       # 123123
       CT_CHAR,      # 'c'
       CT_FLOAT,     # 123123.123123f
-      CT_VEC,       # REMOVER
-      CT_STRING,    # "LOLMEN"
+      #CT_VEC,       # REMOVER
+      CT_STRING,    # "foo bar"
 
       SMCL,         # ??
       EPS,          # EPSILON
       ID,           # 'id'
       CONST,        #  'const'
-      EXPR,         # REMOVER
+      #EXPR,         # REMOVER
 
       OPR_PM,       # '+ -'
       OPR_DM,       # ' * /'
@@ -27,9 +27,9 @@ using JSON
       OPRLR_UN_NEG, # REMOVER
       OPRLR_AND,    # 'and'
       OPRLR_OR,     # 'or'
-      OPRL_NOT,    # 'not'
-      FN_PRINT,     # REMOVER
-      FN_READ,      # REMOVER
+      OPRL_NOT,     # 'not'
+      FN_PRINT,     # "print"
+      #FN_READ,      # REMOVER
       DRED,         # COMENTARIO ??
 
       BLK_IF,       # 'if'
@@ -44,10 +44,12 @@ using JSON
 
       O_BRCKT,      # '('
       C_BRCKT,      # ')'
+      O_SQRBRCKT,   # '['
+      C_SQRBRCKT,   # ']'
       O_C_BRCKT,    # '{'
       C_C_BRCKT,    # '}'
-      O_PRTSIS,     # REMOVER
-      C_PRTSIS,     # REMOVER
+      #O_PRTSIS,    # REMOVER
+      #C_PRTSIS,    # REMOVER
 
       IDT_INT,      # 'int'
       IDT_FLOAT,    # 'float'
@@ -58,9 +60,10 @@ using JSON
       CT_FALSE,     # 'false'
       CT_TRUE,      # 'true'
 
-      FN_MAIN,      # REMOVER
+      FN_MAIN,      # "main"
       VEC_IN,       # '::'
       LEX_ERR,      # erro lexico
+      #=
       OPR_SUM,      # REMOVER
       OPR_SUB,      # REMOVER
       CTN,          # REMOVER
@@ -71,10 +74,11 @@ using JSON
       FN_CALL_TK,   # REMOVER
       OPRLR_GT,     # REMOVER
       OPRLR_GEQ,    # REMOVER
-      OPR_CONCAT,   # REMOVER
-      CTB,          # COMENTARIO ??
-      CMNT_LN,      # COMENTARIO DE LINHA ??
-      OPRLR_DIF,    # REMOVER
+      OPR_CONCAT,   # REMOVER 
+      =#
+      CT_B,         # true ou false
+      CMNT_LN,      # COMENTARIO DE LINHA
+      #OPRLR_DIF,    # REMOVER
       EOF)
 
 
