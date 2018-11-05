@@ -78,9 +78,9 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> 'float'
            -> 'string'
 =#
-addProduction(:TYPE, [[:CONST, :TP]])
-addProduction(:CONST, [[CONST],
-                       [EPS]])
+addProduction(:TYPE, [[:CONST_R, :TP]])
+addProduction(:CONST_R, [[CONST],
+                         [EPS]])
 addProduction(:TP, [[IDT_INT],
                     [IDT_CHAR],
                     [IDT_FLOAT],
@@ -118,7 +118,7 @@ addProduction(:PRL, [[COMMA, :PR],
 #=
    normal:
      ATTR  -> 'IDT_INT' IDVEC OPR_ATR EXPR_NUM
-           -> 'IDT_STRING' OPR_ATR EXPR_STR
+           -> 'IDT_STRING' OPR_ATR EXPR_STRING
            -> 'IDT_CHAR' IDVEC OPR_ATR EXPR_NUM
            -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
 
@@ -128,7 +128,7 @@ addProduction(:PRL, [[COMMA, :PR],
    factoring to remove ambiguity:
 
      ATTR  -> 'IDT_INT' IDVEC OPR_ATR EXPR_NUM
-           -> 'IDT_STRING' OPR_ATR EXPR_STR
+           -> 'IDT_STRING' OPR_ATR EXPR_STRING
            -> 'IDT_CHAR' IDVEC OPR_ATR EXPR_NUM
            -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
 
@@ -136,7 +136,7 @@ addProduction(:PRL, [[COMMA, :PR],
      IDT   -> '::' EXPR_NUM | EPS
 =#
 addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
-                      [IDT_STRING, :IDVEC, OPR_ATR, :EXPR_STR],
+                      [IDT_STRING, :IDVEC, OPR_ATR, :EXPR_STRING],
                       [IDT_FLOAT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_BOOL, :IDVEC, OPR_ATR, :EXPR_BOOL],
                       [IDT_CHAR, :IDVEC, OPR_ATR, :EXPR_NUM]])
@@ -146,22 +146,22 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
 
 #=
 normal:
-   EXPR_STR -> EXPR_STR '+' EXPR_STR
-   EXPR_STR -> (EXPR_STR)
-   EXPR_STR -> 'ct_string'
-   EXPR_STR -> 'id'
+   EXPR_STRING -> EXPR_STRING '+' EXPR_STRING
+   EXPR_STRING -> (EXPR_STRING)
+   EXPR_STRING -> 'ct_string'
+   EXPR_STRING -> 'id'
 
 factoring:
-  EXPR_STR -> ESH '+' EXPR_STR
+  EXPR_STRING -> ESH '+' EXPR_STRING
 
   ESH      -> 'ct_string'
            -> 'id'
-           -> (EXPR_STR)
+           -> (EXPR_STRING)
 =#
-addProduction(:EXPR_STR, [[:ESH, OPR_PM, :EXPR_STR]]),
+addProduction(:EXPR_STRING, [[:ESH, OPR_PM, :EXPR_STRING]])
 addProduction(:ESH, [[CT_STRING],
                      [ID],
-                     [O_BRCKT, EXPR_STR, C_BRCKT]])
+                     [O_BRCKT, :EXPR_STRING, C_BRCKT]])
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
@@ -335,13 +335,13 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> 'break'
           -> 'return' RH
 
-   RH     -> EXPR_STR
+   RH     -> EXPR_STRING
           -> EXPR_NUM
           -> EXPR_BOOL
           -> eps
 =#
 addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN, :RH]])
-addProduction(:RH, [[:EXPR_STR],
+addProduction(:RH, [[:EXPR_STRING],
                     [:EXPR_NUM],
                     [:EXPR_BOOL],
                     [EPS]])
