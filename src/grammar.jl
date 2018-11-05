@@ -181,7 +181,6 @@ addProduction(:K, [[:G,:KH]])
 
 addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
-
 addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
@@ -232,7 +231,6 @@ addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
                             [EPS]])
 
 addProduction(:T, [[:F, :TH]])
-
 addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
