@@ -10,7 +10,7 @@ using JSON
       #CT_VEC,       # REMOVER
       CT_STRING,    # "foo bar"
 
-      SMCL,         # ??
+      #SMCL,         # ??
       EPS,          # EPSILON
       ID,           # 'id'
       CONST,        #  'const'
@@ -20,11 +20,11 @@ using JSON
       OPR_DM,       # ' * /'
 
       OPRLN,        # ??
-      OPRLR_EQ,     # REMOVER
-      OPRLR_LG,     # REMOVER
+      #OPRLR_EQ,     # REMOVER
+      #OPRLR_LG,     # REMOVER
       OPRLR_LGEQ,   # '== >= <= !='
       OPR_ATR,      # '='
-      OPRLR_UN_NEG, # REMOVER
+      #OPRLR_UN_NEG, # REMOVER
       OPRLR_AND,    # 'and'
       OPRLR_OR,     # 'or'
       OPRL_NOT,     # 'not'
