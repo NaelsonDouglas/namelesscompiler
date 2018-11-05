@@ -32,6 +32,7 @@ function getProd_idx(s::Union{Symbol,Int})
 	 try
 	 	return grammar[grammar_map[s]].enum
 	 catch
+    
 	 	return false
 	 end
 end
@@ -77,16 +78,15 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> 'char'
            -> 'float'
            -> 'string'
-           -> 'bool'
 =#
 addProduction(:TYPE, [[:CONST]])
 addProduction(:CONST, [[CONST],
                        [EPS]])
 addProduction(:TP, [[IDT_INT],
-                    [IDT_CHAR],
-                    [IDT_FLOAT],
-                    [IDT_STRING],
-                    [IDT_BOOL]])
+                      [IDT_CHAR],
+                      [IDT_FLOAT],
+                      [IDT_STRING],
+                      [IDT_BOOL]])
 
 
 addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
@@ -147,7 +147,7 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
-               -> EXPR_NUM * EXPR_NUM
+               -> EXPR_NUM * EXPR_NUM 
                -> '-' EXPR_NUM
                -> '(' EXPR_NUM ')'
 
@@ -173,25 +173,12 @@ addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
      G        -> 'ct_int'
               -> 'ct_float'
               -> '(' EXPR_NUM ')'
-  left factoring:
-     EXPR_NUM -> K EH
-
-     EH       -> '+' EXPR_NUM
-              -> EPS
-
-     K        -> G KH
-
-     KH       -> '*' G KH
-              -> EPS
-
-     G        -> 'ct_int'
-              -> 'ct_float'
-              -> '(' EXPR_NUM ')'
 =#
-addProduction(:EXPR_NUM, [[:K, :EH]])
-addProduction(:EH, [[OPR_PM ,:EXPR_NUM],
-                    [EPS]])
+addProduction(:EXPR_NUM, [[:K],
+                          [:K, OPR_PM ,:EXPR_NUM]])
+
 addProduction(:K, [[:G,:KH]])
+
 addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
 addProduction(:G, [[CT_FLOAT],
@@ -248,7 +235,11 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
+<<<<<<< HEAD
                    [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
+=======
+                   [:EXPR_NUM, :OPRLR_REL, :EXPR_NUM] ,
+>>>>>>> fbbf72d53409d7bb525fb2a8ecf2945cbbb79d00
                    [CT_FALSE],
                    [CT_TRUE]])
 

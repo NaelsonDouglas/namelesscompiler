@@ -93,13 +93,8 @@ function producer()
 								lexembuff = ""
 							end
 #TODO FAZER UMA FUNÇÃO PARA ELSE-IF
-							if (contains(==,separators,chunk[i]))
-								if chunk[i] != '='
-									enqueue!(lineq,token(string(chunk[i]),l,col+=1))
-								else
-									enqueue!(lineq,token("==",l,col+=1))
-									i=i+1
-								end
+							if (contains(==,separators,chunk[i]))								
+								enqueue!(lineq,token(string(chunk[i]),l,col+=1))
 							elseif chunk[i] == '>'
 									if chunk[i+1] == '='
 										enqueue!(lineq,token(">=",l,col+=1))

@@ -1,68 +1,69 @@
-amnt_productions = length(collect(map(Int,instances(Prods))))
-follows = Vector{Vector}(amnt_productions)
-fill!(follows,Vector())
+include("grammar.jl")
+map(calc_first,grammar)
+
+function isProduction(p)
+	# if we just do return typeof(p) == Symbol it might bug when p is an Enum
+	#Dont aske me why
+	if typeof(p) == Symbol
+		return true
+	end
+
+	return false
+end
+
+function calc_follow(p::Union{Production,Int})
+	subprods = -1
+	
+	if typeof(p) == Int
+		subprods = getProd(p).subprods
+	else
+		subprods = p.subprods
+	end
 
 
-function calc_follow(g=grammar)
+	for sprod in subprods
+		for elemsprod_idx=1:(length(sprod)-1)
+			
 
-	for prod_i in g
-		prods_body   = get_productions(prod_i)
-		for sent in prods_body
+			if isProduction(sprod[elemsprod_idx]) #Symbols are non-terminals. Enums are tokens			
+				father_id=getProd_idx(sprod[elemsprod_idx])
+				if isProduction(sprod[elemsprod_idx+1])
 
-			for cell=1:(length(sent)-1)
-				if typeof(sent[cell]) == Symbol
-					flwsindex = eval(sent[cell])
-					flwsindex = eval(sent[cell])[2]				
-						
-						next = sent[cell+1]
-
-						if (typeof(next) == Int)
-							follows[flwsindex] = vcat(follows[flwsindex],next)
-						elseif typeof(next) == Symbol
-							expanded = eval(next)
-							next_id = expanded[2]
-							follows[flwsindex] = vcat(follows[eval(sent[cell])[2]],firsts[expanded[2]])
-						end					
-
+					for fst in getProd(elemsprod_idx+1).firsts
+						@show sprod[elemsprod_idx]
+						println("----")
+						grammar[father_id].follows = 
+														vcat(grammar[father_id].follows,fst)
+					end
 				else
-					#Do nothing. 
-					#The follow is defined only for non-terminals
-					#Symbols are productions, Integers are tokens
+					nxtToken = Int(sprod[elemsprod_idx+1])
+					if nxtToken != Int(EPS)							
+						grammar[father_id].follows = unique(vcat(grammar[father_id].follows,nxtToken))
+					end
 				end
+				
+			else
+				#If it's not a symbol, then it's a token, alas, there's no follows for it
 			end
 
 		end
 
-	end	
-
-	#Removes duplicated values on the follows list
-	for i=1:length(follows)
-		follows[i] = unique(follows[i])
+		if typeof(last(sprod)) == Symbol
+			son_id = getProd_idx(last(sprod))
+			father_id = p.enum
+			@show p
+			for fl in grammar[father_id].follows
+				grammar[son_id].follows =
+											 vcat(grammar[son_id].follows,fl)
+			end
+		end
 	end
 
 end
 
 
-"It's an auxiliar and ugly function. Nothing special to see here."
-function reverse_follow()
-	names = collect(instances(Prods))
-	for i=1:length(follows)
-		
-		n = string(names[i])
-		l = length(n)
-		plus = 15-l
-		
-		l2 = length(string(i))
-		plus2 = 4-l2
-		print(i)
-		for j=1:plus2
-			print("-")
-		end
+map(calc_follow,grammar)
 
-		print(string(names[i]))
-		for j=1:plus
-			print("-")
-		end
-		println(follows[i])
-	end
+for p in grammar
+	println(p.lexem*"   =>   "*p.follows)
 end

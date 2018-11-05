@@ -6,7 +6,7 @@ function calc_first(prd::Production)
 	subprods = prd.subprods
 	father_idx = prd.enum
 
-	@show prd
+	
 	for subprods_idx=1:length(subprods)
 
 		if typeof(subprods[subprods_idx][1]) == Symbol
