@@ -280,10 +280,11 @@ addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
                -> RCONT ALL_INTER
 =#
 addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
-                          [:ATTR , :ALL_INTER],
-                          [:RWHILE, :ALL_INTER],
-                          [:RFOR, :ALL_INTER],
-                          [:RCONT, :ALL_INTER]])
+                           [:ATTR , :ALL_INTER],
+                           [:RWHILE, :ALL_INTER],
+                           [:RFOR, :ALL_INTER],
+                           [:RCONT, :ALL_INTER],
+                           [:FN_CALL, :ALL_INTER]])
 
 #=
    normal:
@@ -345,3 +346,25 @@ addProduction(:RH, [[:EXPR_STRING],
                     [:EXPR_NUM],
                     [:EXPR_BOOL],
                     [EPS]])
+
+#=
+  normal:
+    FN_CALL -> 'id' FN_CH
+
+    FN_CH   -> '(' FN_CHP
+
+    FN_CHP  ->  FN_PR ')'
+    FN_CHP  ->  ')'
+
+    FN_PR   -> 'id' FN_PRE
+
+    FN_PRE  ->  ',' FN_PR
+            ->  eps
+=#
+addProduction(:FN_CALL, [[ID, :FN_CH]])
+addProduction(:FN_CH, [[O_BRCKT, :FN_CHP]])
+addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
+                        [C_BRCKT]])
+addProduction(:FN_PR, [[ID]])
+addProduction(:FN_PRE, [[ID, COMMA, :FN_PR],
+                       [EPS]])

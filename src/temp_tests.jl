@@ -1,7 +1,7 @@
 function prodToString(prod::Production)
 	output = ""
 
-	output = prod.lexem*"-> "
+	output = prod.lexem*" -> "
 
 
 	for i=1:length(prod.subprods)
