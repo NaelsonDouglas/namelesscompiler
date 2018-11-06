@@ -19,7 +19,7 @@ function prodToString(prod::Production)
 			output = output*" | "
 		end
 	end
-	return output*"\n"
+	return output*". \n"
 end
 
 
