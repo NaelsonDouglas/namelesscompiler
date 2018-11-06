@@ -1,40 +1,5 @@
-input = "input/fib.nl"
-
-try
-	using DataStructures
-	using JSON
-	using Match
-catch
-	Pkg.add("DataStructures")
-	Pkg.add("JSON")
-	Pkg.add("Match")
-	using DataStructures
-	using JSON
-	using Match
-end
-
-include("tokens.jl")
-#include("productions.jl")
-#include("grammar.jl")
-
-include("auxiliar_funcs.jl")
-
 include("matcher.jl")
-#include("first.jl")
-#include("follow.jl")
-include("data_structures.jl")
-include("grammar.jl")
-include("first.jl")
-include("follow.jl")
-
-
 f = open(input)
-
-#t = open("tks.json") Esse JSON não é mais necessário. O mapeamento agora é feito em tokens.jl sem uso do disco
-#tks_names = JSON.parse(t)
-#tks_names = SortedDict(zip(map(parse,keys(tks_names))  ,  values(tks_names)))
-
-
 
 #Given a lexem, 
 function token(lexem,line::Int, col::Int)
