@@ -155,7 +155,16 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 
 
 
+		if head.categ_num == Int(EOF)
+			if top(stack) == :S
 
+				newline = string(makestepleft(head.lexem),string(collect(stack)))
+				pop!(stack)
+				steps = vcat(steps,newline)
+				newline = string(makestepleft(head.lexem),string(collect(stack)))
+				steps = vcat(steps,newline)
+			end
+		end
 
 
 
