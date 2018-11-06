@@ -284,7 +284,8 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
                            [:RWHILE, :ALL_INTER],
                            [:RFOR, :ALL_INTER],
                            [:RCONT, :ALL_INTER],
-                           [:FN_CALL, :ALL_INTER]])
+                           [:FN_CALL, :ALL_INTER],
+                           [EPS]])
 
 #=
    normal:
