@@ -357,16 +357,25 @@ addProduction(:RH, [#[:EXPR_STRING],
     FN_CHP  ->  ')'
 
     FN_PR   -> 'id' FN_PRE
-            -> TP FN_PRE
+            -> CN_TP FN_PRE
 
     FN_PRE  ->  ',' FN_PR
             ->  eps
+    CN_TP -> 'ct_int'
+          -> 'ct_float'
+          -> 'ct_string'
+          -> 'ct_bool'
 =#
 addProduction(:FN_CALL, [[ID, :FN_CH]])
 addProduction(:FN_CH, [[O_BRCKT, :FN_CHP]])
 addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
                         [C_BRCKT]])
 addProduction(:FN_PR, [[ID, :FN_PRE],
-                       [:TP, :FN_PRE]])
+                       [:CN_TP, :FN_PRE]])
 addProduction(:FN_PRE, [[ID, COMMA, :FN_PR],
-                       [EPS]])
+                        [EPS]])
+addProduction(:CN_TP, [[CT_INT],
+                       [CT_FLOAT],
+                       [CT_STRING],
+                       [CT_B]])
+
