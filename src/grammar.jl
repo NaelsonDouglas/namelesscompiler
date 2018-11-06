@@ -365,6 +365,6 @@ addProduction(:FN_CALL, [[ID, :FN_CH]])
 addProduction(:FN_CH, [[O_BRCKT, :FN_CHP]])
 addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
                         [C_BRCKT]])
-addProduction(:FN_PR, [[ID]])
+addProduction(:FN_PR, [[ID, :FN_PRE]])
 addProduction(:FN_PRE, [[ID, COMMA, :FN_PR],
                        [EPS]])
