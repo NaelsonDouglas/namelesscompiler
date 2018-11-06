@@ -125,7 +125,9 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 		steps = vcat(steps,newline)
 		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
 			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
-
+		try #O try e para não crashar nos eols
+			print_analyzer()
+		end
 			r_rule = reverseRule(rule)
 			
 			pop!(stack)
@@ -150,9 +152,7 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 			end
 			
 		end
-		try #O try e para não crashar nos eols
-			print_analyzer()
-		end
+
 
 
 
