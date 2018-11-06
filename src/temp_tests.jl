@@ -1,4 +1,4 @@
-function convertToalcino(prod::Production)
+function prodToString(prod::Production)
 	output = ""
 
 	output = prod.lexem*"-> "
@@ -26,7 +26,7 @@ end
 function convertGrammar(g=grammar)
 	output = ""
 	for p in grammar
-		output = output*convertToalcino(p)
+		output = output*prodToString(p)
 	end
 	f = open("grammar_prof.txt","w+")
 	write(f,output)

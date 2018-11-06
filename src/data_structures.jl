@@ -4,14 +4,12 @@ mutable struct Token
 	column::Int64
 	categ_nom::String #TODO Provavelmente é melhor tirar esse field. Não faz sentido ficar arrastando uma String para cima e para baixo em cada token. Já tem um dicionário com os nomes e que podemos pegar direto
 	categ_num::Int64
-	firsts
-	follows
 end
-
-function Token(lexem_::String,	line_::Int64,column_::Int64,categ_nom_::String,categ_num_::Int64)
-	
-	Token(lexem_,line_,column_,categ_nom_,categ_num_,categ_num_,Int[])
+#=
+function Token(lexem_::String,	line_::Int64,column_::Int64,categ_nom_::String,categ_num_::Int64)	
+	Token(lexem_,line_,column_,categ_nom_,categ_nom_,categ_num_)
 end
+=#
 
 
 
@@ -28,16 +26,14 @@ end
 
 
 mutable struct Production
-	subprods
-	enum::Int
-	firsts
-	follows	
 	lexem::String
+	subprods
+	enum::Int		
 end
 
  
 function Production(subprods_,enum_)
-	prd = Production(subprods_,enum_,[],[],"")
+	prd = Production("",subprods_,enum_)
 end
 
 function Production(subprods_)
@@ -53,42 +49,7 @@ Element = Union{Token,Production}
 
 	
 
-function getfirst(e::Element)
-	return e.firsts
-end
-
-function getfollows(e::Element)
-	return e.follows
-end
 
 function getLexem(enum::Int)
 	grammar[enum].lexem
-end
-
-function printcontent(content)
-
-	lexems=1
-	for p in grammar
-		if content == "follow"
-		lexems = p.follows
-	elseif content == "first"
-		lexems = p.firsts
-	else
-		error("Use follow ou first")
-	end
-	
-	print(p.lexem*"   =>   [")
-	
-	for i=1:length(lexems)
-		print(tks_names[lexems[i]])		
-		if i!=length(lexems)
-			print(",")
-		end
-
-	end
-	print("]")
-	println()
-
-
-end
 end

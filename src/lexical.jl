@@ -14,8 +14,7 @@ function token(lexem,line::Int, col::Int)
 	else
        	tkn.categ_num = Int(ID)	       		
        	tkn.categ_nom = tks_names[Int(ID)]
-    end  
-    tkn.firsts = tkn.categ_num
+    end      
 	return tkn
 end
 
@@ -155,6 +154,9 @@ function nextToken()
 		println("\(\"$lex\",$col,$nom,$num\)")
 	else
 		#info("eol")
+		return false
 	end
 	return tkn;
 end
+
+#include("sinthatic.jl")

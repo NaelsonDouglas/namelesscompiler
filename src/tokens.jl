@@ -88,3 +88,4 @@ tks_names = String[]
 for tk in instances(Tokens)
 	push!(tks_names,string(tk))
 end
+map!(lowercase,tks_names)

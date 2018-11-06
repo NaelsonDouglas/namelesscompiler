@@ -1,4 +1,3 @@
-a==a
 void fibonacci(int n)
 {
   if (n<0){return}

@@ -1,4 +1,3 @@
-
 Base.length(s::Symbol) = 1
 
 "Turns a vector into single column
@@ -47,8 +46,3 @@ function get_productions(id::Union{Int,Symbol,Array{Any,1}})
 		return id[1]
 	end	
 end
-
-
-
-
-

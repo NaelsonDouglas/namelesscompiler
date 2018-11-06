@@ -1,14 +1,20 @@
-input = "input/fib.nl"
+input = "input/hello_world.nl"
 
 try
+	using CSV
 	using DataStructures
+	#using DataFrames
 	using JSON
 	using Match
 catch
+	Pkg.add("CSV")
 	Pkg.add("DataStructures")
+	Pkg.add("DataFrames")
 	Pkg.add("JSON")
 	Pkg.add("Match")
-	using DataStructures
+
+	using CSV
+	#using DataStructures
 	using JSON
 	using Match
 end
@@ -18,8 +24,11 @@ include("tokens.jl")
 include("data_structures.jl")
 include("grammar.jl")
 include("lexical.jl")
-include("first.jl")
-#include("follow.jl") Calculamos manualmente
 
+table = CSV.read("grammar_table.csv")
 
-map(calc_first,grammar)
+include("sinthatic.jl")
+
+println(steps)
+
+info("Chama a variável steps se quiser ver os passos do analisador")
