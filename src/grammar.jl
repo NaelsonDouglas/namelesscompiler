@@ -55,6 +55,7 @@ end
       -> EPS
 =#
 addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
+                   [EOF],
                    [EPS]])
 
 #=
