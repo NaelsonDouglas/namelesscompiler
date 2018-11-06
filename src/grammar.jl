@@ -266,8 +266,8 @@ addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
 
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-                   [:EXPR_NUM, OPRLR_LGEQ, :EXPR_NUM] ,
-                   [:EXPR_NUM, OPRLR_REL, :EXPR_NUM] ,
+                   #[:EXPR_NUM, OPRLR_REL, :EXPR_NUM] ,
+                   [CT_INT, OPRLR_REL, :EXPR_NUM],
                    [CT_FALSE],
                    [CT_TRUE]])
 
@@ -304,10 +304,10 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
 =#
 addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
                      O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]])
-addProduction(:RIF1, [[BLK_ELS, :RIF1],
-                      [BLK_ELS, O_C_BRCKT, :ALL_INTER, C_C_BRCKT],
+addProduction(:RIF1, [[BLK_ELS, :RIF2],
                       [EPS]])
-
+addProduction(:RIF2, [[:RIF],
+                      [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 #=
    normal:
       RWHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_INTER '}'
@@ -342,9 +342,9 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> eps
 =#
 addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN, :RH]])
-addProduction(:RH, [[:EXPR_STRING],
+addProduction(:RH, [#[:EXPR_STRING],
                     [:EXPR_NUM],
-                    [:EXPR_BOOL],
+                    #[:EXPR_BOOL],
                     [EPS]])
 
 #=
@@ -357,6 +357,7 @@ addProduction(:RH, [[:EXPR_STRING],
     FN_CHP  ->  ')'
 
     FN_PR   -> 'id' FN_PRE
+            -> TP FN_PRE
 
     FN_PRE  ->  ',' FN_PR
             ->  eps
@@ -365,6 +366,7 @@ addProduction(:FN_CALL, [[ID, :FN_CH]])
 addProduction(:FN_CH, [[O_BRCKT, :FN_CHP]])
 addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
                         [C_BRCKT]])
-addProduction(:FN_PR, [[ID, :FN_PRE]])
+addProduction(:FN_PR, [[ID, :FN_PRE],
+                       [:TP, :FN_PRE]])
 addProduction(:FN_PRE, [[ID, COMMA, :FN_PR],
                        [EPS]])
