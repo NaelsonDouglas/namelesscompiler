@@ -161,8 +161,13 @@ factoring:
 =#
 addProduction(:EXPR_STRING, [[:ESH, OPR_PM, :EXPR_STRING]])
 addProduction(:ESH, [[CT_STRING],
-                     [ID],
+                     [:FN_H_STR],
                      [O_BRCKT, :EXPR_STRING, C_BRCKT]])
+
+addProduction(:FN_H_STR, [[ID, :FN_H_V_STR]])
+addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
+                            [:FN_CH],
+                            [EPS]])
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
@@ -215,8 +220,13 @@ addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPS]])
 addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
+                   [ID],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
 
+#addProduction(:FN_H_NUM, [[ID, :FN_H_V_NUM]])
+#addProduction(:FN_H_NUM_V, [[VEC_IN, :EXPR_NUM],
+#                            [:FN_CH],
+#                            [EPS]])
 
 #=
    normal:
@@ -265,13 +275,17 @@ addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
 addProduction(:T, [[:F, :TH]])
 addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPS]])
-
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-                   #[:EXPR_NUM, OPRLR_REL, :EXPR_NUM] ,
-                   [CT_INT, OPRLR_REL, :EXPR_NUM],
+                   [CT_INT, OPRLR_REL, :EXPR_NUM] ,
+                   [CT_FLOAT, OPRLR_REL, :EXPR_NUM] ,
+                   [:FN_H_BL, OPRLR_REL, :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
 
+addProduction(:FN_H_BL, [[ID, :FN_H_BL_V]])
+addProduction(:FN_H_BL_V, [[VEC_IN, :EXPR_NUM],
+                            [:FN_CH],
+                            [EPS]])
 #=
    normal:
      ALL_INTER -> RIF ALL_INTER
@@ -343,11 +357,16 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> EXPR_BOOL
           -> eps
 =#
-addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN, :RH]])
-addProduction(:RH, [#[:EXPR_STRING],
-                    [:EXPR_NUM],
-                    #[:EXPR_BOOL],
-                    [EPS]])
+addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN]])
+#addProduction(:RH, [#[:EXPR_STRING],
+#                    [ID],
+#                    [EPS]])
+#=
+addProduction(:FN_H_RET, [[ID, :FN_H_V_RET]])
+addProduction(:FN_H_RET_V, [[VEC_IN, :EXPR_NUM],
+                            [:FN_CH],
+                            [EPS]])
+=#
 
 #=
   normal:
@@ -380,4 +399,107 @@ addProduction(:CN_TP, [[CT_INT],
                        [CT_FLOAT],
                        [CT_STRING],
                        [CT_B]])
+#=
+normal:
+EXPR    -> EPXR  '+'  EXPR
+        -> EXPR  '*'  EXPR
+        -> EXPR 'or'  EXPR
+        -> EXPR 'and' EXPR
+        -> EXPR 'rel' EXPR
+        -> '(' EXPR ')'
 
+
+precedence:
+EXPR    -> EPXR_T  '+'  EXPR
+        -> EXPR_T
+
+EXPR_T  -> EXPR_T  '*'  EXPR_H
+        -> EXPR_B
+
+EXPR_B  -> EXPR_I 'or'  EXPR
+        -> EXPR_I 'and' EXPR
+        -> EXPR_I
+
+EXPR_I  -> EXPR_I 'rel' EXPR_J
+        -> EXPR_J
+
+EXPR_J  -> CN_TP
+        -> FN_CALL
+        -> IDVEC
+        -> '(' EXPR ')'
+
+left recursion:
+
+EXPR    -> EPXR_T  '+'  EXPR
+        -> EXPR_T
+
+EXPR_T  -> EXPR_H EXPR_TL
+
+EXPR_TL -> '*' EXPR_B EXPR_TL
+        -> 'eps'
+
+EXPR_B  -> EXPR_I 'or'  EXPR
+        -> EXPR_I 'and' EXPR
+        -> EXPR_I
+
+EXPR_I  -> EXPR_J EXPR_IL
+EXPR_IL -> 'rel' EXPR EXPR_IL
+        -> 'eps'
+
+EXPR_J  -> CN_TP
+        -> FN_CALL
+        -> IDVEC
+        -> '(' EXPR ')'
+
+ambiguity:
+
+EXPR    -> EPXR_T EXPRL
+
+EXPRL   -> '+' EXPR
+        -> 'eps'
+
+EXPR_T  -> EXPR_H EXPR_TL
+
+EXPR_TL -> '*' EXPR_B EXPR_TL
+        -> 'eps'
+
+EXPR_B  -> EXPR_I EXPR_BL
+
+EXPR_BL -> 'or'  EXPR
+        -> 'and' EXPR
+        -> 'eps'
+
+EXPR_I  -> EXPR_J EXPR_IL
+EXPR_IL -> 'rel' EXPR EXPR_IL
+        -> 'eps'
+
+EXPR_J  -> CN_TP
+        -> FN_CALL
+        -> IDVEC
+        -> '(' EXPR ')'
+
+
+addProduction(:EXPR, [[:EXPR_T, :EXPRL]])
+addProduction(:EXPRL, [[OPR_PM, :EXPR],
+                       [EPS]])
+addProduction(:EXPR_T, [[:EXPR_H, :EXPR_TL]])
+addProduction(:EXPR_TL, [[OPR_DM, :EXPR_B, :EXPR_TL],
+                         [EPS]])
+addProduction(:EXPR_B, [[:EXPR_I, :EXPR_BL]])
+addProduction(:EXPR_BL, [[OPRLR_OR, :EXPR],
+                         [OPRLR_AND, :EXPR],
+                         [EPS]])
+addProduction(:EXPR_I, [[:EXPR_J, :EXPR_IL]])
+
+addProduction(:EXPR_IL, [[OPRLR_REL, :EXPR_J, :EXPR_IL],
+                         [EPS]])
+addProduction(:EXPR_J, [[:CN_TP],
+                        [:FN_H_EXPR],
+                        [O_BRCKT, :EXPR, C_BRCKT]])
+
+addProduction(:FN_H_EXPR, [[ID, :FN_H_EXPR_RET]])
+addProduction(:FN_H_EXPR_V, [[VEC_IN, :EXPR_NUM],
+                             [:FN_CH],
+                             [EPS]])
+
+=#
