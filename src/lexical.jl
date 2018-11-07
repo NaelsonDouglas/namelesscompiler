@@ -128,7 +128,7 @@ ch = producer()
 
 #	@printf("%.3f",x)
 
-
+g = open(input,"r")
 function nextToken()
 	tkn = -1
 	lex = -1
@@ -151,10 +151,13 @@ function nextToken()
 		col = tkn.column
 		nom = tkn.categ_nom
 		num = tkn.categ_num
-		println("\(\"$lex\",$col,$nom,$num\)")
+		#println("\(\"$lex\",$col,$nom,$num\)")
 	else
 		#info("eol")
 		return false
+	end
+	if tkn.column == 1
+		@printf("%4s  %s\n",lpad(tkn.line,4,0),readline(g))	
 	end
 	return tkn;
 end

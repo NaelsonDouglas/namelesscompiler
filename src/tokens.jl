@@ -11,7 +11,7 @@ using JSON
       CT_STRING,    # "foo bar"
 
       #SMCL,         # ??
-      EPS,          # EPSILON
+      EPSILON,          # epsilonILON
       ID,           # 'id'
       CONST,        #  'const'
       #EXPR,         # REMOVER

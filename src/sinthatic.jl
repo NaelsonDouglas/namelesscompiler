@@ -110,7 +110,7 @@ rule = ""
 steps = String["entrada          |             Pilha"]
 
 
-
+tabs=0
 while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of line
 	
 	
@@ -125,9 +125,14 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 		steps = vcat(steps,newline)
 		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
 			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
-		try #O try e para não crashar nos eols
-			print_analyzer()
-		end
+			
+
+			for i=1:tabs
+				print("\t")
+			end
+			println("          ",rule)
+			tabs=tabs+1
+
 			r_rule = reverseRule(rule)
 			
 			pop!(stack)
@@ -140,13 +145,17 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 
 			#sleep(1)
 			#@show "loop"
-		else			
+		else		
+			
 			if Int(eval(top(stack))) == Int(EPS)
 				pop!(stack)
 			else
 				pop!(stack)
+				printToken(head)
+				println()
 				head = nextToken();
-				if head == false #Se for um eol, pula a fita de novo
+				tabs=0
+				if head == false #Se for um eol, pula a fita de novo					
 					head = nextToken();	
 				end
 			end

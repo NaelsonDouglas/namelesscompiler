@@ -52,11 +52,11 @@ end
 #=
    normal:
     S -> TYPE 'id' PARAM '{' ALL_INTER '}' S
-      -> EPS
+      -> EPSILON
 =#
 addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
                    [EOF],
-                   [EPS]])
+                   [EPSILON]])
 
 #=
    normal:
@@ -66,13 +66,13 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> CONST 'string'
 
      CONST -> 'const'
-           -> EPS
+           -> EPSILON
 
    fectoring:
      TYPE  -> CONST TP
 
      CONST -> 'const'
-           -> EPS
+           -> EPSILON
 
      TP    -> 'int'
            -> 'char'
@@ -81,7 +81,7 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
 =#
 addProduction(:TYPE, [[:CONST_R, :TP]])
 addProduction(:CONST_R, [[CONST],
-                         [EPS]])
+                         [EPSILON]])
 addProduction(:TP, [[IDT_INT],
                     [IDT_CHAR],
                     [IDT_FLOAT],
@@ -107,14 +107,14 @@ addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
      PR     -> TYPE IDVEC PRL
 
      PRL    -> ',' PR
-            -> EPS
+            -> EPSILON
 =#
 addProduction(:PARAM, [[O_BRCKT, :PRH]])
 addProduction(:PRH, [[C_BRCKT],
                      [:PR, C_BRCKT]])
 addProduction(:PR, [[:TYPE, :IDVEC, :PRL]])
 addProduction(:PRL, [[COMMA, :PR],
-                     [EPS]])
+                     [EPSILON]])
 
 #=
    normal:
@@ -134,7 +134,7 @@ addProduction(:PRL, [[COMMA, :PR],
            -> 'IDT_FLOAT' IDVEC OPR_ATR EXPR_NUM
 
      IDVEC -> 'id' IDT
-     IDT   -> '::' EXPR_NUM | EPS
+     IDT   -> '::' EXPR_NUM | EPSILON
 =#
 addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_STRING, :IDVEC, OPR_ATR, :EXPR_STRING],
@@ -143,7 +143,7 @@ addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_CHAR, :IDVEC, OPR_ATR, :EXPR_NUM]])
 addProduction(:IDVEC, [[ID, :IDT]])
 addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
-                     [EPS]])
+                     [EPSILON]])
 
 #=
 normal:
@@ -167,7 +167,7 @@ addProduction(:ESH, [[CT_STRING],
 addProduction(:FN_H_STR, [[ID, :FN_H_V_STR]])
 addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
                             [:FN_CH],
-                            [EPS]])
+                            [EPSILON]])
 #=
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
@@ -193,7 +193,7 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
      K        -> G KH
 
      KH       -> '*' G KH
-              -> EPS
+              -> EPSILON
 
      G        -> 'ct_int'
               -> 'ct_float'
@@ -201,12 +201,12 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
    ambiguity:
      EXPR_NUM -> K KR
      KR       -> '+' EXPR_NUM
-              -> EPS
+              -> EPSILON
 
      K        -> G KH
 
      KH       -> '*' G KH
-              -> EPS
+              -> EPSILON
 
      G        -> 'ct_int'
               -> 'ct_float'
@@ -214,10 +214,10 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
 =#
 addProduction(:EXPR_NUM, [[:K, :KR]])
 addProduction(:KR, [[OPR_PM ,:EXPR_NUM],
-                    [EPS]])
+                    [EPSILON]])
 addProduction(:K, [[:G,:KH]])
 addProduction(:KH, [[OPR_DM,:G, :KH],
-                    [EPS]])
+                    [EPSILON]])
 addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [ID],
@@ -226,7 +226,7 @@ addProduction(:G, [[CT_FLOAT],
 #addProduction(:FN_H_NUM, [[ID, :FN_H_V_NUM]])
 #addProduction(:FN_H_NUM_V, [[VEC_IN, :EXPR_NUM],
 #                            [:FN_CH],
-#                            [EPS]])
+#                            [EPSILON]])
 
 #=
    normal:
@@ -255,12 +255,12 @@ addProduction(:G, [[CT_FLOAT],
                 -> 'not' T EXPR_BOOLH
 
      EXPR_BOOLH -> 'or' T EXPR_BOOLH
-                -> eps
+                -> EPSILON
 
      T          -> F TH
 
      TH         -> 'and'F TH
-                -> eps
+                -> EPSILON
 
      F          -> '(' EXPR_BOOL ')'
                 -> EXPR_NUM OPRLR_REL EXPR_NUM
@@ -270,11 +270,11 @@ addProduction(:G, [[CT_FLOAT],
 addProduction(:EXPR_BOOL, [[:T, :EXPR_BOOLH],
                            [OPRL_NOT, :T, :EXPR_BOOLH]])
 addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
-                            [EPS]])
+                            [EPSILON]])
 
 addProduction(:T, [[:F, :TH]])
 addProduction(:TH, [[OPRLR_AND, :F, :TH],
-                    [EPS]])
+                    [EPSILON]])
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
                    [CT_INT, OPRLR_REL, :EXPR_NUM] ,
                    [CT_FLOAT, OPRLR_REL, :EXPR_NUM] ,
@@ -285,7 +285,7 @@ addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
 addProduction(:FN_H_BL, [[ID, :FN_H_BL_V]])
 addProduction(:FN_H_BL_V, [[VEC_IN, :EXPR_NUM],
                             [:FN_CH],
-                            [EPS]])
+                            [EPSILON]])
 #=
    normal:
      ALL_INTER -> RIF ALL_INTER
@@ -300,20 +300,20 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
                            [:RFOR, :ALL_INTER],
                            [:RCONT, :ALL_INTER],
                            [:FN_CALL, :ALL_INTER],
-                           [EPS]])
+                           [EPSILON]])
 
 #=
    normal:
      RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_INTER '}' RIF1
      RIF1 -> 'else' RIF
           -> 'else' '{' ALL_INTER '}'
-          -> EPS
+          -> EPSILON
 
    factoring:
      RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_INTER '}' RIF1
 
      RIF1 -> 'else' RIF2
-          -> EPS
+          -> EPSILON
 
      RIF2 -> RIF
           -> '{' ALL_INTER '}'
@@ -321,7 +321,7 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
 addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
                      O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]])
 addProduction(:RIF1, [[BLK_ELS, :RIF2],
-                      [EPS]])
+                      [EPSILON]])
 addProduction(:RIF2, [[:RIF],
                       [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 #=
@@ -338,14 +338,14 @@ addProduction(:RWHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
           -> 'id' ATTR_IH
 
   ATTR_IH -> '=' EXPR_NUM
-          -> EPS
+          -> EPSILON
 =#
 addProduction(:RFOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
                         [ID, :ATTR_IH]])
 addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
-                         [EPS]])
+                         [EPSILON]])
 #=
    normal:
     RCONT -> 'continue'
@@ -355,17 +355,17 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
    RH     -> EXPR_STRING
           -> EXPR_NUM
           -> EXPR_BOOL
-          -> eps
+          -> EPSILON
 =#
 addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN]])
 #addProduction(:RH, [#[:EXPR_STRING],
 #                    [ID],
-#                    [EPS]])
+#                    [EPSILON]])
 #=
 addProduction(:FN_H_RET, [[ID, :FN_H_V_RET]])
 addProduction(:FN_H_RET_V, [[VEC_IN, :EXPR_NUM],
                             [:FN_CH],
-                            [EPS]])
+                            [EPSILON]])
 =#
 
 #=
@@ -381,7 +381,7 @@ addProduction(:FN_H_RET_V, [[VEC_IN, :EXPR_NUM],
             -> CN_TP FN_PRE
 
     FN_PRE  ->  ',' FN_PR
-            ->  eps
+            ->  EPSILON
     CN_TP -> 'ct_int'
           -> 'ct_float'
           -> 'ct_string'
@@ -394,7 +394,7 @@ addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
 addProduction(:FN_PR, [[ID, :FN_PRE],
                        [:CN_TP, :FN_PRE]])
 addProduction(:FN_PRE, [[ID, COMMA, :FN_PR],
-                        [EPS]])
+                        [EPSILON]])
 addProduction(:CN_TP, [[CT_INT],
                        [CT_FLOAT],
                        [CT_STRING],
@@ -436,7 +436,7 @@ EXPR    -> EPXR_T  '+'  EXPR
 EXPR_T  -> EXPR_H EXPR_TL
 
 EXPR_TL -> '*' EXPR_B EXPR_TL
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_B  -> EXPR_I 'or'  EXPR
         -> EXPR_I 'and' EXPR
@@ -444,7 +444,7 @@ EXPR_B  -> EXPR_I 'or'  EXPR
 
 EXPR_I  -> EXPR_J EXPR_IL
 EXPR_IL -> 'rel' EXPR EXPR_IL
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_J  -> CN_TP
         -> FN_CALL
@@ -456,22 +456,22 @@ ambiguity:
 EXPR    -> EPXR_T EXPRL
 
 EXPRL   -> '+' EXPR
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_T  -> EXPR_H EXPR_TL
 
 EXPR_TL -> '*' EXPR_B EXPR_TL
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_B  -> EXPR_I EXPR_BL
 
 EXPR_BL -> 'or'  EXPR
         -> 'and' EXPR
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_I  -> EXPR_J EXPR_IL
 EXPR_IL -> 'rel' EXPR EXPR_IL
-        -> 'eps'
+        -> 'EPSILON'
 
 EXPR_J  -> CN_TP
         -> FN_CALL
@@ -481,18 +481,18 @@ EXPR_J  -> CN_TP
 
 addProduction(:EXPR, [[:EXPR_T, :EXPRL]])
 addProduction(:EXPRL, [[OPR_PM, :EXPR],
-                       [EPS]])
+                       [EPSILON]])
 addProduction(:EXPR_T, [[:EXPR_H, :EXPR_TL]])
 addProduction(:EXPR_TL, [[OPR_DM, :EXPR_B, :EXPR_TL],
-                         [EPS]])
+                         [EPSILON]])
 addProduction(:EXPR_B, [[:EXPR_I, :EXPR_BL]])
 addProduction(:EXPR_BL, [[OPRLR_OR, :EXPR],
                          [OPRLR_AND, :EXPR],
-                         [EPS]])
+                         [EPSILON]])
 addProduction(:EXPR_I, [[:EXPR_J, :EXPR_IL]])
 
 addProduction(:EXPR_IL, [[OPRLR_REL, :EXPR_J, :EXPR_IL],
-                         [EPS]])
+                         [EPSILON]])
 addProduction(:EXPR_J, [[:CN_TP],
                         [:FN_H_EXPR],
                         [O_BRCKT, :EXPR, C_BRCKT]])
@@ -500,6 +500,6 @@ addProduction(:EXPR_J, [[:CN_TP],
 addProduction(:FN_H_EXPR, [[ID, :FN_H_EXPR_RET]])
 addProduction(:FN_H_EXPR_V, [[VEC_IN, :EXPR_NUM],
                              [:FN_CH],
-                             [EPS]])
+                             [EPSILON]])
 
 =#

@@ -1,4 +1,4 @@
-input = "input/fib.nl"
+input = "input/hello_world.nl"
 
 try
 	using CSV
@@ -29,6 +29,6 @@ table = CSV.read("grammar_table.csv")
 
 include("sinthatic.jl")
 
-println(steps)
+#println(steps)
 
-info("Chama a variável steps se quiser ver os passos do analisador")
+#info("Chama a variável steps se quiser ver os passos do analisador")
