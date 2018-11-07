@@ -6,12 +6,10 @@ void fibonacci(int n)
     print("0")
     return
   }
-
   if (n == 1){
     print("0,1")
     return
   }
-
   if (n>1)
   {
     int sequence::n

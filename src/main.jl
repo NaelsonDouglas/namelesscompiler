@@ -1,4 +1,4 @@
-input = "input/hello_world.nl"
+input = "input/fib.nl"
 
 try
 	using CSV
