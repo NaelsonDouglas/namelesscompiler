@@ -10,7 +10,11 @@ function prodToString(prod::Production)
 			if typeof(elem) == Symbol
 				output = output*string(elem)
 			else
-				output = output*lowercase(string("'",elem,"'"))
+        if Int(elem) == Int(EPS)
+  		    output = output*lowercase(string(" "))
+        else
+          output = output*lowercase(string("'",elem,"'"))
+        end
 			end
 			output = output*" "
 		end
