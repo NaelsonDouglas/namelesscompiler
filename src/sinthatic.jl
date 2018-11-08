@@ -147,7 +147,7 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 			#@show "loop"
 		else		
 			
-			if Int(eval(top(stack))) == Int(EPS)
+			if Int(eval(top(stack))) == Int(EPSILON)
 				pop!(stack)
 			else
 				pop!(stack)
