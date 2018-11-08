@@ -301,8 +301,11 @@ addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
                            [:RWHILE, :ALL_INTER],
                            [:RFOR, :ALL_INTER],
                            [:RCONT, :ALL_INTER],
-                           [:FN_CALL, :ALL_INTER],
+                           [ID, :FN_H_INTER, :ALL_INTER],
                            [EPSILON]])
+addProduction(:FN_H_INTER, [[VEC_IN, :EXPR_NUM, OPR_ATR, :EXPR_NUM ],
+                            [O_BRCKT, :FN_BRC_H],
+                            [OPR_ATR, :EXPR_NUM]])
 
 #=
    normal:
