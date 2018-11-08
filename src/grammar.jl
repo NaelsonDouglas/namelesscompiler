@@ -324,11 +324,11 @@ addProduction(:FN_H_INTER, [[VEC_IN, :EXPR_NUM, OPR_ATR, :EXPR_NUM ],
           -> '{' ALL_INTER '}'
 =#
 addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
-                     O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]])
-addProduction(:RIF1, [[BLK_ELS, :RIF2],
-                      [EPSILON]])
-addProduction(:RIF2, [[:RIF],
-                      [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+                     O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF_ELSE]])
+addProduction(:RIF_ELSE, [[BLK_ELS, :RIF_ELSE_P],
+                          [EPSILON]])
+addProduction(:RIF_ELSE_P, [[:RIF],
+                            [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 #=
    normal:
       RWHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_INTER '}'
