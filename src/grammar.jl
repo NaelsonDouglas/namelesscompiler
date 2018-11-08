@@ -276,11 +276,13 @@ addProduction(:T, [[:F, :TH]])
 addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPSILON]])
 addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
-                   [CT_INT, OPRLR_REL, :EXPR_NUM] ,
-                   [CT_FLOAT, OPRLR_REL, :EXPR_NUM] ,
-                   [:FN_H_BL, OPRLR_REL, :EXPR_NUM] ,
+                   [CT_INT, :OPRLR_EQQ_REL , :EXPR_NUM] ,
+                   [CT_FLOAT, :OPRLR_EQQ_REL , :EXPR_NUM] ,
+                   [:FN_H_BL, :OPRLR_EQQ_REL , :EXPR_NUM] ,
                    [CT_FALSE],
                    [CT_TRUE]])
+
+addProduction(:OPRLR_EQQ_REL , [[OPR_ATR, OPR_ATR],[OPRLR_REL]])
 
 addProduction(:FN_H_BL, [[ID, :FN_H_BL_V]])
 addProduction(:FN_H_BL_V, [[VEC_IN, :EXPR_NUM],
