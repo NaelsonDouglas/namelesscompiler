@@ -7,7 +7,7 @@ void fibonacci(int n)
     return
   }
   if (n == 1){
-    print("0,1")
+    print("0.1")
     return
   }
   if (n>1)
@@ -16,7 +16,7 @@ void fibonacci(int n)
     sequence::0 =0
     sequence::1 =1
     print(sequence::0)
-    print(",")
+    print(".")
     print(sequence::1)
     
     int i = 2
