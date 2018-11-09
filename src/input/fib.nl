@@ -12,7 +12,7 @@ void fibonacci(int n)
   }
   if (n>1)
   {
-    int sequence::n
+    int sequence::n=1
     sequence::0 =0
     sequence::1 =1
     print(sequence::0)

@@ -5,19 +5,19 @@ grammar_map = Dict{Symbol,Int}()
 grammar = Production[]
 
 function addProduction(id::Symbol, body_::Production)
-	body = body_
-	if !haskey(grammar_map,id)
-		#if !isdefined(id)
-			body.enum =length(grammar)+1
-			body.lexem = string(id)
-			push!(grammar, body)
-			grammar_map[id] = length(grammar)
-		#else
-		#	error(string("The element ",id," is already defined"))
-		#end
-	else
-		error("Production already exists")
-	end
+  body = body_
+  if !haskey(grammar_map,id)
+    #if !isdefined(id)
+      body.enum =length(grammar)+1
+      body.lexem = string(id)
+      push!(grammar, body)
+      grammar_map[id] = length(grammar)
+    #else
+    # error(string("The element ",id," is already defined"))
+    #end
+  else
+    error("Production already exists")
+  end
 end
 
 function addProduction(id::Symbol,body_)
@@ -29,24 +29,24 @@ end
 
 
 function getProd_idx(s::Union{Symbol,Int})
-	 try
-	 	return grammar[grammar_map[s]].enum
-	 catch
+   try
+    return grammar[grammar_map[s]].enum
+   catch
     
-	 	return false
-	 end
+    return false
+   end
 end
 
 function getProd(s::Union{Symbol,Int})
-	 try
-	 	return grammar[grammar_map[s]]
-	 catch
-	 	if isinteger(s)
-	 	 	return grammar[s]
-	 	else
-	 	 	error("Wrong type input for getProd")
-	 	 end
-	 end
+   try
+    return grammar[grammar_map[s]]
+   catch
+    if isinteger(s)
+      return grammar[s]
+    else
+      error("Wrong type input for getProd")
+     end
+   end
 end
 
 #=
@@ -136,11 +136,43 @@ addProduction(:PRL, [[COMMA, :PR],
      IDVEC -> 'id' IDT
      IDT   -> '::' EXPR_NUM | EPSILON
 =#
+
+#=
 addProduction(:ATTR, [[IDT_INT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_STRING, :IDVEC, OPR_ATR, :EXPR_STRING],
                       [IDT_FLOAT, :IDVEC, OPR_ATR, :EXPR_NUM],
                       [IDT_BOOL, :IDVEC, OPR_ATR, :EXPR_BOOL],
                       [IDT_CHAR, :IDVEC, OPR_ATR, :EXPR_NUM]])
+=#
+
+addProduction(:IDT_T, [[IDT_CHAR],
+                       [IDT_STRING],
+                       [IDT_INT],
+                       [IDT_FLOAT],
+                       [IDT_BOOL],])
+
+addProduction(:CT_BOOL, [[CT_TRUE],
+                         [CT_FALSE]])
+
+addProduction(:CT, [[CT_STRING],
+                    [CT_FLOAT],
+                    [CT_INT],
+                    [:CT_BOOL]])
+
+
+addProduction(:FCALL_OR_ATRIB, [[:IDVEC, :FCALL_OR_ATRIB_F]])
+
+
+addProduction(:ATRIB, [[OPR_ATR, :EXPR_NUM]] )
+
+addProduction(:FCALL_OR_ATRIB_F, [[:ATRIB],
+                                   [:FN_CH]])
+
+
+addProduction(:VAR_DCLR, [[:IDT_T, :IDVEC, OPR_ATR, :CT]])
+
+
+
 addProduction(:IDVEC, [[ID, :IDT]])
 addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
                      [EPSILON]])
@@ -297,15 +329,12 @@ addProduction(:FN_H_BL_V, [[VEC_IN, :EXPR_NUM],
                -> RCONT ALL_INTER
 =#
 addProduction(:ALL_INTER, [[:RIF, :ALL_INTER],
-                           [:ATTR , :ALL_INTER],
+                           [:VAR_DCLR , :ALL_INTER],
                            [:RWHILE, :ALL_INTER],
                            [:RFOR, :ALL_INTER],
                            [:RCONT, :ALL_INTER],
-                           [ID, :FN_H_INTER, :ALL_INTER],
+                           [:FCALL_OR_ATRIB, :ALL_INTER],
                            [EPSILON]])
-addProduction(:FN_H_INTER, [[VEC_IN, :EXPR_NUM, OPR_ATR, :EXPR_NUM ],
-                            [O_BRCKT, :FN_BRC_H],
-                            [OPR_ATR, :EXPR_NUM]])
 
 #=
    normal:
@@ -324,11 +353,11 @@ addProduction(:FN_H_INTER, [[VEC_IN, :EXPR_NUM, OPR_ATR, :EXPR_NUM ],
           -> '{' ALL_INTER '}'
 =#
 addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
-                     O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF_ELSE]])
-addProduction(:RIF_ELSE, [[BLK_ELS, :RIF_ELSE_P],
-                          [EPSILON]])
-addProduction(:RIF_ELSE_P, [[:RIF],
-                            [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
+                     O_C_BRCKT, :ALL_INTER,C_C_BRCKT, :RIF1]])
+addProduction(:RIF1, [[BLK_ELS, :RIF2],
+                      [EPSILON]])
+addProduction(:RIF2, [[:RIF],
+                      [O_C_BRCKT, :ALL_INTER, C_C_BRCKT]])
 #=
    normal:
       RWHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_INTER '}'
