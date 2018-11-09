@@ -4,7 +4,7 @@ numbers =  vcat(digits_only,['+','-','.'])
 
 chars_numbers = vcat(chars_only,numbers)
 separators = ['[', ']','{','}','(',')',';',',','-','*','/',' ','<','>','=',' ']
-valid_chars = vcat(chars_numbers,separators,':')
+valid_chars = vcat(chars_numbers,separators,':','،')
 
 function checkisint(lexem::String)
 	try

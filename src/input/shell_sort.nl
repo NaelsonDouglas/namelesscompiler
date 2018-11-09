@@ -1,4 +1,4 @@
-int:: shellSort(int nums::, int n) 
+int shellSort(int nums::, int n) 
 {
     int h = 1    
     while(h < n) 
