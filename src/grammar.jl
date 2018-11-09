@@ -277,7 +277,7 @@ addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPSILON]])
 addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
-                   [ID],
+                   [:IDVEC],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
 
 
