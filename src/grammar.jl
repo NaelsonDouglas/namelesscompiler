@@ -244,6 +244,28 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
               -> 'ct_float'
               -> '(' EXPR_NUM ')'
 =#
+
+
+addProduction(:NUM_OPRS, [[OPR_PM],
+                          [OPR_DM]]
+                           )
+
+addProduction(:DATA, [[:CT],
+                      [:IDVEC]])
+
+addProduction(:EXPR_NUM, [[O_C_BRCKT,:EXPR_NUM,C_C_BRCKT],
+                          [:NUM_OPRS, :EXPR_NUM],
+                          [:DATA, :EXPR_NUM],
+                          [EPSILON]])
+
+
+#=
+addProduction(:EXPR_NUM_R, [[:DATA, :NUM_OPRS, :EXPR_NUM_R]
+                            [EPSILON]])
+=#
+
+
+#=
 addProduction(:EXPR_NUM, [[:K, :KR]])
 addProduction(:KR, [[OPR_PM ,:EXPR_NUM],
                     [EPSILON]])
@@ -254,6 +276,8 @@ addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [ID],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
+=#
+
 
 #addProduction(:FN_H_NUM, [[ID, :FN_H_V_NUM]])
 #addProduction(:FN_H_NUM_V, [[VEC_IN, :EXPR_NUM],
