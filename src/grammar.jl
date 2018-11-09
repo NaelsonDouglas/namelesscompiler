@@ -174,7 +174,10 @@ addProduction(:VAR_DCLR, [[:IDT_T, :IDVEC, OPR_ATR, :CT]])
 
 
 addProduction(:IDVEC, [[ID, :IDT]])
-addProduction(:IDT, [[VEC_IN, :EXPR_NUM],
+addProduction(:INT_OR_ID, [[ID],
+                           [CT_INT]])
+
+addProduction(:IDT, [[VEC_IN, :INT_OR_ID],
                      [EPSILON]])
 
 #=
@@ -245,7 +248,7 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
               -> '(' EXPR_NUM ')'
 =#
 
-
+#=
 addProduction(:NUM_OPRS, [[OPR_PM],
                           [OPR_DM]]
                            )
@@ -259,13 +262,13 @@ addProduction(:EXPR_NUM, [[O_C_BRCKT,:EXPR_NUM,C_C_BRCKT],
                           [EPSILON]])
 
 
-#=
+
 addProduction(:EXPR_NUM_R, [[:DATA, :NUM_OPRS, :EXPR_NUM_R]
                             [EPSILON]])
 =#
 
 
-#=
+
 addProduction(:EXPR_NUM, [[:K, :KR]])
 addProduction(:KR, [[OPR_PM ,:EXPR_NUM],
                     [EPSILON]])
@@ -276,7 +279,7 @@ addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [ID],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
-=#
+
 
 
 #addProduction(:FN_H_NUM, [[ID, :FN_H_V_NUM]])
