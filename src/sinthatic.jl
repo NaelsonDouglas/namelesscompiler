@@ -146,7 +146,10 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 				pop!(stack)
 			else
 				pop!(stack)
-				printToken(head)
+				tkn = printToken(head)
+				write(tree_file,tkn*"\n")
+				println(tkn)
+
 				println()
 				head = nextToken();
 				tabs=0

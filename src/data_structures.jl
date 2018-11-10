@@ -56,7 +56,7 @@ end
 
 
 function printToken(tkn::Token)
-	@printf("              [%04d, %04d] (%04d,%10s){%s}",tkn.line,   tkn.column,   tkn.categ_num,   tkn.categ_nom,   tkn.lexem)
+	@sprintf("              [%04d, %04d] (%04d,%10s){%s}",tkn.line,   tkn.column,   tkn.categ_num,   tkn.categ_nom,   tkn.lexem)
 end
 
 function prodToString(prod::Production)
