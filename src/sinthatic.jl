@@ -179,9 +179,7 @@ end
 if (head.categ_num == Int(EOF))
 	if (length(stack) == 0)
 		info("Entrada aceita")
-	end
-
-	if (top(stack) == :S) #S -> epsilon
+	elseif (length(stack)==1 && top(stack) == :S) #S -> epsilon
 		pop!(stack)
 		info("Entrada aceita")
 	else
