@@ -88,7 +88,7 @@ end
 function makestepleft(lexem::String)
 	len = length(lexem)
 
-	df = 13 - len
+	df = 5 - len
 
 	x = lexem
 
@@ -118,6 +118,7 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 	if head != false #Se não tiver um eol na fita					
 
 		newline = string(makestepleft(head.lexem),string(collect(stack)))
+		newline = @sprintf("%.150s",newline)
 		steps = vcat(steps,newline)
 		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
 			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
@@ -163,10 +164,12 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 				if top(stack) == :S
 
 					newline = string(makestepleft(head.lexem),string(collect(stack)))
+					newline = @sprintf("%150s",newline)
 					pop!(stack)				
 					steps = vcat(steps,newline)
 
 					newline = string(makestepleft(head.lexem),string(collect(stack)))
+					newline = @sprintf("%150s",newline)
 					steps = vcat(steps,newline)
 				end
 			end

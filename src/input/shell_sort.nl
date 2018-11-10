@@ -1,4 +1,4 @@
-int:: shellSort(int nums::, int n) 
+int shellSort(int nums, int n) 
 {
     int h = 1    
     while(h < n) 
@@ -6,7 +6,8 @@ int:: shellSort(int nums::, int n)
             h = h * 3 + 1
     }    
     h = h / 3
-    int c, j
+    int c=-1
+    int j=-1
     
     while (h > 0) 
     {
