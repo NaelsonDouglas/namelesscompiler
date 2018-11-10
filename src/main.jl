@@ -39,7 +39,9 @@ close(f)
 close(tree_file)
 close(g)
 
+#Cria uma cópia da tabela LL1 na pasta especificações, onde o professor vai ver o que é pedido no arquivo
+#Ocasionalmente esta tabela pode ser atualizada/melhorada. Por isso esse comando para sempre enviar ela para a pasta da avaliação
+cp("grammar_table.csv","../especificações/tabela_LL1.csv")
 
-#println(steps)
-
-#info("Chama a variável steps se quiser ver os passos do analisador")
+#Converte a gramática da sintaxe usada na linguagem para a sintaxe vista em sala de aula 
+convertGrammar()
