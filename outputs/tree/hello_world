@@ -1,36 +1,36 @@
 0001  int main(int argc, string argv)
-          S→RETYPE id PARAM o_c_brckt ALL_ITER c_c_brckt S
-	          RETYPE→TYPE
-		          TYPE→CONST_R IDT_TYPE
-			          CONST_R→epsilon
-				          IDT_TYPE→idt_int
-          PARAM→o_brckt PRH
-          PRH→PR c_brckt
-	          PR→TYPE ID_OR_VEC PRL
-		          TYPE→CONST_R IDT_TYPE
-			          CONST_R→epsilon
-				          IDT_TYPE→idt_int
-          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          PRL→comma PR
-          PR→TYPE ID_OR_VEC PRL
-	          TYPE→CONST_R IDT_TYPE
-		          CONST_R→epsilon
-			          IDT_TYPE→idt_string
-          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          PRL→epsilon
+          S=RETYPE id PARAM o_c_brckt ALL_ITER c_c_brckt S
+	          RETYPE=TYPE
+		          TYPE=CONST_R IDT_TYPE
+			          CONST_R=epsilon
+				          IDT_TYPE=idt_int
+          PARAM=o_brckt PRH
+          PRH=PR c_brckt
+	          PR=TYPE ID_OR_VEC PRL
+		          TYPE=CONST_R IDT_TYPE
+			          CONST_R=epsilon
+				          IDT_TYPE=idt_int
+          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          PRL=comma PR
+          PR=TYPE ID_OR_VEC PRL
+	          TYPE=CONST_R IDT_TYPE
+		          CONST_R=epsilon
+			          IDT_TYPE=idt_string
+          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          PRL=epsilon
 0002  {
 0003    print("Hello World")
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→CN_TP FN_PRE
-		          CN_TP→ct_string
-          FN_PRE→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=CN_TP FN_PRE
+		          CN_TP=ct_string
+          FN_PRE=epsilon
 0004  }
-          ALL_ITER→epsilon
+          ALL_ITER=epsilon

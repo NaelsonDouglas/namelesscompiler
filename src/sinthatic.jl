@@ -1,4 +1,4 @@
-function getTblMatch(;production_::Symbol=:KR,token_::Union{Symbol,Int}=:return)
+function getTblMatch(;production_::Symbol=:S,token_::Union{Symbol,Int}=:return)
 	tkn = -1
 	if typeof(token_) == Int
 		tkn = Symbol(uppercase(tks_names[token_]))
@@ -10,15 +10,15 @@ function getTblMatch(;production_::Symbol=:KR,token_::Union{Symbol,Int}=:return)
 	tkn = Symbol(lowercase(string(tkn)))			
 	return table[tkn][getProd_idx(production_)]
 end
-function prodToString(prod::Production)
+function prodToString(prd::Production)
 	output = ""
 
-	output = prod.lexem*"-> "
+	output = prd.lexem*"-> "
 
 
-	for i=1:length(prod.subprods)
+	for i=1:length(prd.subprods)
 
-		for elem in prod.subprods[i]
+		for elem in prd.subprods[i]
 			if typeof(elem) == Symbol
 				output = output*string(elem)
 			else
@@ -27,7 +27,7 @@ function prodToString(prod::Production)
 			output = output*" "
 		end
 
-		if i != length(prod.subprods)
+		if i != length(prd.subprods)
 			output = output*" | "
 		end
 	end
@@ -37,7 +37,7 @@ end
 function stringToProd(production::String)
 	try
 		prd = uppercase(production)
-		splited = split(prd,"→")
+		splited = split(prd,"=")
 		name = splited[1]
 		enum = getProd_idx(Symbol(name))
 		prd = splited[2]

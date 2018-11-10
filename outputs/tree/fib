@@ -1,362 +1,362 @@
 0001  void fibonacci(int n)
-          S→RETYPE id PARAM o_c_brckt ALL_ITER c_c_brckt S
-	          RETYPE→idt_void
-          PARAM→o_brckt PRH
-          PRH→PR c_brckt
-	          PR→TYPE ID_OR_VEC PRL
-		          TYPE→CONST_R IDT_TYPE
-			          CONST_R→epsilon
-				          IDT_TYPE→idt_int
-          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          PRL→epsilon
+          S=RETYPE id PARAM o_c_brckt ALL_ITER c_c_brckt S
+	          RETYPE=idt_void
+          PARAM=o_brckt PRH
+          PRH=PR c_brckt
+	          PR=TYPE ID_OR_VEC PRL
+		          TYPE=CONST_R IDT_TYPE
+			          CONST_R=epsilon
+				          IDT_TYPE=idt_int
+          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          PRL=epsilon
 0002  {
 0003    if (n<0){return}
-          ALL_ITER→RIF ALL_ITER
-	          RIF→blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
-          EXPR_BOOL→EXPR_BOOL_T EXPR_BOOL_H
-	          EXPR_BOOL_T→EXPR_BOOL_F EXPR_BOOL_TH
-		          EXPR_BOOL_F→FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
-			          FN_H_BOOL→id FN_H_BOOL_V
-          FN_H_BOOL_V→epsilon
-	          OPRLR_EQQ_REL→oprlr_rel
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          EXPR_BOOL_TH→epsilon
-			          EXPR_BOOL_H→epsilon
-          ALL_ITER→RCONT ALL_ITER
-	          RCONT→return
-          ALL_ITER→epsilon
+          ALL_ITER=RIF ALL_ITER
+	          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
+	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
+		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
+			          FN_H_BOOL=id FN_H_BOOL_V
+          FN_H_BOOL_V=epsilon
+	          OPRLR_EQQ_REL=oprlr_rel
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          EXPR_BOOL_TH=epsilon
+			          EXPR_BOOL_H=epsilon
+          ALL_ITER=RCONT ALL_ITER
+	          RCONT=return
+          ALL_ITER=epsilon
 0005  
-          RIF1→epsilon
-	          ALL_ITER→RIF ALL_ITER
-		          RIF→blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
-          EXPR_BOOL→EXPR_BOOL_T EXPR_BOOL_H
-	          EXPR_BOOL_T→EXPR_BOOL_F EXPR_BOOL_TH
-		          EXPR_BOOL_F→FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
-			          FN_H_BOOL→id FN_H_BOOL_V
-          FN_H_BOOL_V→epsilon
-	          OPRLR_EQQ_REL→opr_atr opr_atr
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          EXPR_BOOL_TH→epsilon
-			          EXPR_BOOL_H→epsilon
+          RIF1=epsilon
+	          ALL_ITER=RIF ALL_ITER
+		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
+	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
+		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
+			          FN_H_BOOL=id FN_H_BOOL_V
+          FN_H_BOOL_V=epsilon
+	          OPRLR_EQQ_REL=opr_atr opr_atr
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          EXPR_BOOL_TH=epsilon
+			          EXPR_BOOL_H=epsilon
 0006    if (n == 0){
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→CN_TP FN_PRE
-		          CN_TP→ct_string
-          FN_PRE→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=CN_TP FN_PRE
+		          CN_TP=ct_string
+          FN_PRE=epsilon
 0007      print("0")
-          ALL_ITER→RCONT ALL_ITER
-	          RCONT→return
+          ALL_ITER=RCONT ALL_ITER
+	          RCONT=return
 0008      return
-          ALL_ITER→epsilon
+          ALL_ITER=epsilon
 0009    }
-          RIF1→epsilon
-	          ALL_ITER→RIF ALL_ITER
-		          RIF→blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
-          EXPR_BOOL→EXPR_BOOL_T EXPR_BOOL_H
-	          EXPR_BOOL_T→EXPR_BOOL_F EXPR_BOOL_TH
-		          EXPR_BOOL_F→FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
-			          FN_H_BOOL→id FN_H_BOOL_V
-          FN_H_BOOL_V→epsilon
-	          OPRLR_EQQ_REL→opr_atr opr_atr
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          EXPR_BOOL_TH→epsilon
-			          EXPR_BOOL_H→epsilon
+          RIF1=epsilon
+	          ALL_ITER=RIF ALL_ITER
+		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
+	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
+		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
+			          FN_H_BOOL=id FN_H_BOOL_V
+          FN_H_BOOL_V=epsilon
+	          OPRLR_EQQ_REL=opr_atr opr_atr
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          EXPR_BOOL_TH=epsilon
+			          EXPR_BOOL_H=epsilon
 0010    if (n == 1){
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→CN_TP FN_PRE
-		          CN_TP→ct_string
-          FN_PRE→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=CN_TP FN_PRE
+		          CN_TP=ct_string
+          FN_PRE=epsilon
 0011      print("0.1")
-          ALL_ITER→RCONT ALL_ITER
-	          RCONT→return
+          ALL_ITER=RCONT ALL_ITER
+	          RCONT=return
 0012      return
-          ALL_ITER→epsilon
+          ALL_ITER=epsilon
 0013    }
-          RIF1→epsilon
-	          ALL_ITER→RIF ALL_ITER
-		          RIF→blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
-          EXPR_BOOL→EXPR_BOOL_T EXPR_BOOL_H
-	          EXPR_BOOL_T→EXPR_BOOL_F EXPR_BOOL_TH
-		          EXPR_BOOL_F→FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
-			          FN_H_BOOL→id FN_H_BOOL_V
-          FN_H_BOOL_V→epsilon
-	          OPRLR_EQQ_REL→oprlr_rel
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          EXPR_BOOL_TH→epsilon
-			          EXPR_BOOL_H→epsilon
+          RIF1=epsilon
+	          ALL_ITER=RIF ALL_ITER
+		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
+	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
+		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
+			          FN_H_BOOL=id FN_H_BOOL_V
+          FN_H_BOOL_V=epsilon
+	          OPRLR_EQQ_REL=oprlr_rel
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          EXPR_BOOL_TH=epsilon
+			          EXPR_BOOL_H=epsilon
 0014    if (n>1)
 0015    {
-          ALL_ITER→VAR_DCLR ALL_ITER
-	          VAR_DCLR→IDT_T ID_OR_VEC opr_atr CT
-		          IDT_T→idt_int
-          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→id
-          CT→ct_int
+          ALL_ITER=VAR_DCLR ALL_ITER
+	          VAR_DCLR=IDT_T ID_OR_VEC opr_atr CT
+		          IDT_T=idt_int
+          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=id
+          CT=ct_int
 0016      int sequence::n=1
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→ct_int
-          FCALL_OR_ATRIB_F→ATRIB
-	          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=ct_int
+          FCALL_OR_ATRIB_F=ATRIB
+	          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
 0017      sequence::0 =0
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→ct_int
-          FCALL_OR_ATRIB_F→ATRIB
-	          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=ct_int
+          FCALL_OR_ATRIB_F=ATRIB
+	          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
 0018      sequence::1 =1
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=ct_int
 0019      seq = sequence::0
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→id FN_PRE
-          FN_PRE→epsilon
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=id FN_PRE
+          FN_PRE=epsilon
 0020      print(seq)
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→CN_TP FN_PRE
-		          CN_TP→ct_string
-          FN_PRE→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=CN_TP FN_PRE
+		          CN_TP=ct_string
+          FN_PRE=epsilon
 0021      print(".")
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→ct_int
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=ct_int
 0022      seq = sequence::1
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→id FN_PRE
-          FN_PRE→epsilon
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=id FN_PRE
+          FN_PRE=epsilon
 0024      print(seq)
-          ALL_ITER→VAR_DCLR ALL_ITER
-	          VAR_DCLR→IDT_T ID_OR_VEC opr_atr CT
-		          IDT_T→idt_int
-          ID_OR_VEC→id IDT
-          IDT→epsilon
-          CT→ct_int
+          ALL_ITER=VAR_DCLR ALL_ITER
+	          VAR_DCLR=IDT_T ID_OR_VEC opr_atr CT
+		          IDT_T=idt_int
+          ID_OR_VEC=id IDT
+          IDT=epsilon
+          CT=ct_int
 0025      
-          ALL_ITER→RWHILE ALL_ITER
-	          RWHILE→blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
-          EXPR_BOOL→EXPR_BOOL_T EXPR_BOOL_H
-	          EXPR_BOOL_T→EXPR_BOOL_F EXPR_BOOL_TH
-		          EXPR_BOOL_F→FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
-			          FN_H_BOOL→id FN_H_BOOL_V
-          FN_H_BOOL_V→epsilon
-	          OPRLR_EQQ_REL→oprlr_rel
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          KH→epsilon
-		          EXPR_NUM_KR→epsilon
-			          EXPR_BOOL_TH→epsilon
-				          EXPR_BOOL_H→epsilon
+          ALL_ITER=RWHILE ALL_ITER
+	          RWHILE=blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
+          EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
+	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
+		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
+			          FN_H_BOOL=id FN_H_BOOL_V
+          FN_H_BOOL_V=epsilon
+	          OPRLR_EQQ_REL=oprlr_rel
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          KH=epsilon
+		          EXPR_NUM_KR=epsilon
+			          EXPR_BOOL_TH=epsilon
+				          EXPR_BOOL_H=epsilon
 0026      int i = 2
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→o_brckt EXPR_NUM c_brckt
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          KH→epsilon
-		          EXPR_NUM_KR→opr_pm EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=o_brckt EXPR_NUM c_brckt
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          KH=epsilon
+		          EXPR_NUM_KR=opr_pm EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
 0027      while(i<n){
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→o_brckt EXPR_NUM c_brckt
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          KH→epsilon
-		          EXPR_NUM_KR→opr_pm EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ct_int
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=o_brckt EXPR_NUM c_brckt
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          KH=epsilon
+		          EXPR_NUM_KR=opr_pm EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ct_int
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
 0028            m1 = (i - 1)
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→id
-          FCALL_OR_ATRIB_F→ATRIB
-	          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→id
-          KH→epsilon
-	          EXPR_NUM_KR→opr_pm EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→id
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=id
+          FCALL_OR_ATRIB_F=ATRIB
+	          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=id
+          KH=epsilon
+	          EXPR_NUM_KR=opr_pm EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=id
 0029            m2 = (i - 2)
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→CN_TP FN_PRE
-		          CN_TP→ct_string
-          FN_PRE→epsilon
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=CN_TP FN_PRE
+		          CN_TP=ct_string
+          FN_PRE=epsilon
 0030            sequence::i = sequence::m1 + sequence::m2
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→vec_in INT_OR_ID
-          INT_OR_ID→id
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=vec_in INT_OR_ID
+          INT_OR_ID=id
 0031            print(".")
-          KH→epsilon
-	          EXPR_NUM_KR→epsilon
-		          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-			          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-				          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→FN_CH
-		          FN_CH→o_brckt FN_CHP
-          FN_CHP→FN_PR c_brckt
-	          FN_PR→id FN_PRE
-          FN_PRE→epsilon
+          KH=epsilon
+	          EXPR_NUM_KR=epsilon
+		          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+			          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+				          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=FN_CH
+		          FN_CH=o_brckt FN_CHP
+          FN_CHP=FN_PR c_brckt
+	          FN_PR=id FN_PRE
+          FN_PRE=epsilon
 0032            out = sequence::i
-          ALL_ITER→FCALL_OR_ATRIB ALL_ITER
-	          FCALL_OR_ATRIB→ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          FCALL_OR_ATRIB_F→ATRIB
-		          ATRIB→opr_atr EXPR_NUM
-          EXPR_NUM→EXPR_NUM_K EXPR_NUM_KR
-	          EXPR_NUM_K→EXPR_NUM_G KH
-		          EXPR_NUM_G→ID_OR_VEC
-			          ID_OR_VEC→id IDT
-          IDT→epsilon
-	          KH→epsilon
-		          EXPR_NUM_KR→epsilon
-			          ALL_ITER→epsilon
-          ALL_ITER→epsilon
-          RIF1→epsilon
-	          ALL_ITER→epsilon
+          ALL_ITER=FCALL_OR_ATRIB ALL_ITER
+	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
+		          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          FCALL_OR_ATRIB_F=ATRIB
+		          ATRIB=opr_atr EXPR_NUM
+          EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	          EXPR_NUM_K=EXPR_NUM_G KH
+		          EXPR_NUM_G=ID_OR_VEC
+			          ID_OR_VEC=id IDT
+          IDT=epsilon
+	          KH=epsilon
+		          EXPR_NUM_KR=epsilon
+			          ALL_ITER=epsilon
+          ALL_ITER=epsilon
+          RIF1=epsilon
+	          ALL_ITER=epsilon

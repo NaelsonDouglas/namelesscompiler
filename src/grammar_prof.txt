@@ -30,10 +30,10 @@ EXPR_BOOL -> EXPR_BOOL_T EXPR_BOOL_H  | oprl_not EXPR_BOOL_T EXPR_BOOL_H .
 EXPR_BOOL_H -> oprlr_or EXPR_BOOL_T EXPR_BOOL_H  |   . 
 EXPR_BOOL_T -> EXPR_BOOL_F EXPR_BOOL_TH . 
 EXPR_BOOL_TH -> oprlr_and EXPR_BOOL_F EXPR_BOOL_TH  |   . 
-EXPR_BOOL_F -> o_brckt EXPR_BOOL c_brckt  | ct_int OPRLR_EQQ_REL EXPR_NUM  | ct_float OPRLR_EQQ_REL EXPR_NUM  | FN_H_BL OPRLR_EQQ_REL EXPR_NUM  | ct_false  | ct_true . 
+EXPR_BOOL_F -> o_brckt EXPR_BOOL c_brckt  | ct_int OPRLR_EQQ_REL EXPR_NUM  | ct_float OPRLR_EQQ_REL EXPR_NUM  | FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM  | ct_false  | ct_true . 
 OPRLR_EQQ_REL -> opr_atr opr_atr  | oprlr_rel . 
-FN_H_BL -> id FN_H_BL_V . 
-FN_H_BL_V -> vec_in EXPR_NUM  | FN_CH  |   . 
+FN_H_BOOL -> id FN_H_BOOL_V . 
+FN_H_BOOL_V -> vec_in EXPR_NUM  | FN_CH  |   . 
 ALL_ITER -> RIF ALL_ITER  | VAR_DCLR ALL_ITER  | RWHILE ALL_ITER  | RFOR ALL_ITER  | RCONT ALL_ITER  | FCALL_OR_ATRIB ALL_ITER  |   . 
 RIF -> blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1 . 
 RIF1 -> blk_els RIF2  |   . 
