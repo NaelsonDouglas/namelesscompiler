@@ -10,22 +10,22 @@
 		          TYPE=CONST_R IDT_TYPE
 			          CONST_R=epsilon
 				          IDT_TYPE=idt_int
-          ID_OR_VEC=id IDT
-          IDT=epsilon
+          ID_OR_VEC=id VEC_INDX
+          VEC_INDX=epsilon
 	          PRL=comma PR
           PR=TYPE ID_OR_VEC PRL
 	          TYPE=CONST_R IDT_TYPE
 		          CONST_R=epsilon
 			          IDT_TYPE=idt_string
-          ID_OR_VEC=id IDT
-          IDT=epsilon
+          ID_OR_VEC=id VEC_INDX
+          VEC_INDX=epsilon
 	          PRL=epsilon
 0002  {
 0003    print("Hello World")
           ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	          FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
-		          ID_OR_VEC=id IDT
-          IDT=epsilon
+		          ID_OR_VEC=id VEC_INDX
+          VEC_INDX=epsilon
 	          FCALL_OR_ATRIB_F=FN_CH
 		          FN_CH=o_brckt FN_CHP
           FN_CHP=FN_PR c_brckt

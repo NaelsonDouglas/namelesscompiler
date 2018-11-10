@@ -168,15 +168,16 @@ addProduction(:FCALL_OR_ATRIB_F, [[:ATRIB],
                                    [:FN_CH]])
 
 
-addProduction(:VAR_DCLR, [[:IDT_T, :ID_OR_VEC, OPR_ATR, :CT]])
+addProduction(:VAR_DCLR, [[:IDT_T, :ID_OR_VEC, OPR_ATR, :DATA]])
 
+addProduction(:DATA, [[:CT],
+                      [:ID_OR_VEC]])
 
-
-addProduction(:ID_OR_VEC, [[ID, :IDT]])
+addProduction(:ID_OR_VEC, [[ID, :VEC_INDX]])
 addProduction(:INT_OR_ID, [[ID],
                            [CT_INT]])
 
-addProduction(:IDT, [[VEC_IN, :INT_OR_ID],
+addProduction(:VEC_INDX, [[VEC_IN, :INT_OR_ID],
                      [EPSILON]])
 
 #=
@@ -192,7 +193,7 @@ factoring:
   ESH      -> 'ct_string'
            -> 'id'
            -> (EXPR_STRING)
-=#
+
 addProduction(:EXPR_STRING, [[:ESH, OPR_PM, :EXPR_STRING]])
 addProduction(:ESH, [[CT_STRING],
                      [:FN_H_STR],
@@ -202,7 +203,7 @@ addProduction(:FN_H_STR, [[ID, :FN_H_V_STR]])
 addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
                             [:FN_CH],
                             [EPSILON]])
-#=
+
    normal:
      EXPR_NUM  -> EXPR_NUM + EXPR_NUM
                -> EXPR_NUM * EXPR_NUM
@@ -252,8 +253,7 @@ addProduction(:NUM_OPRS, [[OPR_PM],
                           [OPR_DM]]
                            )
 
-addProduction(:DATA, [[:CT],
-                      [:ID_OR_VEC]])
+
 
 addProduction(:EXPR_NUM, [[O_C_BRCKT,:EXPR_NUM,C_C_BRCKT],
                           [:NUM_OPRS, :EXPR_NUM],
@@ -400,7 +400,7 @@ addProduction(:ITER_WHILE, [[WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
   ATTR_IH -> '=' EXPR_NUM
           -> EPSILON
 =#
-addProduction(:ITER_FOR, [[FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
+addProduction(:ITER_FOR, [[FOR, O_BRCKT, :VAR_DCLR , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
                         [ID, :ATTR_IH]])

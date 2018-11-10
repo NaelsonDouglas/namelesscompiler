@@ -13,14 +13,11 @@ CT-> 'ct_string'  | 'ct_float'  | 'ct_int'  | CT_BOOL
 FCALL_OR_ATRIB-> ID_OR_VEC FCALL_OR_ATRIB_F 
 ATRIB-> 'opr_atr' EXPR_NUM 
 FCALL_OR_ATRIB_F-> ATRIB  | FN_CH 
-VAR_DCLR-> IDT_T ID_OR_VEC 'opr_atr' CT 
-ID_OR_VEC-> 'id' IDT 
+VAR_DCLR-> IDT_T ID_OR_VEC 'opr_atr' DATA 
+DATA-> CT  | ID_OR_VEC 
+ID_OR_VEC-> 'id' VEC_INDX 
 INT_OR_ID-> 'id'  | 'ct_int' 
-IDT-> 'vec_in' INT_OR_ID  | 'epsilon' 
-EXPR_STRING-> ESH 'opr_pm' EXPR_STRING 
-ESH-> 'ct_string'  | FN_H_STR  | 'o_brckt' EXPR_STRING 'c_brckt' 
-FN_H_STR-> 'id' FN_H_V_STR 
-FN_H_STR_V-> 'vec_in' EXPR_NUM  | FN_CH  | 'epsilon' 
+VEC_INDX-> 'vec_in' INT_OR_ID  | 'epsilon' 
 EXPR_NUM-> EXPR_NUM_K EXPR_NUM_KR 
 EXPR_NUM_KR-> 'opr_pm' EXPR_NUM  | 'epsilon' 
 EXPR_NUM_K-> EXPR_NUM_G EXPR_NUM_KH 
@@ -39,7 +36,7 @@ ITER_IF-> 'if' 'o_brckt' EXPR_BOOL 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' IT
 ITER_IF_R-> 'else' ITER_IF_RR  | 'epsilon' 
 ITER_IF_RR-> ITER_IF  | 'o_c_brckt' ALL_ITER 'c_c_brckt' 
 ITER_WHILE-> 'while' 'o_brckt' EXPR_BOOL 'o_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-ITER_FOR-> 'for' 'o_brckt' ATTR_I 'comma' EXPR_NUM 'comma' EXPR_NUM 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
+ITER_FOR-> 'for' 'o_brckt' VAR_DCLR 'comma' EXPR_NUM 'comma' EXPR_NUM 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
 ATTR_I-> 'idt_int' 'id' 'opr_atr' EXPR_NUM  | 'id' ATTR_IH 
 ATTR_IH-> 'opr_atr' EXPR_NUM  | 'epsilon' 
 ITER_CTRL-> 'continue'  | 'break'  | 'return' 
