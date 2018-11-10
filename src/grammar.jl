@@ -69,52 +69,51 @@ addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_INTER, C_C_BRCKT, :S],
            -> EPSILON
 
    fectoring:
-     TYPE  -> CONST KEY_TP
+     TYPE  -> CONST TP
 
      CONST -> 'const'
            -> EPSILON
 
-     KEY_TP    -> 'int'
+     TP    -> 'int'
            -> 'char'
            -> 'float'
            -> 'string'
 =#
-addProduction(:TYPE, [[:CONST_R, :KEY_TP]])
+addProduction(:TYPE, [[:CONST_R, :TP]])
 addProduction(:CONST_R, [[CONST],
                          [EPSILON]])
-addProduction(:KEY_TP, [[IDT_INT],
-                        [IDT_CHAR],
-                        [IDT_FLOAT],
-                        [IDT_STRING],
-                        [IDT_BOOL]])
+addProduction(:TP, [[IDT_INT],
+                    [IDT_CHAR],
+                    [IDT_FLOAT],
+                    [IDT_STRING],
+                    [IDT_BOOL]])
 
 
 addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
 
 #=
    normal:
-     PARAM     -> '(' ')'
-               -> '(' PARAM_PR ')'
+     PARAM  -> '(' ')'
+            -> '(' PR ')'
 
-     PARAM_PR  -> TYPE IDVEC
-               -> TYPE IDVEC ',' PARAM_PR
-
+     PR     -> TYPE IDVEC
+            -> TYPE IDVEC ',' PR
    factoring to remove ambiguity:
-     PARAM     -> '(' PARAM_PRH
+     PARAM  -> '(' PRH
 
-     PARAM_PRH -> ')'
-               -> PARAM_PR ')'
+     PRH    -> ')'
+            -> PR ')'
 
-     PARAM_PR  -> TYPE IDVEC PARAM_PRL
+     PR     -> TYPE IDVEC PRL
 
-     PARAM_PRL -> ',' PARAM_PR
-               -> EPSILON
+     PRL    -> ',' PR
+            -> EPSILON
 =#
-addProduction(:PARAM, [[O_BRCKT, :PARAM_PRH]])
-addProduction(:PARAM_PRH, [[C_BRCKT],
-                     [:PARAM_PR, C_BRCKT]])
-addProduction(:PARAM_PR, [[:PARAM_TYPE, :IDVEC, :PARAM_PRL]])
-addProduction(:PARAM_PRL, [[COMMA, :PARAM_PR],
+addProduction(:PARAM, [[O_BRCKT, :PRH]])
+addProduction(:PRH, [[C_BRCKT],
+                     [:PR, C_BRCKT]])
+addProduction(:PR, [[:TYPE, :IDVEC, :PRL]])
+addProduction(:PRL, [[COMMA, :PR],
                      [EPSILON]])
 
 #=
@@ -213,40 +212,40 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
                -> 'ct_int'
                -> 'ct_float'
    precedence:
-     EXPR_NUM     -> EXPR_NUM_K
-                  -> EXPR_NUM_K + EXPR_NUM
+     EXPR_NUM -> K
+              -> K + EXPR_NUM
 
-     EXPR_NUM_K   -> EXPR_NUM_G
-                  -> K * G
+     K        -> G
+              -> K * G
 
-     EXPR_NUM_G   -> 'ct_int'
-                  -> 'ct_float'
-                  -> '(' EXPR_NUM ')'
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
    removed left recursion:
-     EXPR_NUM    -> EXPR_NUM_K
-                 -> EXPR_NUM_K '+' EXPR_NUM
+     EXPR_NUM -> K
+              -> K '+' EXPR_NUM
 
-     EXPR_NUM_K  -> EXPR_NUM_G EXPR_NUM_KH
+     K        -> G KH
 
-     EXPR_NUM_KH -> '*' EXPR_NUM_G EXPR_NUM_KH
-                 -> EPSILON
+     KH       -> '*' G KH
+              -> EPSILON
 
-     EXPR_NUM_G  -> 'ct_int'
-                 -> 'ct_float'
-                 -> '(' EXPR_NUM ')'
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
    ambiguity:
-     EXPR_NUM      -> EXPR_NUM_K EXPR_NUM_KR
-     EXPR_NUM_KR   -> '+' EXPR_NUM
-                   -> EPSILON
+     EXPR_NUM -> K KR
+     KR       -> '+' EXPR_NUM
+              -> EPSILON
 
-     EXPR_NUM_K    -> EXPR_NUM_G EXPR_NUM_KH
+     K        -> G KH
 
-     EXPR_NUM_KH   -> '*' EXPR_NUM_G EXPR_NUM_KH
-                   -> EPSILON
+     KH       -> '*' G KH
+              -> EPSILON
 
-     EXPR_NUM_G    -> 'ct_int'
-                   -> 'ct_float'
-                   -> '(' EXPR_NUM ')'
+     G        -> 'ct_int'
+              -> 'ct_float'
+              -> '(' EXPR_NUM ')'
 =#
 
 #=
@@ -268,13 +267,15 @@ addProduction(:EXPR_NUM_R, [[:DATA, :NUM_OPRS, :EXPR_NUM_R]
                             [EPSILON]])
 =#
 
-addProduction(:EXPR_NUM, [[:EXPR_NUM_K, :EXPR_NUM_KR]])
-addProduction(:EXPR_NUM_KR, [[OPR_PM ,:EXPR_NUM],
+
+
+addProduction(:EXPR_NUM, [[:K, :KR]])
+addProduction(:KR, [[OPR_PM ,:EXPR_NUM],
                     [EPSILON]])
-addProduction(:EXPR_NUM_K, [[:EXPR_NUM_G,:EXPR_NUM_KH]])
-addProduction(:EXPR_NUM_KH, [[OPR_DM,:EXPR_NUM_G, :EXPR_NUM_KH],
+addProduction(:K, [[:G,:KH]])
+addProduction(:KH, [[OPR_DM,:G, :KH],
                     [EPSILON]])
-addProduction(:EXPR_NUM_G, [[CT_FLOAT],
+addProduction(:G, [[CT_FLOAT],
                    [CT_INT],
                    [:IDVEC],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
@@ -296,44 +297,44 @@ addProduction(:EXPR_NUM_G, [[CT_FLOAT],
                -> 'true'
                -> 'false'
    precedence:
-     EXPR_BOOL    -> EXPR_BOOL_T
-                  -> EXPR_BOOL 'or' EXPR_BOOL_T
-                  -> 'not' EXPR_BOOL_T
+     EXPR_BOOL -> T
+               -> EXPR_BOOL 'or' T
+               -> 'not' T
 
-     EXPR_BOOL_T  -> EXPR_BOOL_F
-                  -> EXPR_BOOL_T 'and' EXPR_BOOL_F
+     T         -> F
+               -> T 'and' F
 
-     EXPR_BOOL_F  -> '(' EXPR_BOOL ')'
-                  -> EXPR_NUM 'rel' EXPR_NUM
-                  -> 'true'
-                  -> 'false'
+     F         -> '(' EXPR_BOOL ')'
+               -> EXPR_NUM 'rel' EXPR_NUM
+               -> 'true'
+               -> 'false'
 
    removed left recursion:
-     EXPR_BOOL    -> T EXPR_BOOLH
-                  -> 'not' T EXPR_BOOLH
+     EXPR_BOOL  -> T EXPR_BOOLH
+                -> 'not' T EXPR_BOOLH
 
-     EXPR_BOOL_H  -> 'or' EXPR_BOOL_T EXPR_BOOL_H
-                  -> EPSILON
+     EXPR_BOOLH -> 'or' T EXPR_BOOLH
+                -> EPSILON
 
-     EXPR_BOOL_T  -> EXPR_BOOL_F EXPR_BOOL_TH
+     T          -> F TH
 
-     EXPR_BOOL_TH -> 'and'EXPR_BOOL_F EXPR_BOOL_TH
-                  -> EPSILON
+     TH         -> 'and'F TH
+                -> EPSILON
 
-     EXPR_BOOL_F  -> '(' EXPR_BOOL ')'
-                  -> EXPR_NUM OPRLR_REL EXPR_NUM
-                  -> 'true'
-                  -> 'false'
+     F          -> '(' EXPR_BOOL ')'
+                -> EXPR_NUM OPRLR_REL EXPR_NUM
+                -> 'true'
+                -> 'false'
 =#
-addProduction(:EXPR_BOOL, [[:EXPR_BOOL_T, :EXPR_BOOL_H],
-                           [OPRL_NOT, :EXPR_BOOL_T, :EXPR_BOOL_H]])
-addProduction(:EXPR_BOOL_H, [[OPRLR_OR, :EXPR_BOOL_T, :EXPR_BOOL_H],
+addProduction(:EXPR_BOOL, [[:T, :EXPR_BOOLH],
+                           [OPRL_NOT, :T, :EXPR_BOOLH]])
+addProduction(:EXPR_BOOLH, [[OPRLR_OR, :T, :EXPR_BOOLH],
                             [EPSILON]])
 
-addProduction(:EXPR_BOOL_T, [[:EXPR_BOOL_F, :EXPR_BOOL_TH]])
-addProduction(:EXPR_BOOL_TH, [[OPRLR_AND, :EXPR_BOOL_F, :EXPR_BOOL_TH],
+addProduction(:T, [[:F, :TH]])
+addProduction(:TH, [[OPRLR_AND, :F, :TH],
                     [EPSILON]])
-addProduction(:EXPR_BOOL_F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
+addProduction(:F, [[O_BRCKT, :EXPR_BOOL, C_BRCKT],
                    [CT_INT, :OPRLR_EQQ_REL , :EXPR_NUM] ,
                    [CT_FLOAT, :OPRLR_EQQ_REL , :EXPR_NUM] ,
                    [:FN_H_BL, :OPRLR_EQQ_REL , :EXPR_NUM] ,
