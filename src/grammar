@@ -34,15 +34,15 @@ EXPR_BOOL_F-> 'o_brckt' EXPR_BOOL 'c_brckt'  | 'ct_int' OPRLR_EQQ_REL EXPR_NUM  
 OPRLR_EQQ_REL-> 'opr_atr' 'opr_atr'  | 'oprlr_rel' 
 FN_H_BOOL-> 'id' FN_H_BOOL_V 
 FN_H_BOOL_V-> 'vec_in' EXPR_NUM  | FN_CH  | 'epsilon' 
-ALL_ITER-> RIF ALL_ITER  | VAR_DCLR ALL_ITER  | RWHILE ALL_ITER  | RFOR ALL_ITER  | RCONT ALL_ITER  | FCALL_OR_ATRIB ALL_ITER  | 'epsilon' 
-RIF-> 'blk_if' 'o_brckt' EXPR_BOOL 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' RIF1 
-RIF1-> 'blk_els' RIF2  | 'epsilon' 
-RIF2-> RIF  | 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-RWHILE-> 'blk_while' 'o_brckt' EXPR_BOOL 'o_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-RFOR-> 'blk_for' 'o_brckt' ATTR_I 'comma' EXPR_NUM 'comma' EXPR_NUM 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
+ALL_ITER-> ITER_IF ALL_ITER  | VAR_DCLR ALL_ITER  | ITER_WHILE ALL_ITER  | ITER_FOR ALL_ITER  | ITER_CTRL ALL_ITER  | FCALL_OR_ATRIB ALL_ITER  | 'epsilon' 
+ITER_IF-> 'blk_if' 'o_brckt' EXPR_BOOL 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' ITER_IF_R 
+ITER_IF_R-> 'blk_els' ITER_IF_RR  | 'epsilon' 
+ITER_IF_RR-> ITER_IF  | 'o_c_brckt' ALL_ITER 'c_c_brckt' 
+ITER_WHILE-> 'blk_while' 'o_brckt' EXPR_BOOL 'o_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
+ITER_FOR-> 'blk_for' 'o_brckt' ATTR_I 'comma' EXPR_NUM 'comma' EXPR_NUM 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
 ATTR_I-> 'idt_int' 'id' 'opr_atr' EXPR_NUM  | 'id' ATTR_IH 
 ATTR_IH-> 'opr_atr' EXPR_NUM  | 'epsilon' 
-RCONT-> 'continue'  | 'break'  | 'return' 
+ITER_CTRL-> 'continue'  | 'break'  | 'return' 
 FN_CALL-> 'id' FN_CH 
 FN_CH-> 'o_brckt' FN_CHP 
 FN_CHP-> FN_PR 'c_brckt'  | 'c_brckt' 

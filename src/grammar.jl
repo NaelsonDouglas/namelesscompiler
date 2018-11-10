@@ -349,59 +349,59 @@ addProduction(:FN_H_BOOL_V, [[VEC_IN, :EXPR_NUM],
                             [EPSILON]])
 #=
    normal:
-     ALL_ITER -> RIF ALL_ITER
+     ALL_ITER -> ITER_IF ALL_ITER
                -> ATTR ALL_ITER
-               -> RWHILE ALL_ITER
-               -> RFOR ALL_ITER
-               -> RCONT ALL_ITER
+               -> ITER_WHILE ALL_ITER
+               -> ITER_FOR ALL_ITER
+               -> ITER_CTRL ALL_ITER
 =#
-addProduction(:ALL_ITER, [[:RIF, :ALL_ITER],
+addProduction(:ALL_ITER, [[:ITER_IF, :ALL_ITER],
                            [:VAR_DCLR , :ALL_ITER],
-                           [:RWHILE, :ALL_ITER],
-                           [:RFOR, :ALL_ITER],
-                           [:RCONT, :ALL_ITER],
+                           [:ITER_WHILE, :ALL_ITER],
+                           [:ITER_FOR, :ALL_ITER],
+                           [:ITER_CTRL, :ALL_ITER],
                            [:FCALL_OR_ATRIB, :ALL_ITER],
                            [EPSILON]])
 
 #=
    normal:
-     RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_ITER '}' RIF1
-     RIF1 -> 'else' RIF
+     ITER_IF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_ITER '}' ITER_IF_R
+     ITER_IF_R -> 'else' ITER_IF
           -> 'else' '{' ALL_ITER '}'
           -> EPSILON
 
    factoring:
-     RIF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_ITER '}' RIF1
+     ITER_IF  -> 'if' '(' EXPR_BOOL ')' '{' ALL_ITER '}' ITER_IF_R
 
-     RIF1 -> 'else' RIF2
+     ITER_IF_R -> 'else' ITER_IF_RR
           -> EPSILON
 
-     RIF2 -> RIF
+     ITER_IF_RR -> ITER_IF
           -> '{' ALL_ITER '}'
 =#
-addProduction(:RIF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
-                     O_C_BRCKT, :ALL_ITER,C_C_BRCKT, :RIF1]])
-addProduction(:RIF1, [[BLK_ELS, :RIF2],
+addProduction(:ITER_IF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
+                     O_C_BRCKT, :ALL_ITER,C_C_BRCKT, :ITER_IF_R]])
+addProduction(:ITER_IF_R, [[BLK_ELS, :ITER_IF_RR],
                       [EPSILON]])
-addProduction(:RIF2, [[:RIF],
+addProduction(:ITER_IF_RR, [[:ITER_IF],
                       [O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
 #=
    normal:
-      RWHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_ITER '}'
+      ITER_WHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_ITER '}'
 =#
-addProduction(:RWHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
+addProduction(:ITER_WHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
                          :ALL_ITER, C_C_BRCKT]])
 
 #=
   normal:
-   RFOR   -> 'for' '(' ATTR_I ',' EXPR_NUM ',' EXPR_NUM ') '{' '{' ALL_ITER '}'
+   ITER_FOR   -> 'for' '(' ATTR_I ',' EXPR_NUM ',' EXPR_NUM ') '{' '{' ALL_ITER '}'
    ATTR_I -> 'int' 'id' '=' :EXPR_NUM
           -> 'id' ATTR_IH
 
   ATTR_IH -> '=' EXPR_NUM
           -> EPSILON
 =#
-addProduction(:RFOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
+addProduction(:ITER_FOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
                         [ID, :ATTR_IH]])
@@ -409,7 +409,7 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
                          [EPSILON]])
 #=
    normal:
-    RCONT -> 'continue'
+    ITER_CTRL -> 'continue'
           -> 'break'
           -> 'return' RH
 
@@ -418,7 +418,7 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> EXPR_BOOL
           -> EPSILON
 =#
-addProduction(:RCONT, [[CONTINUE], [BREAK], [RETURN]])
+addProduction(:ITER_CTRL, [[CONTINUE], [BREAK], [RETURN]])
 #addProduction(:RH, [#[:EXPR_STRING],
 #                    [ID],
 #                    [EPSILON]])

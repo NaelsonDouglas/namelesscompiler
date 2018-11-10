@@ -12,8 +12,8 @@
 	          PRL=epsilon
 0002  {
 0003    if (n<0){return}
-          ALL_ITER=RIF ALL_ITER
-	          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          ALL_ITER=ITER_IF ALL_ITER
+	          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -27,13 +27,13 @@
 	          EXPR_NUM_KR=epsilon
 		          EXPR_BOOL_TH=epsilon
 			          EXPR_BOOL_H=epsilon
-          ALL_ITER=RCONT ALL_ITER
-	          RCONT=return
+          ALL_ITER=ITER_CTRL ALL_ITER
+	          ITER_CTRL=return
           ALL_ITER=epsilon
 0005  
-          RIF1=epsilon
-	          ALL_ITER=RIF ALL_ITER
-		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          ITER_IF_R=epsilon
+	          ALL_ITER=ITER_IF ALL_ITER
+		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -59,14 +59,14 @@
 		          CN_TP=ct_string
           FN_PRE=epsilon
 0007      print("0")
-          ALL_ITER=RCONT ALL_ITER
-	          RCONT=return
+          ALL_ITER=ITER_CTRL ALL_ITER
+	          ITER_CTRL=return
 0008      return
           ALL_ITER=epsilon
 0009    }
-          RIF1=epsilon
-	          ALL_ITER=RIF ALL_ITER
-		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          ITER_IF_R=epsilon
+	          ALL_ITER=ITER_IF ALL_ITER
+		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -92,14 +92,14 @@
 		          CN_TP=ct_string
           FN_PRE=epsilon
 0011      print("0.1")
-          ALL_ITER=RCONT ALL_ITER
-	          RCONT=return
+          ALL_ITER=ITER_CTRL ALL_ITER
+	          ITER_CTRL=return
 0012      return
           ALL_ITER=epsilon
 0013    }
-          RIF1=epsilon
-	          ALL_ITER=RIF ALL_ITER
-		          RIF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt RIF1
+          ITER_IF_R=epsilon
+	          ALL_ITER=ITER_IF ALL_ITER
+		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -217,8 +217,8 @@
           IDT=epsilon
           CT=ct_int
 0025      
-          ALL_ITER=RWHILE ALL_ITER
-	          RWHILE=blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
+          ALL_ITER=ITER_WHILE ALL_ITER
+	          ITER_WHILE=blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -358,5 +358,5 @@
 		          EXPR_NUM_KR=epsilon
 			          ALL_ITER=epsilon
           ALL_ITER=epsilon
-          RIF1=epsilon
+          ITER_IF_R=epsilon
 	          ALL_ITER=epsilon
