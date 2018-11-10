@@ -174,11 +174,16 @@ addProduction(:DATA, [[:CT],
                       [:ID_OR_VEC]])
 
 addProduction(:ID_OR_VEC, [[ID, :VEC_INDX]])
+
+
 addProduction(:INT_OR_ID, [[ID],
                            [CT_INT]])
 
-addProduction(:VEC_INDX, [[VEC_IN, :INT_OR_ID],
+addProduction(:VEC_INDX, [[VEC_IN, :VEC_INDX_F],
                      [EPSILON]])
+
+addProduction(:VEC_INDX_F, [[O_BRCKT, :EXPR_NUM,C_BRCKT],
+                            [:INT_OR_ID]])
 
 #=
 normal:
@@ -416,7 +421,7 @@ addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
           -> EXPR_BOOL
           -> EPSILON
 =#
-addProduction(:ITER_CTRL, [[CONTINUE], [BREAK], [RETURN]])
+addProduction(:ITER_CTRL, [[CONTINUE], [BREAK], [RETURN,:DATA]])
 #addProduction(:RH, [#[:EXPR_STRING],
 #                    [ID],
 #                    [EPSILON]])

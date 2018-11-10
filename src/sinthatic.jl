@@ -112,9 +112,6 @@ steps = String["entrada          |             Pilha"]
 
 tabs=0
 while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of line
-	
-	
-	
 	if head != false #Se não tiver um eol na fita					
 
 		newline = string(makestepleft(head.lexem),string(collect(stack)))
@@ -177,4 +174,19 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 			head = nextToken();
 		end
 	end
+end
+
+if (head.categ_num == Int(EOF))
+	if (length(stack) == 0)
+		info("Entrada aceita")
+	end
+
+	if (top(stack) == :S) #S -> epsilon
+		pop!(stack)
+		info("Entrada aceita")
+	else
+		info("Entrada rejeitada")
+	end
+else
+		info("Entrada rejeitada")
 end

@@ -36,7 +36,9 @@ ID_OR_VEC= 'id' VEC_INDX
 
 INT_OR_ID= 'id' | 'ct_int' 
 
-VEC_INDX= 'vec_in' INT_OR_ID | 'epsilon' 
+VEC_INDX= 'vec_in' VEC_INDX_F | 'epsilon' 
+
+VEC_INDX_F= 'o_brckt' EXPR_NUM 'c_brckt' | INT_OR_ID 
 
 EXPR_NUM= EXPR_NUM_K EXPR_NUM_KR 
 
@@ -82,7 +84,7 @@ ATTR_I= 'idt_int' 'id' 'opr_atr' EXPR_NUM | 'id' ATTR_IH
 
 ATTR_IH= 'opr_atr' EXPR_NUM | 'epsilon' 
 
-ITER_CTRL= 'continue' | 'break' | 'return' 
+ITER_CTRL= 'continue' | 'break' | 'return' DATA 
 
 FN_CALL= 'id' FN_CH 
 
