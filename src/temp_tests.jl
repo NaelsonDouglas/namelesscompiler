@@ -26,17 +26,31 @@ function prodToString(prod::Production)
 	return output*". \n"
 end
 
-
 function convertGrammar(g=grammar)
-	output = ""
+	output_prof = ""
+	output_code = ""
+	prof_file = open("grammar_prof.txt","w+")
+	code_file = open("grammar_code.txt","w+")
 	for p in grammar
-		output = output*prodToString(p)
+		line = prodToString(p)
+		output_code = output_code*line
+		
+		buff_prof = replace(line,"|   .","| epsilon")
+		buff_prof = replace(buff_prof,". ","")		 
+		buff_prof = replace(buff_prof,"->","=")
+		buff_prof = replace(buff_prof,"  "," ")
+		output_prof = output_prof*buff_prof*"\n"
+
 	end
-	f = open("grammar_prof.txt","w+")
-	write(f,output)
+	f = open("../especificações/gramática.txt","w+")
+	write(f,output_prof)
 	flush(f)
 	close(f)
-	return output
+
+	f = open("grammar","w+")
+	write(f,output_code)
+	flush(f)
+	close(f)	
 end
 
 

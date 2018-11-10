@@ -59,5 +59,30 @@ function printToken(tkn::Token)
 	@printf("              [%04d, %04d] (%04d,%10s){%s}",tkn.line,   tkn.column,   tkn.categ_num,   tkn.categ_nom,   tkn.lexem)
 end
 
+function prodToString(prod::Production)
+	output = ""
+
+	output = prod.lexem*" -> "
 
 
+	for i=1:length(prod.subprods)
+
+		for elem in prod.subprods[i]
+			if typeof(elem) == Symbol
+				output = output*string(elem)
+			else
+        if Int(elem) == Int(EPSILON)
+  		    output = output*lowercase(string(" "))
+        else
+          output = output*lowercase(string(elem))
+        end
+			end
+			output = output*" "
+		end
+
+		if i != length(prod.subprods)
+			output = output*" | "
+		end
+	end
+	return output*". \n"
+end

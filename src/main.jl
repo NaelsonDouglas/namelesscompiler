@@ -22,9 +22,10 @@ catch
 	using Match
 end
 
-include("auxiliar_funcs.jl")
+
 include("tokens.jl")
 include("data_structures.jl")
+include("auxiliar_funcs.jl")
 include("grammar.jl")
 
 
