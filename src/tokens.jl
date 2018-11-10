@@ -32,10 +32,10 @@ using JSON
       #FN_READ,      # REMOVER
       DRED,         # COMENTARIO ??
 
-      BLK_IF,       # 'if'
-      BLK_ELS,      # 'else'
-      BLK_FOR,      # 'for'
-      BLK_WHILE,    # 'while'
+      IF,       # 'if'
+      ELSE,      # 'else'
+      FOR,      # 'for'
+      WHILE,    # 'while'
       CONTINUE,     # 'continue'
       BREAK,        # 'break'
       RETURN,       # 'return'

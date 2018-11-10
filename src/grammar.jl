@@ -378,9 +378,9 @@ addProduction(:ALL_ITER, [[:ITER_IF, :ALL_ITER],
      ITER_IF_RR -> ITER_IF
           -> '{' ALL_ITER '}'
 =#
-addProduction(:ITER_IF,[[BLK_IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
+addProduction(:ITER_IF,[[IF, O_BRCKT, :EXPR_BOOL, C_BRCKT,
                      O_C_BRCKT, :ALL_ITER,C_C_BRCKT, :ITER_IF_R]])
-addProduction(:ITER_IF_R, [[BLK_ELS, :ITER_IF_RR],
+addProduction(:ITER_IF_R, [[ELSE, :ITER_IF_RR],
                       [EPSILON]])
 addProduction(:ITER_IF_RR, [[:ITER_IF],
                       [O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
@@ -388,7 +388,7 @@ addProduction(:ITER_IF_RR, [[:ITER_IF],
    normal:
       ITER_WHILE -> 'while' '(' EXPR_BOOL ')' '{' ALL_ITER '}'
 =#
-addProduction(:ITER_WHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
+addProduction(:ITER_WHILE, [[WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
                          :ALL_ITER, C_C_BRCKT]])
 
 #=
@@ -400,7 +400,7 @@ addProduction(:ITER_WHILE, [[BLK_WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
   ATTR_IH -> '=' EXPR_NUM
           -> EPSILON
 =#
-addProduction(:ITER_FOR, [[BLK_FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
+addProduction(:ITER_FOR, [[FOR, O_BRCKT, :ATTR_I , COMMA,:EXPR_NUM, COMMA,
                        :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
                         [ID, :ATTR_IH]])

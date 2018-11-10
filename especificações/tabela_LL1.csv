@@ -1,4 +1,4 @@
-,eof,ct_b,ct_string,ct_float,ct_int,comma,id,c_brckt,o_brckt,return,break,continue,opr_atr,idt_int,c_c_brckt,o_c_brckt,blk_for,blk_while,blk_els,blk_if,vec_in,oprlr_rel,ct_true,ct_false,oprlr_and,oprlr_or,oprl_not,opr_dm,opr_pm,idt_bool,idt_float,idt_string,idt_char,idt_void,const,eof
+,eof,ct_b,ct_string,ct_float,ct_int,comma,id,c_brckt,o_brckt,return,break,continue,opr_atr,idt_int,c_c_brckt,o_c_brckt,for,while,else,if,vec_in,oprlr_rel,ct_true,ct_false,oprlr_and,oprlr_or,oprl_not,opr_dm,opr_pm,idt_bool,idt_float,idt_string,idt_char,idt_void,const,eof
 S,S=epsilon,,,,,,,,,,,,,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,,,,,,,,,,,,,,,,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S,S=eof
 TYPE,,,,,,,,,,,,,,TYPE=CONST_R IDT_TYPE,,,,,,,,,,,,,,,,TYPE=CONST_R IDT_TYPE,TYPE=CONST_R IDT_TYPE,TYPE=CONST_R IDT_TYPE,TYPE=CONST_R IDT_TYPE,,TYPE=CONST_R IDT_TYPE,
 CONST_R,,,,,,,,,,,,,,CONST_R=epsilon,,,,,,,,,,,,,,,,CONST_R=epsilon,CONST_R=epsilon,CONST_R=epsilon,CONST_R=epsilon,,CONST_R=const,
@@ -36,11 +36,11 @@ OPRLR_EQQ_REL,,,,,,,,,,,,,OPRLR_EQQ_REL=opr_atr opr_atr,,,,,,,,,OPRLR_EQQ_REL=op
 FN_H_BOOL,,,,,,,FN_H_BOOL=id FN_H_BOOL_V,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 FN_H_BOOL_V,,,,,,,,,FN_H_BOOL_V=FN_CH,,,,FN_H_BOOL_V=epsilon,,,,,,,,FN_H_BOOL_V=vec_in EXPR_NUM,FN_H_BOOL_V=epsilon,,,,,,,,,,,,,,
 ALL_ITER,,,,,,,ALL_ITER=FCALL_OR_ATRIB ALL_ITER,,,ALL_ITER=ITER_CTRL ALL_ITER,ALL_ITER=ITER_CTRL ALL_ITER,ALL_ITER=ITER_CTRL ALL_ITER,,ALL_ITER=VAR_DCLR ALL_ITER,ALL_ITER=epsilon,,ALL_ITER=ITER_FOR ALL_ITER,ALL_ITER=ITER_WHILE ALL_ITER,,ALL_ITER=ITER_IF ALL_ITER,,,,,,,,,,ALL_ITER=VAR_DCLR ALL_ITER,ALL_ITER=VAR_DCLR ALL_ITER,ALL_ITER=VAR_DCLR ALL_ITER,ALL_ITER=VAR_DCLR ALL_ITER,,,
-ITER_IF,,,,,,,,,,,,,,,,,,,,ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R,,,,,,,,,,,,,,,,
-ITER_IF_R,,,,,,,ITER_IF_R=epsilon,,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=blk_els ITER_IF_RR,ITER_IF_R=epsilon,,,,,,,,,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,,
+ITER_IF,,,,,,,,,,,,,,,,,,,,ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R,,,,,,,,,,,,,,,,
+ITER_IF_R,,,,,,,ITER_IF_R=epsilon,,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=else ITER_IF_RR,ITER_IF_R=epsilon,,,,,,,,,,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,ITER_IF_R=epsilon,,,
 ITER_IF_RR,,,,,,,,,,,,,,,,ITER_IF_RR=o_c_brckt ALL_ITER c_c_brckt,,,,ITER_IF_RR=ITER_IF,,,,,,,,,,,,,,,,
-ITER_WHILE,,,,,,,,,,,,,,,,,,ITER_WHILE=blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt,,,,,,,,,,,,,,,,,,
-ITER_FOR,,,,,,,,,,,,,,,,,ITER_FOR=blk_for o_brckt ATTR_I comma EXPR_NUM comma EXPR_NUM c_brckt o_c_brckt ALL_ITER c_c_brckt,,,,,,,,,,,,,,,,,,,
+ITER_WHILE,,,,,,,,,,,,,,,,,,ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt,,,,,,,,,,,,,,,,,,
+ITER_FOR,,,,,,,,,,,,,,,,,ITER_FOR=for o_brckt ATTR_I comma EXPR_NUM comma EXPR_NUM c_brckt o_c_brckt ALL_ITER c_c_brckt,,,,,,,,,,,,,,,,,,,
 ATTR_I,,,,,,,ATTR_I=id ATTR_IH,,,,,,,ATTR_I=idt_int id opr_atr EXPR_NUM,,,,,,,,,,,,,,,,,,,,,,
 ATTR_IH,,,,,,ATTR_IH=epsilon,,,,,,,ATTR_IH=opr_atr EXPR_NUM,,,,,,,,,,,,,,,,,,,,,,,
 ITER_CTRL,,,,,,,,,,ITER_CTRL=return,ITER_CTRL=break,ITER_CTRL=continue,,,,,,,,,,,,,,,,,,,,,,,,

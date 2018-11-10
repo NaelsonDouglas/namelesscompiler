@@ -13,7 +13,7 @@
 0002  {
 0003    if (n<0){return}
           ALL_ITER=ITER_IF ALL_ITER
-	          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
+	          ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -33,7 +33,7 @@
 0005  
           ITER_IF_R=epsilon
 	          ALL_ITER=ITER_IF ALL_ITER
-		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
+		          ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -66,7 +66,7 @@
 0009    }
           ITER_IF_R=epsilon
 	          ALL_ITER=ITER_IF ALL_ITER
-		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
+		          ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -99,7 +99,7 @@
 0013    }
           ITER_IF_R=epsilon
 	          ALL_ITER=ITER_IF ALL_ITER
-		          ITER_IF=blk_if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
+		          ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
@@ -218,7 +218,7 @@
           CT=ct_int
 0025      
           ALL_ITER=ITER_WHILE ALL_ITER
-	          ITER_WHILE=blk_while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
+	          ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
           EXPR_BOOL=EXPR_BOOL_T EXPR_BOOL_H
 	          EXPR_BOOL_T=EXPR_BOOL_F EXPR_BOOL_TH
 		          EXPR_BOOL_F=FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM
