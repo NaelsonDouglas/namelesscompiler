@@ -9,15 +9,17 @@ int shellSort(int nums, int n)
     int c=-1
     int j=-1
     
-    while (h > 0) 
+    while (h > 0)
     {
-        for (int i = h, i < n, i++)  
+        for (int i = h, i < n, i=i+1)  
         {
             c = nums::i
-            j = i
-            while (j >= h && nums[j - h] > c) {
-                nums::j = nums::(j - h)
-                j = j - h
+            j = i            
+            while(j >= h) {
+                while( nums(j-h)>c){
+                        nums::j = nums::(j-h)
+                        j = j - h
+                    }
             }
             nums::j = c
         }

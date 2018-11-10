@@ -266,8 +266,6 @@ addProduction(:EXPR_NUM_R, [[:DATA, :NUM_OPRS, :EXPR_NUM_R]
                             [EPSILON]])
 =#
 
-
-
 addProduction(:EXPR_NUM, [[:EXPR_NUM_K, :EXPR_NUM_KR]])
 addProduction(:EXPR_NUM_KR, [[OPR_PM ,:EXPR_NUM],
                     [EPSILON]])
@@ -278,7 +276,6 @@ addProduction(:EXPR_NUM_G, [[CT_FLOAT],
                    [CT_INT],
                    [:ID_OR_VEC],
                    [O_BRCKT, :EXPR_NUM, C_BRCKT]])
-
 
 
 #addProduction(:FN_H_NUM, [[ID, :FN_H_V_NUM]])
@@ -400,8 +397,10 @@ addProduction(:ITER_WHILE, [[WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
   ATTR_IH -> '=' EXPR_NUM
           -> EPSILON
 =#
-addProduction(:ITER_FOR, [[FOR, O_BRCKT, :VAR_DCLR , COMMA,:EXPR_NUM, COMMA,
-                       :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
+addProduction(:FOR_EXP_LIMITER,[[:ID_OR_VEC, :OPRLR_REL,:EXPR_NUM]])
+
+addProduction(:ITER_FOR, [[FOR, O_BRCKT, :VAR_DCLR , COMMA,:FOR_EXP_LIMITER, COMMA,
+                       :ID_OR_VEC, OPR_ATR, :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
 addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
                         [ID, :ATTR_IH]])
 addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
