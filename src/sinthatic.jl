@@ -115,34 +115,31 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 	
 	
 	
-	if head != false #Se não tiver um eol na fita			
-
-
-
-		p1 = ""
+	if head != false #Se não tiver um eol na fita					
 
 		newline = string(makestepleft(head.lexem),string(collect(stack)))
 		steps = vcat(steps,newline)
 		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
 			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
 			
-
+			tree_buff=""
 			for i=1:tabs
 				print("\t")
+				#@printf("%s","\t")
+				tree_buff=vcat(tree_buff,@sprintf("%s","\t")) #yeah, I know calling @printf and @sprintf twice is lame, But its bugging.
 			end
 			println("          ",rule)
-			tabs=tabs+1
+			tree_buff=vcat(tree_buff,@sprintf("%s%s","          ",rule*"\n"))
+			write(tree_file,tree_buff)
 
-			r_rule = reverseRule(rule)
-			
+			tabs=tabs+1			
+			r_rule = reverseRule(rule)			
 			pop!(stack)
 
 
 			for i in r_rule
 				push!(stack,i)
 			end
-
-
 			#sleep(1)
 			#@show "loop"
 		else		
@@ -158,11 +155,8 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 				if head == false #Se for um eol, pula a fita de novo					
 					head = nextToken();	
 				end
-			end
-			
+			end			
 		end
-
-
 
 		if typeof(head)!=Bool
 			if head.categ_num == Int(EOF)
@@ -179,10 +173,5 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 		else
 			head = nextToken();
 		end
-
-
-
-
 	end
-
 end

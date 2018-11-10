@@ -157,7 +157,10 @@ function nextToken()
 		return false
 	end
 	if tkn.column == 1
-		@printf("%4s  %s\n",lpad(tkn.line,4,0),readline(g))	
+		header = @sprintf("%4s  %s\n",lpad(tkn.line,4,0),readline(g))	
+		write(tree_file,header)
+		println()
+		print(header)
 	end
 	return tkn;
 end
