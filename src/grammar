@@ -1,8 +1,8 @@
-S-> RETYPE 'id' PARAM 'o_c_brckt' ALL_ITER 'c_c_brckt' S  | 'eof'  | 'epsilon' 
+S-> IDT_TYPE_OR_VOID 'id' PARAM 'o_c_brckt' ALL_ITER 'c_c_brckt' S  | 'eof'  | 'epsilon' 
 TYPE-> CONST_R IDT_TYPE 
 CONST_R-> 'const'  | 'epsilon' 
 IDT_TYPE-> 'idt_int'  | 'idt_char'  | 'idt_float'  | 'idt_string'  | 'idt_bool' 
-RETYPE-> TYPE  | 'idt_void' 
+IDT_TYPE_OR_VOID-> TYPE  | 'idt_void' 
 PARAM-> 'o_brckt' PRH 
 PRH-> 'c_brckt'  | PR 'c_brckt' 
 PR-> TYPE ID_OR_VEC PRL 
@@ -23,8 +23,8 @@ FN_H_STR-> 'id' FN_H_V_STR
 FN_H_STR_V-> 'vec_in' EXPR_NUM  | FN_CH  | 'epsilon' 
 EXPR_NUM-> EXPR_NUM_K EXPR_NUM_KR 
 EXPR_NUM_KR-> 'opr_pm' EXPR_NUM  | 'epsilon' 
-EXPR_NUM_K-> EXPR_NUM_G KH 
-KH-> 'opr_dm' EXPR_NUM_G KH  | 'epsilon' 
+EXPR_NUM_K-> EXPR_NUM_G EXPR_NUM_KH 
+EXPR_NUM_KH-> 'opr_dm' EXPR_NUM_G EXPR_NUM_KH  | 'epsilon' 
 EXPR_NUM_G-> 'ct_float'  | 'ct_int'  | ID_OR_VEC  | 'o_brckt' EXPR_NUM 'c_brckt' 
 EXPR_BOOL-> EXPR_BOOL_T EXPR_BOOL_H  | 'oprl_not' EXPR_BOOL_T EXPR_BOOL_H 
 EXPR_BOOL_H-> 'oprlr_or' EXPR_BOOL_T EXPR_BOOL_H  | 'epsilon' 

@@ -1,4 +1,3 @@
-
 include("tokens.jl")
 include("data_structures.jl")
 grammar_map = Dict{Symbol,Int}()
@@ -54,7 +53,7 @@ end
     S -> TYPE 'id' PARAM '{' ALL_ITER '}' S
       -> EPSILON
 =#
-addProduction(:S, [[:RETYPE,ID, :PARAM, O_C_BRCKT, :ALL_ITER, C_C_BRCKT, :S],
+addProduction(:S, [[:IDT_TYPE_OR_VOID,ID, :PARAM, O_C_BRCKT, :ALL_ITER, C_C_BRCKT, :S],
                    [EOF],
                    [EPSILON]])
 
@@ -89,7 +88,7 @@ addProduction(:IDT_TYPE, [[IDT_INT],
                     [IDT_BOOL]])
 
 
-addProduction(:RETYPE, [[:TYPE], [IDT_VOID]])
+addProduction(:IDT_TYPE_OR_VOID, [[:TYPE], [IDT_VOID]])
 
 #=
    normal:
@@ -225,9 +224,9 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
      EXPR_NUM -> EXPR_NUM_K
               -> EXPR_NUM_K '+' EXPR_NUM
 
-     EXPR_NUM_K        -> EXPR_NUM_G KH
+     EXPR_NUM_K        -> EXPR_NUM_G EXPR_NUM_KH
 
-     KH       -> '*' EXPR_NUM_G KH
+     EXPR_NUM_KH       -> '*' EXPR_NUM_G EXPR_NUM_KH
               -> EPSILON
 
      EXPR_NUM_G        -> 'ct_int'
@@ -238,9 +237,9 @@ addProduction(:FN_H_STR_V, [[VEC_IN, :EXPR_NUM],
      EXPR_NUM_KR       -> '+' EXPR_NUM
               -> EPSILON
 
-     EXPR_NUM_K        -> EXPR_NUM_G KH
+     EXPR_NUM_K        -> EXPR_NUM_G EXPR_NUM_KH
 
-     KH       -> '*' EXPR_NUM_G KH
+     EXPR_NUM_KH       -> '*' EXPR_NUM_G EXPR_NUM_KH
               -> EPSILON
 
      EXPR_NUM_G        -> 'ct_int'
@@ -272,8 +271,8 @@ addProduction(:EXPR_NUM_R, [[:DATA, :NUM_OPRS, :EXPR_NUM_R]
 addProduction(:EXPR_NUM, [[:EXPR_NUM_K, :EXPR_NUM_KR]])
 addProduction(:EXPR_NUM_KR, [[OPR_PM ,:EXPR_NUM],
                     [EPSILON]])
-addProduction(:EXPR_NUM_K, [[:EXPR_NUM_G,:KH]])
-addProduction(:KH, [[OPR_DM,:EXPR_NUM_G, :KH],
+addProduction(:EXPR_NUM_K, [[:EXPR_NUM_G,:EXPR_NUM_KH]])
+addProduction(:EXPR_NUM_KH, [[OPR_DM,:EXPR_NUM_G, :EXPR_NUM_KH],
                     [EPSILON]])
 addProduction(:EXPR_NUM_G, [[CT_FLOAT],
                    [CT_INT],
