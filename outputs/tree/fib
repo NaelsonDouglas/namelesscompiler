@@ -176,8 +176,8 @@
               [0014, 0001] (0031, o_c_brckt){{}
   15    {
           ALL_ITER=VAR_DCLR ALL_ITER
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0015, 0001] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0015, 0002] (0007,        id){sequence}
@@ -315,8 +315,8 @@
               [0022, 0004] (0028,   c_brckt){)}
   24      print(seq)
           ALL_ITER=VAR_DCLR ALL_ITER
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0024, 0001] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0024, 0002] (0007,        id){i}

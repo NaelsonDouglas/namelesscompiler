@@ -7,13 +7,12 @@ PARAM-> 'o_brckt' PRH
 PRH-> 'c_brckt'  | PR 'c_brckt' 
 PR-> TYPE ID_OR_VEC PRL 
 PRL-> 'comma' PR  | 'epsilon' 
-IDT_T-> 'idt_char'  | 'idt_string'  | 'idt_int'  | 'idt_float'  | 'idt_bool' 
 CT_BOOL-> 'ct_true'  | 'ct_false' 
 CT-> 'ct_string'  | 'ct_float'  | 'ct_int'  | CT_BOOL 
 FCALL_OR_ATRIB-> ID_OR_VEC FCALL_OR_ATRIB_F 
 ATRIB-> 'opr_atr' EXPR_NUM 
 FCALL_OR_ATRIB_F-> ATRIB  | FN_CH 
-VAR_DCLR-> IDT_T ID_OR_VEC 'opr_atr' DATA 
+VAR_DCLR-> IDT_TYPE ID_OR_VEC 'opr_atr' DATA 
 DATA-> CT  | ID_OR_VEC 
 ID_OR_VEC-> 'id' VEC_INDX 
 INT_OR_ID-> 'id'  | 'ct_int' 

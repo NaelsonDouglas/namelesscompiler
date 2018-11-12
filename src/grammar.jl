@@ -144,11 +144,7 @@ addProduction(:ATTR, [[IDT_INT, :ID_OR_VEC, OPR_ATR, :EXPR_NUM],
                       [IDT_CHAR, :ID_OR_VEC, OPR_ATR, :EXPR_NUM]])
 =#
 
-addProduction(:IDT_T, [[IDT_CHAR],
-                       [IDT_STRING],
-                       [IDT_INT],
-                       [IDT_FLOAT],
-                       [IDT_BOOL],])
+
 
 addProduction(:CT_BOOL, [[CT_TRUE],
                          [CT_FALSE]])
@@ -168,7 +164,7 @@ addProduction(:FCALL_OR_ATRIB_F, [[:ATRIB],
                                    [:FN_CH]])
 
 
-addProduction(:VAR_DCLR, [[:IDT_T, :ID_OR_VEC, OPR_ATR, :DATA]])
+addProduction(:VAR_DCLR, [[:IDT_TYPE, :ID_OR_VEC, OPR_ATR, :DATA]])
 
 addProduction(:DATA, [[:CT],
                       [:ID_OR_VEC]])

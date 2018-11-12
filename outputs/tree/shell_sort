@@ -33,8 +33,8 @@
               [0002, 0001] (0031, o_c_brckt){{}
    3      int h = 1    
           ALL_ITER=VAR_DCLR ALL_ITER
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0003, 0001] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0003, 0002] (0007,        id){h}
@@ -123,8 +123,8 @@
           EXPR_NUM_KH=epsilon
           EXPR_NUM_KR=epsilon
           ALL_ITER=VAR_DCLR ALL_ITER
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0009, 0001] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0009, 0002] (0007,        id){c}
@@ -135,8 +135,8 @@
               [0009, 0004] (0002,    ct_int){-1}
   10      int j=-1
           ALL_ITER=VAR_DCLR ALL_ITER
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0010, 0001] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0010, 0002] (0007,        id){j}
@@ -174,8 +174,8 @@
           ITER_FOR=for o_brckt VAR_DCLR comma FOR_EXP_LIMITER comma ID_OR_VEC opr_atr EXPR_NUM c_brckt o_c_brckt ALL_ITER c_c_brckt
               [0014, 0001] (0021,       for){for}
               [0014, 0002] (0027,   o_brckt){(}
-          VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
-          IDT_T=idt_int
+          VAR_DCLR=IDT_TYPE ID_OR_VEC opr_atr DATA
+          IDT_TYPE=idt_int
               [0014, 0003] (0033,   idt_int){int}
           ID_OR_VEC=id VEC_INDX
               [0014, 0004] (0007,        id){i}
