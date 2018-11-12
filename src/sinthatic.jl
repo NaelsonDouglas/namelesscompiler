@@ -85,17 +85,16 @@ function print_analyzer()
 	println()
 end
 
-function makestepleft(lexem::String)
+
+function makeStepLine(lexem::String)
 	len = length(lexem)
-
 	df = 5 - len
-
 	x = lexem
 
 	for i=1:df
 		x=x*" "
 	end
-	x=x*"  ->   "
+	x=x*";"
 	return x
 end
 
@@ -107,18 +106,20 @@ head = false
 head = nextToken();	
 move_head = false
 rule = ""
-steps = String["entrada          |             Pilha"]
+steps = "entrada;Pilha;Regra\n"
 
 
 tabs=0
 while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of line
 	if head != false #Se não tiver um eol na fita					
 
-		newline = string(makestepleft(head.lexem),string(collect(stack)))
+		newline = string(makeStepLine(head.lexem),string(collect(stack)))
 		newline = @sprintf("%.150s",newline)
-		steps = vcat(steps,newline)
 		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
+			
+			
 			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
+			steps = steps*newline*";"*rule*"\n"
 			
 			tree_buff=""
 			for i=1:tabs
@@ -127,7 +128,7 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 				tree_buff=vcat(tree_buff,@sprintf("%s","\t")) #yeah, I know calling @printf and @sprintf twice is lame, But its bugging.
 			end
 			println("          ",rule)
-			tree_buff=vcat(tree_buff,@sprintf("%s%s","          ",rule*"\n"))
+			tree_buff=vcat(tree_buff,@sprintf("%s%s","",rule*"\n"))
 			write(tree_file,tree_buff)
 
 			tabs=tabs+1			
@@ -163,14 +164,14 @@ while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of li
 			if head.categ_num == Int(EOF)
 				if top(stack) == :S
 
-					newline = string(makestepleft(head.lexem),string(collect(stack)))
-					newline = @sprintf("%150s",newline)
+					newline = string(makeStepLine(head.lexem),string(collect(stack)))
+					newline = @sprintf("%.150s",newline)
 					pop!(stack)				
-					steps = vcat(steps,newline)
+					steps = steps*newline*";S=epsilon"*"\n"
 
-					newline = string(makestepleft(head.lexem),string(collect(stack)))
-					newline = @sprintf("%150s",newline)
-					steps = vcat(steps,newline)
+					newline = string(makeStepLine(head.lexem),string(collect(stack)))
+					newline = @sprintf("%.150s",newline)
+					steps = steps*newline*";---"*"\n"
 				end
 			end
 		else
@@ -183,6 +184,7 @@ if (head.categ_num == Int(EOF))
 	if (length(stack) == 0)
 		info("Entrada aceita")
 	elseif (length(stack)==1 && top(stack) == :S) #S -> epsilon
+
 		pop!(stack)
 		info("Entrada aceita")
 	else
@@ -191,3 +193,8 @@ if (head.categ_num == Int(EOF))
 else
 		info("Entrada rejeitada")
 end
+
+z = open("../outputs/steps/$input_name.csv","w+")
+write(z,String(steps))
+close(z)
+steps = CSV.read("../outputs/steps/$input_name.csv";delim=";")

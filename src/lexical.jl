@@ -144,7 +144,7 @@ function nextToken()
 		
 	catch
 		#info("End of file reached")
-		tkn = Token("\eof",0,0,"EOF",Int(EOF))
+		tkn = Token("\\eof",0,0,"EOF",Int(EOF))
 	end	
 	if typeof(tkn) == Token
 		lex = tkn.lexem
