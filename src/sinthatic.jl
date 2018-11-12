@@ -196,9 +196,14 @@ end
 
 z = open("../outputs/steps/$input_name.csv","w+")
 
+
+#This bunch of replaces is to force Github to render the CSV. It's not elegant. There might be a better way to solve it.
 steps=replace(steps,"\"","") #Para forçar o github a exibir o arquivo como CSV. Por algum motivo o CSV não é renderizado se tiver aspas
-steps=replace(steps,","," _") #Para forçar o github a exibir o arquivo como CSV. Por algum motivo o CSV não é renderizado se tiver aspas
+steps=replace(steps,"Any","") #Para forçar o github a exibir o arquivo como CSV. Por algum motivo o CSV não é renderizado se tiver aspas
+steps=replace(steps,", ","،") #Para forçar o github a exibir o arquivo como CSV. Por algum motivo o CSV não é renderizado se tiver aspas
 steps=replace(steps,";",",") #Para forçar o github a exibir o arquivo como CSV. Por algum motivo o CSV não é renderizado se tiver aspas
+
+
 write(z,String(steps))
 close(z)
-steps = CSV.read("../outputs/steps/$input_name.csv";delim=";")
+steps = CSV.read("../outputs/steps/$input_name.csv";delim=",")

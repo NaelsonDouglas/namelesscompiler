@@ -1,4 +1,4 @@
-input = "input/shell_sort.nl"
+input = "input/fib.nl"
 
 input_name = split(split(input,"/")[2],".")[1] #The name without the '.nl' and without the directory
 tree_file = open("../outputs/tree/$input_name","w+")
