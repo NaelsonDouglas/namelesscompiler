@@ -186,7 +186,7 @@
               [0014, 0006] (0007,        id){h}
           VEC_INDX=epsilon
               [0014, 0007] (0026,     comma){,}
-          FOR_EXP_LIMITER=ID_OR_VEC OPRLR_REL EXPR_NUM
+          FOR_EXP_LIMITER=ID_OR_VEC oprlr_rel EXPR_NUM
           ID_OR_VEC=id VEC_INDX
               [0014, 0008] (0007,        id){i}
           VEC_INDX=epsilon

@@ -402,14 +402,12 @@ addProduction(:ITER_WHILE, [[WHILE, O_BRCKT, :EXPR_BOOL, O_BRCKT, O_C_BRCKT,
   ATTR_IH -> '=' EXPR_NUM
           -> EPSILON
 =#
-addProduction(:FOR_EXP_LIMITER,[[:ID_OR_VEC, :OPRLR_REL,:EXPR_NUM]])
+addProduction(:FOR_EXP_LIMITER,[[:ID_OR_VEC, OPRLR_REL,:EXPR_NUM]])
 
 addProduction(:ITER_FOR, [[FOR, O_BRCKT, :VAR_DCLR , COMMA,:FOR_EXP_LIMITER, COMMA,
                        :ID_OR_VEC, OPR_ATR, :EXPR_NUM,C_BRCKT, O_C_BRCKT, :ALL_ITER, C_C_BRCKT]])
-addProduction(:ATTR_I, [[IDT_INT, ID, OPR_ATR, :EXPR_NUM],
-                        [ID, :ATTR_IH]])
-addProduction(:ATTR_IH, [[OPR_ATR, :EXPR_NUM],
-                         [EPSILON]])
+
+
 #=
    normal:
     ITER_CTRL -> 'continue'
@@ -451,7 +449,7 @@ addProduction(:FN_H_RET_V, [[VEC_IN, :EXPR_NUM],
           -> 'ct_string'
           -> 'ct_bool'
 =#
-addProduction(:FN_CALL, [[ID, :FN_CH]])
+
 addProduction(:FN_CH, [[O_BRCKT, :FN_CHP]])
 addProduction(:FN_CHP, [[:FN_PR, C_BRCKT],
                         [C_BRCKT]])
