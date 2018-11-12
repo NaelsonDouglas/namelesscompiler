@@ -1,4 +1,4 @@
-0001  void fibonacci(int n)
+   1  void fibonacci(int n)
 S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S
 	IDT_TYPE_OR_VOID=idt_void
               [0001, 0001] (0038,  idt_void){void}
@@ -16,9 +16,9 @@ ID_OR_VEC=id VEC_INDX
 VEC_INDX=epsilon
 	PRL=epsilon
               [0001, 0006] (0028,   c_brckt){)}
-0002  {
+   2  {
               [0002, 0001] (0031, o_c_brckt){{}
-0003    if (n<0){return -1}
+   3    if (n<0){return -1}
 ALL_ITER=ITER_IF ALL_ITER
 	ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
               [0003, 0001] (0019,        if){if}
@@ -49,7 +49,7 @@ DATA=CT
               [0003, 0009] (0002,    ct_int){-1}
 ALL_ITER=epsilon
               [0003, 0010] (0032, c_c_brckt){}}
-0005  
+   5  
 ITER_IF_R=epsilon
 	ALL_ITER=ITER_IF ALL_ITER
 		ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
@@ -74,7 +74,7 @@ EXPR_NUM_KH=epsilon
 			EXPR_BOOL_H=epsilon
               [0005, 0007] (0028,   c_brckt){)}
               [0005, 0008] (0031, o_c_brckt){{}
-0006    if (n == 0){
+   6    if (n == 0){
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -89,17 +89,17 @@ FN_CHP=FN_PR c_brckt
               [0006, 0003] (0005, ct_string){"0"}
 FN_PRE=epsilon
               [0006, 0004] (0028,   c_brckt){)}
-0007      print("0")
+   7      print("0")
 ALL_ITER=ITER_CTRL ALL_ITER
 	ITER_CTRL=return DATA
               [0007, 0001] (0025,    return){return}
 DATA=CT
 	CT=ct_int
               [0007, 0002] (0002,    ct_int){-1}
-0008      return -1
+   8      return -1
 ALL_ITER=epsilon
               [0008, 0001] (0032, c_c_brckt){}}
-0009    }
+   9    }
 ITER_IF_R=epsilon
 	ALL_ITER=ITER_IF ALL_ITER
 		ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
@@ -124,7 +124,7 @@ EXPR_NUM_KH=epsilon
 			EXPR_BOOL_H=epsilon
               [0009, 0007] (0028,   c_brckt){)}
               [0009, 0008] (0031, o_c_brckt){{}
-0010    if (n == 1){
+  10    if (n == 1){
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -139,17 +139,17 @@ FN_CHP=FN_PR c_brckt
               [0010, 0003] (0005, ct_string){"0.1"}
 FN_PRE=epsilon
               [0010, 0004] (0028,   c_brckt){)}
-0011      print("0.1")
+  11      print("0.1")
 ALL_ITER=ITER_CTRL ALL_ITER
 	ITER_CTRL=return DATA
               [0011, 0001] (0025,    return){return}
 DATA=CT
 	CT=ct_int
               [0011, 0002] (0002,    ct_int){-1}
-0012      return -1
+  12      return -1
 ALL_ITER=epsilon
               [0012, 0001] (0032, c_c_brckt){}}
-0013    }
+  13    }
 ITER_IF_R=epsilon
 	ALL_ITER=ITER_IF ALL_ITER
 		ITER_IF=if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R
@@ -172,9 +172,9 @@ EXPR_NUM_KH=epsilon
 		EXPR_BOOL_TH=epsilon
 			EXPR_BOOL_H=epsilon
               [0013, 0006] (0028,   c_brckt){)}
-0014    if (n>1)
+  14    if (n>1)
               [0014, 0001] (0031, o_c_brckt){{}
-0015    {
+  15    {
 ALL_ITER=VAR_DCLR ALL_ITER
 	VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
 		IDT_T=idt_int
@@ -190,7 +190,7 @@ VEC_INDX_F=INT_OR_ID
 DATA=CT
 	CT=ct_int
               [0015, 0006] (0002,    ct_int){1}
-0016      int sequence::n=1
+  16      int sequence::n=1
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -207,7 +207,7 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
 		EXPR_NUM_G=ct_int
               [0016, 0005] (0002,    ct_int){0}
-0017      sequence::0 =0
+  17      sequence::0 =0
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -226,7 +226,7 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
 		EXPR_NUM_G=ct_int
               [0017, 0005] (0002,    ct_int){1}
-0018      sequence::1 =1
+  18      sequence::1 =1
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -247,7 +247,7 @@ VEC_INDX=vec_in VEC_INDX_F
 VEC_INDX_F=INT_OR_ID
 	INT_OR_ID=ct_int
               [0018, 0005] (0002,    ct_int){0}
-0019      seq = sequence::0
+  19      seq = sequence::0
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -263,7 +263,7 @@ FN_CHP=FN_PR c_brckt
               [0019, 0003] (0007,        id){seq}
 FN_PRE=epsilon
               [0019, 0004] (0028,   c_brckt){)}
-0020      print(seq)
+  20      print(seq)
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -278,7 +278,7 @@ FN_CHP=FN_PR c_brckt
               [0020, 0003] (0005, ct_string){"."}
 FN_PRE=epsilon
               [0020, 0004] (0028,   c_brckt){)}
-0021      print(".")
+  21      print(".")
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -297,7 +297,7 @@ VEC_INDX=vec_in VEC_INDX_F
 VEC_INDX_F=INT_OR_ID
 	INT_OR_ID=ct_int
               [0021, 0005] (0002,    ct_int){1}
-0022      seq = sequence::1
+  22      seq = sequence::1
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -313,7 +313,7 @@ FN_CHP=FN_PR c_brckt
               [0022, 0003] (0007,        id){seq}
 FN_PRE=epsilon
               [0022, 0004] (0028,   c_brckt){)}
-0024      print(seq)
+  24      print(seq)
 ALL_ITER=VAR_DCLR ALL_ITER
 	VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
 		IDT_T=idt_int
@@ -325,7 +325,7 @@ VEC_INDX=epsilon
 DATA=CT
 	CT=ct_int
               [0024, 0004] (0002,    ct_int){2}
-0025      
+  25      
 ALL_ITER=ITER_WHILE ALL_ITER
 	ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
               [0025, 0001] (0022,     while){while}
@@ -350,7 +350,7 @@ VEC_INDX=epsilon
 				EXPR_BOOL_H=epsilon
               [0025, 0006] (0028,   c_brckt){)}
               [0025, 0007] (0031, o_c_brckt){{}
-0026      int i = 2
+  26      int i = 2
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -379,7 +379,7 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
               [0026, 0007] (0028,   c_brckt){)}
-0027      while(i<n){
+  27      while(i<n){
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -410,7 +410,7 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
               [0027, 0007] (0028,   c_brckt){)}
-0028            m1 = (i - 1)
+  28            m1 = (i - 1)
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -448,7 +448,7 @@ VEC_INDX=vec_in VEC_INDX_F
 VEC_INDX_F=INT_OR_ID
 	INT_OR_ID=id
               [0028, 0011] (0007,        id){m2}
-0029            m2 = (i - 2)
+  29            m2 = (i - 2)
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -465,7 +465,7 @@ FN_CHP=FN_PR c_brckt
               [0029, 0003] (0005, ct_string){"."}
 FN_PRE=epsilon
               [0029, 0004] (0028,   c_brckt){)}
-0030            sequence::i = sequence::m1 + sequence::m2
+  30            sequence::i = sequence::m1 + sequence::m2
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -484,7 +484,7 @@ VEC_INDX=vec_in VEC_INDX_F
 VEC_INDX_F=INT_OR_ID
 	INT_OR_ID=id
               [0030, 0005] (0007,        id){i}
-0031            print(".")
+  31            print(".")
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -500,7 +500,7 @@ FN_CHP=FN_PR c_brckt
               [0031, 0003] (0007,        id){out}
 FN_PRE=epsilon
               [0031, 0004] (0028,   c_brckt){)}
-0032            out = sequence::i
+  32            out = sequence::i
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX

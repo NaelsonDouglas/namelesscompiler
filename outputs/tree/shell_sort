@@ -1,4 +1,4 @@
-0001  int shellSort(int nums, int n) 
+   1  int shellSort(int nums, int n) 
 S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S
 	IDT_TYPE_OR_VOID=TYPE
 		TYPE=CONST_R IDT_TYPE
@@ -29,9 +29,9 @@ ID_OR_VEC=id VEC_INDX
 VEC_INDX=epsilon
 	PRL=epsilon
               [0001, 0009] (0028,   c_brckt){)}
-0002  {
+   2  {
               [0002, 0001] (0031, o_c_brckt){{}
-0003      int h = 1    
+   3      int h = 1    
 ALL_ITER=VAR_DCLR ALL_ITER
 	VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
 		IDT_T=idt_int
@@ -43,7 +43,7 @@ VEC_INDX=epsilon
 DATA=CT
 	CT=ct_int
               [0003, 0004] (0002,    ct_int){1}
-0004      while(h < n) 
+   4      while(h < n) 
 ALL_ITER=ITER_WHILE ALL_ITER
 	ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
               [0004, 0001] (0022,     while){while}
@@ -67,9 +67,9 @@ VEC_INDX=epsilon
 			EXPR_BOOL_TH=epsilon
 				EXPR_BOOL_H=epsilon
               [0004, 0006] (0028,   c_brckt){)}
-0005      {
+   5      {
               [0005, 0001] (0031, o_c_brckt){{}
-0006              h = h * 3 + 1
+   6              h = h * 3 + 1
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -95,12 +95,12 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
 		EXPR_NUM_G=ct_int
               [0006, 0007] (0002,    ct_int){1}
-0007      }    
+   7      }    
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=epsilon
               [0007, 0001] (0032, c_c_brckt){}}
-0008      h = h / 3
+   8      h = h / 3
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -119,7 +119,7 @@ VEC_INDX=epsilon
               [0008, 0004] (0010,    opr_dm){/}
 EXPR_NUM_G=ct_int
               [0008, 0005] (0002,    ct_int){3}
-0009      int c=-1
+   9      int c=-1
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=VAR_DCLR ALL_ITER
@@ -133,7 +133,7 @@ VEC_INDX=epsilon
 DATA=CT
 	CT=ct_int
               [0009, 0004] (0002,    ct_int){-1}
-0010      int j=-1
+  10      int j=-1
 ALL_ITER=VAR_DCLR ALL_ITER
 	VAR_DCLR=IDT_T ID_OR_VEC opr_atr DATA
 		IDT_T=idt_int
@@ -145,7 +145,7 @@ VEC_INDX=epsilon
 DATA=CT
 	CT=ct_int
               [0010, 0004] (0002,    ct_int){-1}
-0012      
+  12      
 ALL_ITER=ITER_WHILE ALL_ITER
 	ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
               [0012, 0001] (0022,     while){while}
@@ -167,9 +167,9 @@ EXPR_NUM_KH=epsilon
 		EXPR_BOOL_TH=epsilon
 			EXPR_BOOL_H=epsilon
               [0012, 0006] (0028,   c_brckt){)}
-0013      while (h > 0)
+  13      while (h > 0)
               [0013, 0001] (0031, o_c_brckt){{}
-0014      {        
+  14      {        
 ALL_ITER=ITER_FOR ALL_ITER
 	ITER_FOR=for o_brckt VAR_DCLR comma FOR_EXP_LIMITER comma ID_OR_VEC opr_atr EXPR_NUM c_brckt o_c_brckt ALL_ITER c_c_brckt
               [0014, 0001] (0021,       for){for}
@@ -208,14 +208,21 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
 		EXPR_NUM_G=ID_OR_VEC
 			ID_OR_VEC=id VEC_INDX
-              [0014, 0014] (0007,        id){i+1}
+              [0014, 0014] (0007,        id){i}
 VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
-		EXPR_NUM_KR=epsilon
-              [0014, 0015] (0028,   c_brckt){)}
-0015          for (int i = h, i < n, i=i+1)  
+		EXPR_NUM_KR=opr_pm EXPR_NUM
+              [0014, 0015] (0009,    opr_pm){+}
+EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
+		EXPR_NUM_G=ct_int
+              [0014, 0016] (0002,    ct_int){1}
+EXPR_NUM_KH=epsilon
+	EXPR_NUM_KR=epsilon
+              [0014, 0017] (0028,   c_brckt){)}
+  15          for (int i = h, i < n, i=i + 1)  
               [0015, 0001] (0031, o_c_brckt){{}
-0016          {
+  16          {
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -234,7 +241,7 @@ VEC_INDX=vec_in VEC_INDX_F
 VEC_INDX_F=INT_OR_ID
 	INT_OR_ID=id
               [0016, 0005] (0007,        id){i}
-0017              c = nums::i
+  17              c = nums::i
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -250,7 +257,7 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 		EXPR_NUM_G=ID_OR_VEC
 			ID_OR_VEC=id VEC_INDX
               [0017, 0003] (0007,        id){i}
-0018              j = i            
+  18              j = i            
 VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
 		EXPR_NUM_KR=epsilon
@@ -278,7 +285,7 @@ VEC_INDX=epsilon
 				EXPR_BOOL_H=epsilon
               [0018, 0006] (0028,   c_brckt){)}
               [0018, 0007] (0031, o_c_brckt){{}
-0019              while(j > h) {
+  19              while(j > h) {
 ALL_ITER=ITER_WHILE ALL_ITER
 	ITER_WHILE=while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt
               [0019, 0001] (0022,     while){while}
@@ -310,7 +317,7 @@ VEC_INDX=epsilon
 				EXPR_BOOL_H=epsilon
               [0019, 0009] (0028,   c_brckt){)}
               [0019, 0010] (0031, o_c_brckt){{}
-0020                  while( nums(j-h)>c){
+  20                  while( nums(j-h)>c){
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -341,7 +348,7 @@ VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
 		EXPR_NUM_KR=epsilon
               [0020, 0009] (0028,   c_brckt){)}
-0021                          nums::j = nums::(j-h)
+  21                          nums::j = nums::(j-h)
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=FCALL_OR_ATRIB ALL_ITER
@@ -366,16 +373,16 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 		EXPR_NUM_G=ID_OR_VEC
 			ID_OR_VEC=id VEC_INDX
               [0021, 0005] (0007,        id){h}
-0022                          j = j - h
+  22                          j = j - h
 VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
 		EXPR_NUM_KR=epsilon
 			ALL_ITER=epsilon
               [0022, 0001] (0032, c_c_brckt){}}
-0023                      }
+  23                      }
 ALL_ITER=epsilon
               [0023, 0001] (0032, c_c_brckt){}}
-0024              }
+  24              }
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -393,13 +400,13 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 		EXPR_NUM_G=ID_OR_VEC
 			ID_OR_VEC=id VEC_INDX
               [0024, 0005] (0007,        id){c}
-0025              nums::j = c
+  25              nums::j = c
 VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
 		EXPR_NUM_KR=epsilon
 			ALL_ITER=epsilon
               [0025, 0001] (0032, c_c_brckt){}}
-0026          }
+  26          }
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -418,19 +425,19 @@ VEC_INDX=epsilon
               [0026, 0004] (0010,    opr_dm){/}
 EXPR_NUM_G=ct_int
               [0026, 0005] (0002,    ct_int){2}
-0027          h = h / 2
+  27          h = h / 2
 EXPR_NUM_KH=epsilon
 	EXPR_NUM_KR=epsilon
 		ALL_ITER=epsilon
               [0027, 0001] (0032, c_c_brckt){}}
-0028      }
+  28      }
 ALL_ITER=ITER_CTRL ALL_ITER
 	ITER_CTRL=return DATA
               [0028, 0001] (0025,    return){return}
 DATA=ID_OR_VEC
 	ID_OR_VEC=id VEC_INDX
               [0028, 0002] (0007,        id){nums}
-0029      return nums
+  29      return nums
 VEC_INDX=epsilon
 	ALL_ITER=epsilon
               [0029, 0001] (0032, c_c_brckt){}}

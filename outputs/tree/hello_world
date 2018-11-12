@@ -1,4 +1,4 @@
-0001  int main(int argc, string argv)
+   1  int main(int argc, string argv)
 S=IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S
 	IDT_TYPE_OR_VOID=TYPE
 		TYPE=CONST_R IDT_TYPE
@@ -29,9 +29,9 @@ ID_OR_VEC=id VEC_INDX
 VEC_INDX=epsilon
 	PRL=epsilon
               [0001, 0009] (0028,   c_brckt){)}
-0002  {
+   2  {
               [0002, 0001] (0031, o_c_brckt){{}
-0003    print("Hello World")
+   3    print("Hello World")
 ALL_ITER=FCALL_OR_ATRIB ALL_ITER
 	FCALL_OR_ATRIB=ID_OR_VEC FCALL_OR_ATRIB_F
 		ID_OR_VEC=id VEC_INDX
@@ -46,6 +46,6 @@ FN_CHP=FN_PR c_brckt
               [0003, 0003] (0005, ct_string){"Hello World"}
 FN_PRE=epsilon
               [0003, 0004] (0028,   c_brckt){)}
-0004  }
+   4  }
 ALL_ITER=epsilon
               [0004, 0001] (0032, c_c_brckt){}}
