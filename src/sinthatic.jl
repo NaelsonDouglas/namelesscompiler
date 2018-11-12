@@ -114,7 +114,7 @@ tabs=0
 		if head != false #Se não tiver um eol na fita					
 
 			newline = string(makeStepLine(head.lexem),string(collect(stack)))
-			newline = @sprintf("%.150s",newline)
+			newline = @sprintf("%s",newline)
 			if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
 				
 				
@@ -168,12 +168,12 @@ tabs=0
 					if top(stack) == :S
 
 						newline = string(makeStepLine(head.lexem),string(collect(stack)))
-						newline = @sprintf("%.150s",newline)
+						newline = @sprintf("%s",newline)
 						pop!(stack)				
 						steps = steps*newline*";S=epsilon"*"\n"
 
 						newline = string(makeStepLine(head.lexem),string(collect(stack)))
-						newline = @sprintf("%.150s",newline)
+						newline = @sprintf("%s",newline)
 						steps = steps*newline*";---"*"\n"
 					end
 				end
