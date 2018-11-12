@@ -4,6 +4,7 @@ TYPE = CONST_R IDT_TYPE
 CONST_R = const | epsilon
 
 IDT_TYPE = idt_int | idt_char | idt_float | idt_string | idt_bool
+
 IDT_TYPE_OR_VOID = TYPE | idt_void
 
 PARAM = o_brckt PRH
@@ -61,4 +62,4 @@ ITER_CTRL = continue | break | return DATA
 FN_CH = o_brckt FN_CHP
 FN_CHP = FN_PR c_brckt | c_brckt
 FN_PR = id FN_PRE | CT FN_PRE
-FN_PRE = id comma FN_PR | epsilon
+FN_PRE = id comma FN_PR | epsilon 
