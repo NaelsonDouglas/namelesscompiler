@@ -1,4 +1,4 @@
-input = "input/shell_sort.nl"
+input = "input/fib.nl"
 manual = false #If it's true, all the steps on the analysis will require the user to press enter. Otherwise, it will be executed automatically
 
 input_name = split(split(input,"/")[2],".")[1] #The name without the '.nl' and without the directory

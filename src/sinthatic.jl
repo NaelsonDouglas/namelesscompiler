@@ -129,6 +129,7 @@ tabs=0
 					tree_buff=vcat(tree_buff,@sprintf("%s","\t")) #yeah, I know calling @printf and @sprintf twice is lame, But its bugging.
 				end
 				=#
+				tree_buff=vcat(tree_buff,@sprintf("%10s"," "))
 				println("          ",rule)
 				tree_buff=vcat(tree_buff,@sprintf("%s%s","",rule*"\n"))
 				write(tree_file,tree_buff)
