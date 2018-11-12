@@ -1,90 +1,45 @@
-S= IDT_TYPE_OR_VOID 'id' PARAM 'o_c_brckt' ALL_ITER 'c_c_brckt' S | 'eof' | 'epsilon' 
-
-TYPE= CONST_R IDT_TYPE 
-
-CONST_R= 'const' | 'epsilon' 
-
-IDT_TYPE= 'idt_int' | 'idt_char' | 'idt_float' | 'idt_string' | 'idt_bool' 
-
-IDT_TYPE_OR_VOID= TYPE | 'idt_void' 
-
-PARAM= 'o_brckt' PRH 
-
-PRH= 'c_brckt' | PR 'c_brckt' 
-
-PR= TYPE ID_OR_VEC PRL 
-
-PRL= 'comma' PR | 'epsilon' 
-
-CT_BOOL= 'ct_true' | 'ct_false' 
-
-CT= 'ct_string' | 'ct_float' | 'ct_int' | CT_BOOL 
-
-FCALL_OR_ATRIB= ID_OR_VEC FCALL_OR_ATRIB_F 
-
-ATRIB= 'opr_atr' EXPR_NUM 
-
-FCALL_OR_ATRIB_F= ATRIB | FN_CH 
-
-VAR_DCLR= IDT_TYPE ID_OR_VEC 'opr_atr' DATA 
-
-DATA= CT | ID_OR_VEC 
-
-ID_OR_VEC= 'id' VEC_INDX 
-
-INT_OR_ID= 'id' | 'ct_int' 
-
-VEC_INDX= 'vec_in' VEC_INDX_F | 'epsilon' 
-
-VEC_INDX_F= 'o_brckt' EXPR_NUM 'c_brckt' | INT_OR_ID 
-
-EXPR_NUM= EXPR_NUM_K EXPR_NUM_KR 
-
-EXPR_NUM_KR= 'opr_pm' EXPR_NUM | 'epsilon' 
-
-EXPR_NUM_K= EXPR_NUM_G EXPR_NUM_KH 
-
-EXPR_NUM_KH= 'opr_dm' EXPR_NUM_G EXPR_NUM_KH | 'epsilon' 
-
-EXPR_NUM_G= 'ct_float' | 'ct_int' | ID_OR_VEC | 'o_brckt' EXPR_NUM 'c_brckt' 
-
-EXPR_BOOL= EXPR_BOOL_T EXPR_BOOL_H | 'oprl_not' EXPR_BOOL_T EXPR_BOOL_H 
-
-EXPR_BOOL_H= 'oprlr_or' EXPR_BOOL_T EXPR_BOOL_H | 'epsilon' 
-
-EXPR_BOOL_T= EXPR_BOOL_F EXPR_BOOL_TH 
-
-EXPR_BOOL_TH= 'oprlr_and' EXPR_BOOL_F EXPR_BOOL_TH | 'epsilon' 
-
-EXPR_BOOL_F= 'o_brckt' EXPR_BOOL 'c_brckt' | 'ct_int' OPRLR_EQQ_REL EXPR_NUM | 'ct_float' OPRLR_EQQ_REL EXPR_NUM | FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM | 'ct_false' | 'ct_true' 
-
-OPRLR_EQQ_REL= 'opr_atr' 'opr_atr' | 'oprlr_rel' 
-
-FN_H_BOOL= 'id' FN_H_BOOL_V 
-
-FN_H_BOOL_V= 'vec_in' EXPR_NUM | FN_CH | 'epsilon' 
-
-ALL_ITER= ITER_IF ALL_ITER | VAR_DCLR ALL_ITER | ITER_WHILE ALL_ITER | ITER_FOR ALL_ITER | ITER_CTRL ALL_ITER | FCALL_OR_ATRIB ALL_ITER | 'epsilon' 
-
-ITER_IF= 'if' 'o_brckt' EXPR_BOOL 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' ITER_IF_R 
-
-ITER_IF_R= 'else' ITER_IF_RR | 'epsilon' 
-
-ITER_IF_RR= ITER_IF | 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-
-ITER_WHILE= 'while' 'o_brckt' EXPR_BOOL 'o_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-
-FOR_EXP_LIMITER= ID_OR_VEC 'oprlr_rel' EXPR_NUM 
-
-ITER_FOR= 'for' 'o_brckt' VAR_DCLR 'comma' FOR_EXP_LIMITER 'comma' ID_OR_VEC 'opr_atr' EXPR_NUM 'c_brckt' 'o_c_brckt' ALL_ITER 'c_c_brckt' 
-
-ITER_CTRL= 'continue' | 'break' | 'return' DATA 
-
-FN_CH= 'o_brckt' FN_CHP 
-
-FN_CHP= FN_PR 'c_brckt' | 'c_brckt' 
-
-FN_PR= 'id' FN_PRE | CT FN_PRE 
-
-FN_PRE= 'id' 'comma' FN_PR | 'epsilon' 
-
+S = IDT_TYPE_OR_VOID id PARAM o_c_brckt ALL_ITER c_c_brckt S | eof |  epsilon
+TYPE = CONST_R IDT_TYPE epsilon
+CONST_R = const |  epsilon
+IDT_TYPE = idt_int | idt_char | idt_float | idt_string | idt_bool epsilon
+IDT_TYPE_OR_VOID = TYPE | idt_void epsilon
+PARAM = o_brckt PRH epsilon
+PRH = c_brckt | PR c_brckt epsilon
+PR = TYPE ID_OR_VEC PRL epsilon
+PRL = comma PR |  epsilon
+CT_BOOL = ct_true | ct_false epsilon
+CT = ct_string | ct_float | ct_int | CT_BOOL epsilon
+FCALL_OR_ATRIB = ID_OR_VEC FCALL_OR_ATRIB_F epsilon
+ATRIB = opr_atr EXPR_NUM epsilon
+FCALL_OR_ATRIB_F = ATRIB | FN_CH epsilon
+VAR_DCLR = IDT_TYPE ID_OR_VEC opr_atr DATA epsilon
+DATA = CT | ID_OR_VEC epsilon
+ID_OR_VEC = id VEC_INDX epsilon
+INT_OR_ID = id | ct_int epsilon
+VEC_INDX = vec_in VEC_INDX_F |  epsilon
+VEC_INDX_F = o_brckt EXPR_NUM c_brckt | INT_OR_ID epsilon
+EXPR_NUM = EXPR_NUM_K EXPR_NUM_KR epsilon
+EXPR_NUM_KR = opr_pm EXPR_NUM |  epsilon
+EXPR_NUM_K = EXPR_NUM_G EXPR_NUM_KH epsilon
+EXPR_NUM_KH = opr_dm EXPR_NUM_G EXPR_NUM_KH |  epsilon
+EXPR_NUM_G = ct_float | ct_int | ID_OR_VEC | o_brckt EXPR_NUM c_brckt epsilon
+EXPR_BOOL = EXPR_BOOL_T EXPR_BOOL_H | oprl_not EXPR_BOOL_T EXPR_BOOL_H epsilon
+EXPR_BOOL_H = oprlr_or EXPR_BOOL_T EXPR_BOOL_H |  epsilon
+EXPR_BOOL_T = EXPR_BOOL_F EXPR_BOOL_TH epsilon
+EXPR_BOOL_TH = oprlr_and EXPR_BOOL_F EXPR_BOOL_TH |  epsilon
+EXPR_BOOL_F = o_brckt EXPR_BOOL c_brckt | ct_int OPRLR_EQQ_REL EXPR_NUM | ct_float OPRLR_EQQ_REL EXPR_NUM | FN_H_BOOL OPRLR_EQQ_REL EXPR_NUM | ct_false | ct_true epsilon
+OPRLR_EQQ_REL = opr_atr opr_atr | oprlr_rel epsilon
+FN_H_BOOL = id FN_H_BOOL_V epsilon
+FN_H_BOOL_V = vec_in EXPR_NUM | FN_CH |  epsilon
+ALL_ITER = ITER_IF ALL_ITER | VAR_DCLR ALL_ITER | ITER_WHILE ALL_ITER | ITER_FOR ALL_ITER | ITER_CTRL ALL_ITER | FCALL_OR_ATRIB ALL_ITER |  epsilon
+ITER_IF = if o_brckt EXPR_BOOL c_brckt o_c_brckt ALL_ITER c_c_brckt ITER_IF_R epsilon
+ITER_IF_R = else ITER_IF_RR |  epsilon
+ITER_IF_RR = ITER_IF | o_c_brckt ALL_ITER c_c_brckt epsilon
+ITER_WHILE = while o_brckt EXPR_BOOL o_brckt o_c_brckt ALL_ITER c_c_brckt epsilon
+FOR_EXP_LIMITER = ID_OR_VEC oprlr_rel EXPR_NUM epsilon
+ITER_FOR = for o_brckt VAR_DCLR comma FOR_EXP_LIMITER comma ID_OR_VEC opr_atr EXPR_NUM c_brckt o_c_brckt ALL_ITER c_c_brckt epsilon
+ITER_CTRL = continue | break | return DATA epsilon
+FN_CH = o_brckt FN_CHP epsilon
+FN_CHP = FN_PR c_brckt | c_brckt epsilon
+FN_PR = id FN_PRE | CT FN_PRE epsilon
+FN_PRE = id comma FN_PR |  epsilon
