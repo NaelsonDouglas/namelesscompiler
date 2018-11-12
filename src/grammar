@@ -42,6 +42,5 @@ ITER_FOR-> 'for' 'o_brckt' VAR_DCLR 'comma' FOR_EXP_LIMITER 'comma' ID_OR_VEC 'o
 ITER_CTRL-> 'continue'  | 'break'  | 'return' DATA 
 FN_CH-> 'o_brckt' FN_CHP 
 FN_CHP-> FN_PR 'c_brckt'  | 'c_brckt' 
-FN_PR-> 'id' FN_PRE  | CN_TP FN_PRE 
+FN_PR-> 'id' FN_PRE  | CT FN_PRE 
 FN_PRE-> 'id' 'comma' FN_PR  | 'epsilon' 
-CN_TP-> 'ct_int'  | 'ct_float'  | 'ct_string'  | 'ct_b' 

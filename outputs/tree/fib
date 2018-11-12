@@ -84,8 +84,8 @@
           FN_CH=o_brckt FN_CHP
               [0006, 0002] (0027,   o_brckt){(}
           FN_CHP=FN_PR c_brckt
-          FN_PR=CN_TP FN_PRE
-          CN_TP=ct_string
+          FN_PR=CT FN_PRE
+          CT=ct_string
               [0006, 0003] (0005, ct_string){"0"}
           FN_PRE=epsilon
               [0006, 0004] (0028,   c_brckt){)}
@@ -134,8 +134,8 @@
           FN_CH=o_brckt FN_CHP
               [0010, 0002] (0027,   o_brckt){(}
           FN_CHP=FN_PR c_brckt
-          FN_PR=CN_TP FN_PRE
-          CN_TP=ct_string
+          FN_PR=CT FN_PRE
+          CT=ct_string
               [0010, 0003] (0005, ct_string){"0.1"}
           FN_PRE=epsilon
               [0010, 0004] (0028,   c_brckt){)}
@@ -273,8 +273,8 @@
           FN_CH=o_brckt FN_CHP
               [0020, 0002] (0027,   o_brckt){(}
           FN_CHP=FN_PR c_brckt
-          FN_PR=CN_TP FN_PRE
-          CN_TP=ct_string
+          FN_PR=CT FN_PRE
+          CT=ct_string
               [0020, 0003] (0005, ct_string){"."}
           FN_PRE=epsilon
               [0020, 0004] (0028,   c_brckt){)}
@@ -460,8 +460,8 @@
           FN_CH=o_brckt FN_CHP
               [0029, 0002] (0027,   o_brckt){(}
           FN_CHP=FN_PR c_brckt
-          FN_PR=CN_TP FN_PRE
-          CN_TP=ct_string
+          FN_PR=CT FN_PRE
+          CT=ct_string
               [0029, 0003] (0005, ct_string){"."}
           FN_PRE=epsilon
               [0029, 0004] (0028,   c_brckt){)}

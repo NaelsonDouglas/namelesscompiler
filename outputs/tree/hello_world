@@ -41,8 +41,8 @@
           FN_CH=o_brckt FN_CHP
               [0003, 0002] (0027,   o_brckt){(}
           FN_CHP=FN_PR c_brckt
-          FN_PR=CN_TP FN_PRE
-          CN_TP=ct_string
+          FN_PR=CT FN_PRE
+          CT=ct_string
               [0003, 0003] (0005, ct_string){"Hello World"}
           FN_PRE=epsilon
               [0003, 0004] (0028,   c_brckt){)}

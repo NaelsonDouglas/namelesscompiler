@@ -45,4 +45,4 @@ close(g)
 cp("grammar_table.csv","../especificações/tabela_LL1.csv",remove_destination=true)
 
 #Converte a gramática da sintaxe usada na linguagem para a sintaxe vista em sala de aula 
-convertGrammar()
+#convertGrammar()
