@@ -110,75 +110,80 @@ steps = "entrada;Pilha;Regra\n"
 
 
 tabs=0
-while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of line
-	if head != false #Se não tiver um eol na fita					
+	while(head == false || head.categ_num != Int(EOF)) #head == false ---> end of line
+		if head != false #Se não tiver um eol na fita					
 
-		newline = string(makeStepLine(head.lexem),string(collect(stack)))
-		newline = @sprintf("%.150s",newline)
-		if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
-			
-			
-			rule = getTblMatch(production_=top(stack),token_=head.categ_num)
-			steps = steps*newline*";"*rule*"\n"
-			
-			tree_buff=""
-			for i=1:tabs
-				print("\t")
-				#@printf("%s","\t")
-				tree_buff=vcat(tree_buff,@sprintf("%s","\t")) #yeah, I know calling @printf and @sprintf twice is lame, But its bugging.
-			end
-			println("          ",rule)
-			tree_buff=vcat(tree_buff,@sprintf("%s%s","",rule*"\n"))
-			write(tree_file,tree_buff)
+			newline = string(makeStepLine(head.lexem),string(collect(stack)))
+			newline = @sprintf("%.150s",newline)
+			if isProduction(top(stack)) #Se tiver uma produção no topo da pilha		
+				
+				
+				rule = getTblMatch(production_=top(stack),token_=head.categ_num)
+				steps = steps*newline*";"*rule*"\n"
+				
+				tree_buff=""
+				#=
+				for i=1:tabs
+					print("\t")
+					#@printf("%s","\t")
+					tree_buff=vcat(tree_buff,@sprintf("%s","\t")) #yeah, I know calling @printf and @sprintf twice is lame, But its bugging.
+				end
+				=#
+				println("          ",rule)
+				tree_buff=vcat(tree_buff,@sprintf("%s%s","",rule*"\n"))
+				write(tree_file,tree_buff)
 
-			tabs=tabs+1			
-			r_rule = reverseRule(rule)			
-			pop!(stack)
-
-
-			for i in r_rule
-				push!(stack,i)
-			end
-			#sleep(1)
-			#@show "loop"
-		else		
-			
-			if Int(eval(top(stack))) == Int(EPSILON)
+				tabs=tabs+1			
+				r_rule = reverseRule(rule)			
 				pop!(stack)
+
+
+				for i in r_rule
+					push!(stack,i)
+				end
+				#sleep(1)
+				#@show "loop"
+			else		
+				
+				if Int(eval(top(stack))) == Int(EPSILON)
+					pop!(stack)
+				else
+					pop!(stack)
+					tkn = printToken(head)
+					write(tree_file,tkn*"\n")
+					println(tkn)
+
+					println()
+					head = nextToken();
+					tabs=0
+					if head == false #Se for um eol, pula a fita de novo					
+						head = nextToken();	
+					end
+				end			
+			end
+
+			if typeof(head)!=Bool
+				if head.categ_num == Int(EOF)
+					if top(stack) == :S
+
+						newline = string(makeStepLine(head.lexem),string(collect(stack)))
+						newline = @sprintf("%.150s",newline)
+						pop!(stack)				
+						steps = steps*newline*";S=epsilon"*"\n"
+
+						newline = string(makeStepLine(head.lexem),string(collect(stack)))
+						newline = @sprintf("%.150s",newline)
+						steps = steps*newline*";---"*"\n"
+					end
+				end
 			else
-				pop!(stack)
-				tkn = printToken(head)
-				write(tree_file,tkn*"\n")
-				println(tkn)
-
-				println()
 				head = nextToken();
-				tabs=0
-				if head == false #Se for um eol, pula a fita de novo					
-					head = nextToken();	
-				end
-			end			
-		end
-
-		if typeof(head)!=Bool
-			if head.categ_num == Int(EOF)
-				if top(stack) == :S
-
-					newline = string(makeStepLine(head.lexem),string(collect(stack)))
-					newline = @sprintf("%.150s",newline)
-					pop!(stack)				
-					steps = steps*newline*";S=epsilon"*"\n"
-
-					newline = string(makeStepLine(head.lexem),string(collect(stack)))
-					newline = @sprintf("%.150s",newline)
-					steps = steps*newline*";---"*"\n"
-				end
 			end
-		else
-			head = nextToken();
+		end
+		if manual
+			readline(STDIN)
 		end
 	end
-end
 
 if (head.categ_num == Int(EOF))
 	if (length(stack) == 0)
@@ -207,3 +212,4 @@ steps=replace(steps,";",",") #Para forçar o github a exibir o arquivo como CSV.
 write(z,String(steps))
 close(z)
 steps = CSV.read("../outputs/steps/$input_name.csv";delim=",")
+
