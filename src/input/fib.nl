@@ -29,4 +29,4 @@ void fibonacci(int n)
           print(".")
           out = sequence::i
           print(out)
-      i=i+1}}}
+      i=i + 1}}}

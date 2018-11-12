@@ -513,14 +513,21 @@ EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
 	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
 		EXPR_NUM_G=ID_OR_VEC
 			ID_OR_VEC=id VEC_INDX
-              [0032, 0003] (0007,        id){i+1}
+              [0032, 0003] (0007,        id){i}
 VEC_INDX=epsilon
 	EXPR_NUM_KH=epsilon
-		EXPR_NUM_KR=epsilon
-			ALL_ITER=epsilon
-              [0032, 0004] (0032, c_c_brckt){}}
+		EXPR_NUM_KR=opr_pm EXPR_NUM
+              [0032, 0004] (0009,    opr_pm){+}
+EXPR_NUM=EXPR_NUM_K EXPR_NUM_KR
+	EXPR_NUM_K=EXPR_NUM_G EXPR_NUM_KH
+		EXPR_NUM_G=ct_int
+              [0032, 0005] (0002,    ct_int){1}
+EXPR_NUM_KH=epsilon
+	EXPR_NUM_KR=epsilon
+		ALL_ITER=epsilon
+              [0032, 0006] (0032, c_c_brckt){}}
 ALL_ITER=epsilon
-              [0032, 0005] (0032, c_c_brckt){}}
+              [0032, 0007] (0032, c_c_brckt){}}
 ITER_IF_R=epsilon
 	ALL_ITER=epsilon
-              [0032, 0006] (0032, c_c_brckt){}}
+              [0032, 0008] (0032, c_c_brckt){}}

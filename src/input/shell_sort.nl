@@ -11,7 +11,7 @@ int shellSort(int nums, int n)
     
     while (h > 0)
     {        
-        for (int i = h, i < n, i=i+1)  
+        for (int i = h, i < n, i=i + 1)  
         {
             c = nums::i
             j = i            
