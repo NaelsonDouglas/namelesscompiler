@@ -88,4 +88,7 @@ tks_names = String[]
 for tk in instances(Tokens)
 	push!(tks_names,string(tk))
 end
-map!(lowercase,tks_names)
+for ti =1:length(tks_names)
+      tks_names[ti] = lowercase(tks_names[ti])
+end
+#map!(lowercase,tks_names);
